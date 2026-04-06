@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KneeRecovery Pro - Recuperação de Joelho</title>
+    <title>KneeRecovery Pro</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -18,11 +18,7 @@
             --border: #e2e8f0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -37,28 +33,21 @@
             background: var(--bg-light);
             min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
         }
 
-        /* ==================== LOGIN POPUP ==================== */
+        /* ==================== LOGIN ==================== */
         .login-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow-y: auto;
         }
 
-        .login-overlay.hidden {
-            display: none;
-        }
+        .login-overlay.hidden { display: none; }
 
         .login-container {
             background: white;
@@ -67,39 +56,15 @@
             width: 100%;
             max-width: 400px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: slideUp 0.5s ease;
             max-height: 90vh;
             overflow-y: auto;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        .login-header { text-align: center; margin-bottom: 25px; }
+        .login-logo { font-size: 4rem; margin-bottom: 10px; }
+        .login-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .login-subtitle { color: var(--text-muted); }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .login-logo {
-            font-size: 4rem;
-            margin-bottom: 10px;
-        }
-
-        .login-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
-
-        .login-subtitle {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Tabs */
         .login-tabs {
             display: flex;
             margin-bottom: 25px;
@@ -126,41 +91,17 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* Login Forms */
-        .login-form {
-            display: none;
-        }
-
-        .login-form.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Avatar Selection */
-        .avatar-section {
-            margin-bottom: 20px;
-        }
-
-        .avatar-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
+        .login-form { display: none; }
+        .login-form.active { display: block; }
 
         .avatar-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 10px;
+            margin-bottom: 20px;
         }
 
         .avatar-option {
-            width: 100%;
             aspect-ratio: 1;
             border: 3px solid var(--border);
             border-radius: 50%;
@@ -168,31 +109,15 @@
             font-size: 1.8rem;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .avatar-option:hover {
-            transform: scale(1.1);
-            border-color: var(--primary);
-        }
-
-        .avatar-option.selected {
+        .avatar-option:hover, .avatar-option.selected {
             border-color: var(--primary);
             background: #dbeafe;
             transform: scale(1.1);
         }
 
-        /* Knee Selection */
-        .knee-selection {
-            margin-bottom: 20px;
-        }
-
-        .knee-options {
-            display: flex;
-            gap: 10px;
-        }
+        .knee-options { display: flex; gap: 10px; margin-bottom: 20px; }
 
         .knee-option {
             flex: 1;
@@ -201,42 +126,20 @@
             border-radius: 16px;
             background: var(--bg-light);
             cursor: pointer;
-            transition: all 0.3s;
             text-align: center;
+            transition: all 0.3s;
         }
 
-        .knee-option:hover {
+        .knee-option:hover, .knee-option.selected {
             border-color: var(--primary);
             background: #dbeafe;
         }
 
-        .knee-option.selected {
-            border-color: var(--primary);
-            background: #dbeafe;
-        }
+        .knee-option-icon { font-size: 2rem; margin-bottom: 5px; }
+        .knee-option-label { font-weight: 600; font-size: 0.8rem; }
 
-        .knee-option-icon {
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        .knee-option-label {
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: var(--text-dark);
-        }
-
-        /* Input Fields */
-        .login-input-group {
-            margin-bottom: 15px;
-        }
-
-        .login-input-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
+        .login-input-group { margin-bottom: 15px; }
+        .login-input-label { display: block; font-weight: 600; margin-bottom: 8px; }
 
         .login-input {
             width: 100%;
@@ -244,21 +147,14 @@
             border: 2px solid var(--border);
             border-radius: 12px;
             font-size: 1rem;
-            transition: all 0.3s;
         }
 
         .login-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        /* PIN Input */
-        .pin-container {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
+        .pin-container { display: flex; gap: 10px; justify-content: center; }
 
         .pin-input {
             width: 55px;
@@ -268,16 +164,13 @@
             font-weight: 700;
             border: 2px solid var(--border);
             border-radius: 12px;
-            transition: all 0.3s;
         }
 
         .pin-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        /* Buttons */
         .login-btn {
             width: 100%;
             padding: 16px;
@@ -286,7 +179,6 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             margin-top: 10px;
         }
 
@@ -300,26 +192,7 @@
             box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
         }
 
-        .login-btn-secondary {
-            background: var(--bg-light);
-            color: var(--text-dark);
-        }
-
-        /* Existing Users List */
-        .existing-users {
-            margin-bottom: 20px;
-        }
-
-        .existing-users-title {
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-        }
-
-        .user-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
+        .user-list { max-height: 200px; overflow-y: auto; }
 
         .user-card {
             display: flex;
@@ -330,17 +203,12 @@
             border-radius: 12px;
             margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.3s;
             border: 2px solid transparent;
+            transition: all 0.3s;
         }
 
-        .user-card:hover {
+        .user-card:hover, .user-card.selected {
             background: #e0e7ff;
-            border-color: var(--primary);
-        }
-
-        .user-card.selected {
-            background: #dbeafe;
             border-color: var(--primary);
         }
 
@@ -353,22 +221,11 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .user-stats {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 600; }
+        .user-stats { font-size: 0.8rem; color: var(--text-muted); }
 
         .user-knee-badge {
             font-size: 0.7rem;
@@ -387,8 +244,6 @@
             color: var(--danger);
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
         }
 
         .user-delete:hover {
@@ -396,13 +251,10 @@
             color: white;
         }
 
-        /* PIN Verification Modal */
+        /* PIN Modal */
         .pin-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
             display: none;
             align-items: center;
@@ -410,9 +262,7 @@
             z-index: 1001;
         }
 
-        .pin-modal.active {
-            display: flex;
-        }
+        .pin-modal.active { display: flex; }
 
         .pin-modal-content {
             background: white;
@@ -423,29 +273,12 @@
             text-align: center;
         }
 
-        .pin-modal-avatar {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+        .pin-modal-avatar { font-size: 3rem; margin-bottom: 10px; }
+        .pin-modal-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; }
+        .pin-error { color: var(--danger); font-size: 0.9rem; margin-top: 10px; display: none; }
+        .pin-error.show { display: block; }
 
-        .pin-modal-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .pin-error {
-            color: var(--danger);
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .pin-error.show {
-            display: block;
-        }
-
-        /* Header */
+        /* ==================== HEADER ==================== */
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -461,11 +294,7 @@
             justify-content: space-between;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .header-left { display: flex; align-items: center; gap: 12px; }
 
         .header-avatar {
             width: 40px;
@@ -477,23 +306,10 @@
             justify-content: center;
             font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .header-avatar:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
-        .header-info h1 {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .header-info p {
-            font-size: 0.75rem;
-            opacity: 0.9;
-        }
+        .header-info h1 { font-size: 1.1rem; font-weight: 700; }
+        .header-info p { font-size: 0.75rem; opacity: 0.9; }
 
         .header-knee-indicator {
             font-size: 0.65rem;
@@ -503,11 +319,7 @@
             margin-left: 5px;
         }
 
-        /* Language Selector */
-        .lang-selector {
-            display: flex;
-            gap: 5px;
-        }
+        .lang-selector { display: flex; gap: 5px; }
 
         .lang-btn {
             background: rgba(255,255,255,0.2);
@@ -517,7 +329,6 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.75rem;
-            transition: all 0.3s;
         }
 
         .lang-btn.active, .lang-btn:hover {
@@ -525,7 +336,7 @@
             color: var(--primary);
         }
 
-        /* Navigation */
+        /* ==================== NAV ==================== */
         .nav-tabs {
             display: flex;
             background: white;
@@ -544,7 +355,6 @@
             background: transparent;
             color: var(--text-muted);
             font-size: 0.85rem;
-            transition: all 0.3s;
             border-bottom: 3px solid transparent;
         }
 
@@ -554,22 +364,10 @@
             font-weight: 600;
         }
 
-        .nav-tab:hover {
-            background: var(--bg-light);
-        }
+        /* ==================== SCREENS ==================== */
+        .screen { display: none; padding: 20px; }
+        .screen.active { display: block; }
 
-        /* Screens */
-        .screen {
-            display: none;
-            padding: 20px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        /* Cards */
         .card {
             background: var(--bg-card);
             border-radius: 16px;
@@ -596,12 +394,7 @@
             margin-bottom: 20px;
         }
 
-        .welcome-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
+        .welcome-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
 
         .welcome-avatar {
             width: 60px;
@@ -614,15 +407,8 @@
             font-size: 2rem;
         }
 
-        .welcome-text h2 {
-            font-size: 1.3rem;
-            margin-bottom: 3px;
-        }
-
-        .welcome-text p {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
+        .welcome-text h2 { font-size: 1.3rem; margin-bottom: 3px; }
+        .welcome-text p { opacity: 0.9; font-size: 0.9rem; }
 
         .welcome-knee-info {
             display: inline-block;
@@ -633,12 +419,7 @@
             margin-top: 5px;
         }
 
-        .welcome-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
+        .welcome-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
 
         .welcome-stat {
             background: rgba(255,255,255,0.15);
@@ -647,22 +428,11 @@
             text-align: center;
         }
 
-        .welcome-stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .welcome-stat-label {
-            font-size: 0.7rem;
-            opacity: 0.9;
-        }
+        .welcome-stat-value { font-size: 1.5rem; font-weight: 700; }
+        .welcome-stat-label { font-size: 0.7rem; opacity: 0.9; }
 
         /* Pain Scale */
-        .pain-scale {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
+        .pain-scale { display: flex; justify-content: space-between; margin: 20px 0; }
 
         .pain-level {
             width: 45px;
@@ -673,8 +443,8 @@
             justify-content: center;
             cursor: pointer;
             font-size: 1.5rem;
-            transition: all 0.3s;
             border: 3px solid transparent;
+            transition: all 0.3s;
         }
 
         .pain-level:hover, .pain-level.selected {
@@ -688,12 +458,7 @@
         .pain-level.level-3 { background: #fed7aa; }
         .pain-level.level-4 { background: #fecaca; }
 
-        .pain-description {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
+        .pain-description { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; }
 
         /* Programs */
         .program-card {
@@ -702,8 +467,8 @@
             padding: 20px;
             margin-bottom: 15px;
             cursor: pointer;
-            transition: all 0.3s;
             border: 2px solid transparent;
+            transition: all 0.3s;
         }
 
         .program-card:hover {
@@ -716,18 +481,8 @@
             background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
         }
 
-        .program-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .program-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
+        .program-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .program-title { font-size: 1.1rem; font-weight: 600; }
 
         .program-badge {
             background: var(--primary);
@@ -737,127 +492,128 @@
             font-size: 0.75rem;
         }
 
-        .program-description {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+        .program-description { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; }
+        .program-meta { display: flex; gap: 15px; font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ==================== VIDEO PLAYER ==================== */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 15px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
-        .program-meta {
-            display: flex;
-            gap: 15px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 400px;
+            object-fit: cover;
         }
 
-        /* ==================== EXERCISE ILLUSTRATION ==================== */
-        .exercise-illustration {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .illustration-title {
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .illustration-sequence {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .illustration-step {
-            flex: 1;
-            max-width: 100px;
-            text-align: center;
-        }
-
-        .step-figure {
-            background: white;
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .step-figure svg {
-            width: 60px;
-            height: 80px;
-        }
-
-        .step-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            background: var(--primary);
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
-            border-radius: 50%;
-            font-size: 0.65rem;
-            line-height: 18px;
-            margin-bottom: 3px;
         }
 
-        .illustration-arrow {
-            color: var(--primary);
-            font-size: 1.5rem;
-            font-weight: bold;
-            flex-shrink: 0;
+        .video-overlay-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 5px;
         }
 
-        .movement-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            padding: 10px;
-            background: white;
-            border-radius: 10px;
-        }
-
-        .movement-indicator .arrow-icon {
-            font-size: 1.2rem;
-        }
-
-        .movement-indicator .movement-text {
+        .video-overlay-subtitle {
             font-size: 0.8rem;
-            color: var(--text-dark);
-            font-weight: 500;
+            opacity: 0.9;
         }
 
-        /* SVG Figure Styles */
-        .svg-body { fill: #3b82f6; }
-        .svg-skin { fill: #fcd34d; }
-        .svg-shorts { fill: #1e40af; }
-        .svg-outline { fill: none; stroke: #1e3a5f; stroke-width: 1.5; }
-        .svg-floor { fill: #94a3b8; }
-        .svg-equipment { fill: #ef4444; stroke: #b91c1c; stroke-width: 1; }
-        .svg-arrow { fill: var(--primary); }
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
 
-        /* ==================== REST OF STYLES ==================== */
+        .video-control-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .video-control-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.1);
+        }
+
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .video-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .video-error {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            background: var(--bg-light);
+            border-radius: 20px;
+        }
+
+        .video-error-icon { font-size: 3rem; margin-bottom: 10px; }
+
+        .video-fallback {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 15px auto;
+            max-width: 320px;
+        }
+
+        .video-fallback-icon { font-size: 4rem; margin-bottom: 15px; }
+        .video-fallback-text { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ==================== EXERCISE ==================== */
+        .exercise-container { text-align: center; }
+
         .exercise-name {
             font-size: 1.3rem;
             font-weight: 700;
             margin: 15px 0 10px;
             color: var(--text-dark);
-            text-align: center;
         }
 
         .muscle-target {
@@ -868,10 +624,6 @@
             border-radius: 20px;
             font-size: 0.75rem;
             margin: 5px auto;
-        }
-
-        .exercise-container {
-            text-align: center;
         }
 
         .exercise-details {
@@ -888,18 +640,9 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .detail-row:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            color: var(--text-muted);
-        }
-
-        .detail-value {
-            font-weight: 600;
-            color: var(--primary);
-        }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-label { color: var(--text-muted); }
+        .detail-value { font-weight: 600; color: var(--primary); }
 
         .exercise-instructions {
             text-align: left;
@@ -910,19 +653,9 @@
             border-left: 4px solid var(--warning);
         }
 
-        .exercise-instructions h4 {
-            margin-bottom: 10px;
-            color: #92400e;
-        }
-
-        .exercise-instructions ol {
-            padding-left: 20px;
-            color: #78350f;
-        }
-
-        .exercise-instructions li {
-            margin-bottom: 5px;
-        }
+        .exercise-instructions h4 { margin-bottom: 10px; color: #92400e; }
+        .exercise-instructions ol { padding-left: 20px; color: #78350f; }
+        .exercise-instructions li { margin-bottom: 5px; }
 
         /* Timer */
         .timer-display {
@@ -934,12 +667,7 @@
             font-family: 'Courier New', monospace;
         }
 
-        .timer-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
+        .timer-controls { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
 
         .timer-btn {
             padding: 15px 30px;
@@ -948,27 +676,12 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .timer-btn.start {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .timer-btn.pause {
-            background: var(--warning);
-            color: white;
-        }
-
-        .timer-btn.reset {
-            background: var(--border);
-            color: var(--text-dark);
-        }
-
-        .timer-btn:hover {
-            transform: scale(1.05);
-        }
+        .timer-btn.start { background: var(--secondary); color: white; }
+        .timer-btn.pause { background: var(--warning); color: white; }
+        .timer-btn.reset { background: var(--border); color: var(--text-dark); }
+        .timer-btn:hover { transform: scale(1.05); }
 
         /* Progress */
         .progress-bar {
@@ -987,18 +700,10 @@
             transition: width 0.5s ease;
         }
 
-        .progress-text {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        .progress-text { text-align: center; color: var(--text-muted); font-size: 0.9rem; }
 
-        /* Navigation Buttons */
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
+        /* Nav Buttons */
+        .nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
 
         .nav-btn {
             flex: 1;
@@ -1008,36 +713,15 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .nav-btn.prev {
-            background: var(--border);
-            color: var(--text-dark);
-        }
-
-        .nav-btn.next {
-            background: var(--primary);
-            color: white;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .nav-btn.prev { background: var(--border); color: var(--text-dark); }
+        .nav-btn.next { background: var(--primary); color: white; }
+        .nav-btn:hover { transform: translateY(-2px); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
         /* Calendar */
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 
         .calendar-nav {
             background: var(--primary);
@@ -1050,16 +734,8 @@
             font-size: 1.2rem;
         }
 
-        .calendar-month {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
+        .calendar-month { font-size: 1.2rem; font-weight: 600; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 
         .calendar-day-header {
             text-align: center;
@@ -1077,33 +753,15 @@
             border-radius: 50%;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .calendar-day:hover {
-            background: var(--bg-light);
-        }
-
-        .calendar-day.today {
-            border: 2px solid var(--primary);
-            font-weight: 600;
-        }
-
-        .calendar-day.completed {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .calendar-day.other-month {
-            color: var(--border);
-        }
+        .calendar-day:hover { background: var(--bg-light); }
+        .calendar-day.today { border: 2px solid var(--primary); font-weight: 600; }
+        .calendar-day.completed { background: var(--secondary); color: white; }
+        .calendar-day.other-month { color: var(--border); }
 
         /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 
         .stat-card {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -1113,91 +771,24 @@
             text-align: center;
         }
 
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
+        .stat-value { font-size: 2rem; font-weight: 700; }
+        .stat-label { font-size: 0.85rem; opacity: 0.9; margin-top: 5px; }
 
         /* Evolution Chart */
-        .evolution-chart {
-            height: 120px;
-            display: flex;
-            align-items: flex-end;
-            gap: 8px;
-            padding: 10px 0;
-        }
+        .evolution-chart { height: 120px; display: flex; align-items: flex-end; gap: 8px; padding: 10px 0; }
 
-        .chart-bar-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
+        .chart-bar-container { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 
         .chart-bar {
             width: 100%;
             background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 4px 4px 0 0;
-            transition: height 0.5s ease;
             min-height: 5px;
         }
 
-        .chart-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-
-        /* Pain History */
-        .pain-history {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 0;
-        }
-
-        .pain-history-item {
-            flex-shrink: 0;
-            text-align: center;
-            padding: 10px;
-            background: var(--bg-light);
-            border-radius: 12px;
-            min-width: 70px;
-        }
-
-        .pain-history-emoji {
-            font-size: 1.5rem;
-        }
-
-        .pain-history-date {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
+        .chart-label { font-size: 0.65rem; color: var(--text-muted); }
 
         /* Profile */
-        .user-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
-            margin-bottom: 10px;
-            transition: border-color 0.3s;
-        }
-
-        .user-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        /* Switch User Button */
         .switch-user-btn {
             display: flex;
             align-items: center;
@@ -1207,7 +798,6 @@
             border: 2px solid var(--border);
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s;
             margin-bottom: 15px;
             width: 100%;
         }
@@ -1217,23 +807,32 @@
             background: #dbeafe;
         }
 
-        /* Completion Modal */
+        .user-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .user-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
             z-index: 200;
             align-items: center;
             justify-content: center;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal {
             background: white;
@@ -1241,30 +840,11 @@
             padding: 30px;
             max-width: 350px;
             text-align: center;
-            animation: modalPop 0.3s ease;
         }
 
-        @keyframes modalPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .modal-text {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
+        .modal-icon { font-size: 4rem; margin-bottom: 15px; }
+        .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        .modal-text { color: var(--text-muted); margin-bottom: 20px; }
 
         .modal-btn {
             background: var(--primary);
@@ -1276,124 +856,98 @@
             font-weight: 600;
             cursor: pointer;
         }
-
-        /* Responsive */
-        @media (max-width: 400px) {
-            .illustration-step {
-                max-width: 80px;
-            }
-
-            .step-figure {
-                min-height: 70px;
-                padding: 8px;
-            }
-
-            .step-figure svg {
-                width: 45px;
-                height: 60px;
-            }
-
-            .illustration-arrow {
-                font-size: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- ==================== LOGIN OVERLAY ==================== -->
+        <!-- LOGIN OVERLAY -->
         <div class="login-overlay" id="login-overlay">
             <div class="login-container">
                 <div class="login-header">
                     <div class="login-logo">🦵</div>
                     <h1 class="login-title">KneeRecovery Pro</h1>
-                    <p class="login-subtitle" data-i18n="loginSubtitle">Quem vai treinar hoje?</p>
+                    <p class="login-subtitle">Quem vai treinar hoje?</p>
                 </div>
 
                 <div class="login-tabs">
-                    <button class="login-tab active" onclick="showLoginTab('existing')" data-i18n="existingUser">Já tenho perfil</button>
-                    <button class="login-tab" onclick="showLoginTab('new')" data-i18n="newUser">Criar perfil</button>
+                    <button class="login-tab active" onclick="showLoginTab('existing')">Já tenho perfil</button>
+                    <button class="login-tab" onclick="showLoginTab('new')">Criar perfil</button>
                 </div>
 
                 <div class="login-form active" id="existing-form">
-                    <div class="existing-users" id="existing-users">
-                        <div class="existing-users-title" data-i18n="selectProfile">Selecione seu perfil:</div>
+                    <div class="existing-users">
+                        <div class="existing-users-title">Selecione seu perfil:</div>
                         <div class="user-list" id="user-list"></div>
                     </div>
                     <div id="no-users-message" style="text-align: center; padding: 30px; color: var(--text-muted); display: none;">
                         <div style="font-size: 3rem; margin-bottom: 10px;">👋</div>
-                        <p data-i18n="noUsersYet">Nenhum perfil cadastrado ainda.</p>
-                        <p data-i18n="createFirst">Crie seu primeiro perfil!</p>
+                        <p>Nenhum perfil cadastrado ainda.</p>
+                        <p>Crie seu primeiro perfil!</p>
                     </div>
                 </div>
 
                 <div class="login-form" id="new-form">
                     <div class="avatar-section">
-                        <label class="avatar-label" data-i18n="chooseAvatar">Escolha seu avatar:</label>
+                        <label class="login-input-label">Escolha seu avatar:</label>
                         <div class="avatar-grid" id="avatar-grid"></div>
                     </div>
 
                     <div class="login-input-group">
-                        <label class="login-input-label" data-i18n="nickname">Apelido:</label>
+                        <label class="login-input-label">Apelido:</label>
                         <input type="text" class="login-input" id="new-nickname" placeholder="Ex: João, Maria..." maxlength="15">
                     </div>
 
                     <div class="knee-selection">
-                        <label class="avatar-label" data-i18n="whichKnee">Qual joelho está machucado?</label>
+                        <label class="login-input-label">Qual joelho está machucado?</label>
                         <div class="knee-options">
                             <div class="knee-option" onclick="selectKnee('left')" id="knee-left">
                                 <div class="knee-option-icon">🦵</div>
-                                <div class="knee-option-label" data-i18n="leftKnee">Esquerdo</div>
+                                <div class="knee-option-label">Esquerdo</div>
                             </div>
                             <div class="knee-option" onclick="selectKnee('right')" id="knee-right">
                                 <div class="knee-option-icon" style="transform: scaleX(-1);">🦵</div>
-                                <div class="knee-option-label" data-i18n="rightKnee">Direito</div>
+                                <div class="knee-option-label">Direito</div>
                             </div>
                             <div class="knee-option" onclick="selectKnee('both')" id="knee-both">
                                 <div class="knee-option-icon">🦵🦵</div>
-                                <div class="knee-option-label" data-i18n="bothKnees">Ambos</div>
+                                <div class="knee-option-label">Ambos</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="login-input-group">
-                        <label class="login-input-label" data-i18n="createPin">Crie um PIN de 4 dígitos:</label>
+                        <label class="login-input-label">Crie um PIN de 4 dígitos:</label>
                         <div class="pin-container">
                             <input type="tel" class="pin-input" maxlength="1" id="new-pin-1" oninput="handlePinInput(this, 'new-pin-2')">
                             <input type="tel" class="pin-input" maxlength="1" id="new-pin-2" oninput="handlePinInput(this, 'new-pin-3')">
                             <input type="tel" class="pin-input" maxlength="1" id="new-pin-3" oninput="handlePinInput(this, 'new-pin-4')">
-                            <input type="tel" class="pin-input" maxlength="1" id="new-pin-4" oninput="handlePinInput(this, null)">
+                            <input type="tel" class="pin-input" maxlength="1" id="new-pin-4">
                         </div>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; text-align: center;" data-i18n="pinHint">
-                            O PIN protege seus dados de outros usuários
-                        </p>
                     </div>
 
-                    <button class="login-btn login-btn-primary" onclick="createNewUser()" data-i18n="createProfile">
-                        ✨ Criar Perfil
-                    </button>
+                    <button class="login-btn login-btn-primary" onclick="createNewUser()">✨ Criar Perfil</button>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== PIN VERIFICATION MODAL ==================== -->
+        <!-- PIN MODAL -->
         <div class="pin-modal" id="pin-modal">
             <div class="pin-modal-content">
                 <div class="pin-modal-avatar" id="pin-modal-avatar">🏃</div>
                 <div class="pin-modal-name" id="pin-modal-name">Nome</div>
-                <p style="color: var(--text-muted); margin-bottom: 15px;" data-i18n="enterPin">Digite seu PIN:</p>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">Digite seu PIN:</p>
                 <div class="pin-container">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-1" oninput="handlePinInput(this, 'verify-pin-2')">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-2" oninput="handlePinInput(this, 'verify-pin-3')">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-3" oninput="handlePinInput(this, 'verify-pin-4')">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-4" oninput="verifyPin()">
                 </div>
-                <p class="pin-error" id="pin-error" data-i18n="wrongPin">PIN incorreto. Tente novamente.</p>
-                <button class="login-btn login-btn-secondary" onclick="closePinModal()" style="margin-top: 15px;" data-i18n="cancel">Cancelar</button>
+                <p class="pin-error" id="pin-error">PIN incorreto.</p>
+                <button class="login-btn" style="background: var(--bg-light); color: var(--text-dark); margin-top: 15px;" onclick="closePinModal()">Cancelar</button>
             </div>
         </div>
 
-        <!-- ==================== MAIN APP ==================== -->
+        <!-- MAIN APP -->
         <div id="main-app" style="display: none;">
             <header class="header">
                 <div class="header-content">
@@ -1401,9 +955,8 @@
                         <div class="header-avatar" id="header-avatar" onclick="showLoginScreen()">🏃</div>
                         <div class="header-info">
                             <h1>KneeRecovery Pro</h1>
-                            <p>
-                                <span data-i18n="hello">Olá</span>, <span id="header-username">Atleta</span>!
-                                <span class="header-knee-indicator" id="header-knee-indicator">🦵 Esquerdo</span>
+                            <p>Olá, <span id="header-username">Atleta</span>!
+                                <span class="header-knee-indicator" id="header-knee-indicator">🦵 E</span>
                             </p>
                         </div>
                     </div>
@@ -1416,41 +969,41 @@
             </header>
 
             <nav class="nav-tabs">
-                <button class="nav-tab active" onclick="showScreen('home')" data-i18n="navHome">Início</button>
-                <button class="nav-tab" onclick="showScreen('training')" data-i18n="navTraining">Treino</button>
-                <button class="nav-tab" onclick="showScreen('calendar')" data-i18n="navCalendar">Calendário</button>
-                <button class="nav-tab" onclick="showScreen('profile')" data-i18n="navProfile">Perfil</button>
+                <button class="nav-tab active" onclick="showScreen('home')">Início</button>
+                <button class="nav-tab" onclick="showScreen('training')">Treino</button>
+                <button class="nav-tab" onclick="showScreen('calendar')">Calendário</button>
+                <button class="nav-tab" onclick="showScreen('profile')">Perfil</button>
             </nav>
 
-            <!-- Home Screen -->
+            <!-- HOME -->
             <div id="home-screen" class="screen active">
                 <div class="welcome-card">
                     <div class="welcome-header">
                         <div class="welcome-avatar" id="welcome-avatar">🏃</div>
                         <div class="welcome-text">
-                            <h2><span data-i18n="welcomeBack">Bem-vindo</span>, <span id="welcome-name">Atleta</span>!</h2>
-                            <p data-i18n="keepGoing">Continue sua jornada de recuperação</p>
-                            <div class="welcome-knee-info" id="welcome-knee-info">🦵 Joelho Esquerdo</div>
+                            <h2>Bem-vindo, <span id="welcome-name">Atleta</span>!</h2>
+                            <p>Continue sua jornada de recuperação</p>
+                            <div class="welcome-knee-info" id="welcome-knee-info">🦵 Esquerdo</div>
                         </div>
                     </div>
                     <div class="welcome-stats">
                         <div class="welcome-stat">
                             <div class="welcome-stat-value" id="home-workouts">0</div>
-                            <div class="welcome-stat-label" data-i18n="workouts">Treinos</div>
+                            <div class="welcome-stat-label">Treinos</div>
                         </div>
                         <div class="welcome-stat">
                             <div class="welcome-stat-value" id="home-streak">0</div>
-                            <div class="welcome-stat-label" data-i18n="streak">Sequência</div>
+                            <div class="welcome-stat-label">Sequência</div>
                         </div>
                         <div class="welcome-stat">
                             <div class="welcome-stat-value" id="home-minutes">0</div>
-                            <div class="welcome-stat-label" data-i18n="minutes">Minutos</div>
+                            <div class="welcome-stat-label">Minutos</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">📊 <span data-i18n="painTitle">Como está seu joelho hoje?</span></div>
+                    <div class="card-title">📊 Como está seu joelho hoje?</div>
                     <div class="pain-scale">
                         <div class="pain-level level-0" onclick="selectPain(0)" data-pain="0">😊</div>
                         <div class="pain-level level-1" onclick="selectPain(1)" data-pain="1">🙂</div>
@@ -1458,76 +1011,69 @@
                         <div class="pain-level level-3" onclick="selectPain(3)" data-pain="3">😟</div>
                         <div class="pain-level level-4" onclick="selectPain(4)" data-pain="4">😣</div>
                     </div>
-                    <div class="pain-description" id="pain-description" data-i18n="painSelect">Selecione seu nível de dor</div>
-                </div>
-
-                <div class="card" id="pain-evolution-card" style="display: none;">
-                    <div class="card-title">📈 <span data-i18n="painEvolution">Evolução da Dor</span></div>
-                    <div class="pain-history" id="pain-history"></div>
+                    <div class="pain-description" id="pain-description">Selecione seu nível de dor</div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">🎯 <span data-i18n="selectProgram">Escolha seu programa</span></div>
+                    <div class="card-title">🎯 Escolha seu programa</div>
 
                     <div class="program-card" onclick="selectProgram(0)">
                         <div class="program-header">
-                            <span class="program-title" data-i18n="program1Title">Propriocepção Básica</span>
-                            <span class="program-badge" data-i18n="levelBeginner">Iniciante</span>
+                            <span class="program-title">Propriocepção Básica</span>
+                            <span class="program-badge">Iniciante</span>
                         </div>
-                        <p class="program-description" data-i18n="program1Desc">Foco em equilíbrio e consciência corporal.</p>
+                        <p class="program-description">Foco em equilíbrio e consciência corporal.</p>
                         <div class="program-meta">
                             <span>⏱️ 20 min</span>
-                            <span>🔄 6 <span data-i18n="exercises">exercícios</span></span>
+                            <span>🔄 6 exercícios</span>
                         </div>
                     </div>
 
                     <div class="program-card" onclick="selectProgram(1)">
                         <div class="program-header">
-                            <span class="program-title" data-i18n="program2Title">Fortalecimento Quadríceps</span>
-                            <span class="program-badge" data-i18n="levelIntermediate">Intermediário</span>
+                            <span class="program-title">Fortalecimento Quadríceps</span>
+                            <span class="program-badge">Intermediário</span>
                         </div>
-                        <p class="program-description" data-i18n="program2Desc">Exercícios para fortalecer a coxa.</p>
+                        <p class="program-description">Exercícios para fortalecer a coxa.</p>
                         <div class="program-meta">
                             <span>⏱️ 25 min</span>
-                            <span>🔄 7 <span data-i18n="exercises">exercícios</span></span>
+                            <span>🔄 7 exercícios</span>
                         </div>
                     </div>
 
                     <div class="program-card" onclick="selectProgram(2)">
                         <div class="program-header">
-                            <span class="program-title" data-i18n="program3Title">Cadeia Posterior</span>
-                            <span class="program-badge" data-i18n="levelIntermediate">Intermediário</span>
+                            <span class="program-title">Cadeia Posterior</span>
+                            <span class="program-badge">Intermediário</span>
                         </div>
-                        <p class="program-description" data-i18n="program3Desc">Fortalecimento de isquiotibiais e glúteos.</p>
+                        <p class="program-description">Fortalecimento de isquiotibiais e glúteos.</p>
                         <div class="program-meta">
                             <span>⏱️ 25 min</span>
-                            <span>🔄 7 <span data-i18n="exercises">exercícios</span></span>
+                            <span>🔄 7 exercícios</span>
                         </div>
                     </div>
 
                     <div class="program-card" onclick="selectProgram(3)">
                         <div class="program-header">
-                            <span class="program-title" data-i18n="program4Title">Estabilização Avançada</span>
-                            <span class="program-badge" data-i18n="levelAdvanced">Avançado</span>
+                            <span class="program-title">Estabilização Avançada</span>
+                            <span class="program-badge">Avançado</span>
                         </div>
-                        <p class="program-description" data-i18n="program4Desc">Exercícios dinâmicos de equilíbrio.</p>
+                        <p class="program-description">Exercícios dinâmicos de equilíbrio.</p>
                         <div class="program-meta">
                             <span>⏱️ 30 min</span>
-                            <span>🔄 8 <span data-i18n="exercises">exercícios</span></span>
+                            <span>🔄 8 exercícios</span>
                         </div>
                     </div>
                 </div>
 
-                <button class="nav-btn next" style="width: 100%;" onclick="startTraining()" data-i18n="startTraining">
-                    🚀 Iniciar Treino
-                </button>
+                <button class="nav-btn next" style="width: 100%;" onclick="startTraining()">🚀 Iniciar Treino</button>
             </div>
 
-            <!-- Training Screen -->
+            <!-- TRAINING -->
             <div id="training-screen" class="screen">
                 <div class="card">
                     <div class="progress-text">
-                        <span data-i18n="exercise">Exercício</span> <span id="current-exercise">1</span> <span data-i18n="of">de</span> <span id="total-exercises">6</span>
+                        Exercício <span id="current-exercise">1</span> de <span id="total-exercises">6</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="progress-fill" style="width: 16.66%"></div>
@@ -1535,25 +1081,46 @@
                 </div>
 
                 <div class="card exercise-container">
-                    <!-- Exercise Illustration -->
-                    <div class="exercise-illustration" id="exercise-illustration">
-                        <!-- SVG illustrations will be rendered here -->
+                    <!-- VIDEO PLAYER -->
+                    <div class="video-container" id="video-container">
+                        <video id="exercise-video" loop muted playsinline>
+                            <source src="" type="video/mp4">
+                        </video>
+                        <div class="video-loading" id="video-loading">
+                            <div class="video-loading-spinner"></div>
+                            <div>Carregando vídeo...</div>
+                        </div>
+                        <div class="video-overlay">
+                            <div class="video-overlay-title" id="video-title">Exercício</div>
+                            <div class="video-overlay-subtitle" id="video-subtitle">Músculo alvo</div>
+                            <div class="video-controls">
+                                <button class="video-control-btn" onclick="toggleVideoPlay()">▶️</button>
+                                <button class="video-control-btn" onclick="toggleVideoMute()">🔇</button>
+                                <button class="video-control-btn" onclick="restartVideo()">🔄</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <h2 class="exercise-name" id="exercise-name">Agachamento Isométrico</h2>
+                    <!-- Fallback quando vídeo não carrega -->
+                    <div class="video-fallback" id="video-fallback" style="display: none;">
+                        <div class="video-fallback-icon" id="fallback-icon">🏋️</div>
+                        <div class="video-fallback-text" id="fallback-text">Vídeo não disponível</div>
+                    </div>
+
+                    <h2 class="exercise-name" id="exercise-name">Agachamento</h2>
                     <div class="muscle-target" id="muscle-target">🎯 Quadríceps, Glúteos</div>
 
                     <div class="exercise-details">
                         <div class="detail-row">
-                            <span class="detail-label" data-i18n="duration">Duração</span>
+                            <span class="detail-label">Duração</span>
                             <span class="detail-value" id="exercise-duration">30 seg</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label" data-i18n="repetitions">Repetições</span>
+                            <span class="detail-label">Repetições</span>
                             <span class="detail-value" id="exercise-reps">3 séries</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label" data-i18n="equipment">Equipamento</span>
+                            <span class="detail-label">Equipamento</span>
                             <span class="detail-value" id="exercise-equipment">Mini Band</span>
                         </div>
                     </div>
@@ -1561,28 +1128,28 @@
                     <div class="timer-display" id="timer-display">00:30</div>
 
                     <div class="timer-controls">
-                        <button class="timer-btn start" id="timer-btn" onclick="toggleTimer()" data-i18n="start">Iniciar</button>
-                        <button class="timer-btn reset" onclick="resetTimer()" data-i18n="reset">Resetar</button>
+                        <button class="timer-btn start" id="timer-btn" onclick="toggleTimer()">Iniciar</button>
+                        <button class="timer-btn reset" onclick="resetTimer()">Resetar</button>
                     </div>
 
-                    <div class="exercise-instructions" id="exercise-instructions">
-                        <h4>📝 <span data-i18n="howToExecute">Como executar:</span></h4>
+                    <div class="exercise-instructions">
+                        <h4>📝 Como executar:</h4>
                         <ol id="instructions-list">
-                            <li>Posicione a mini band acima dos joelhos</li>
+                            <li>Instrução 1</li>
                         </ol>
                     </div>
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="nav-btn prev" onclick="prevExercise()" id="prev-btn" disabled data-i18n="previous">Anterior</button>
-                    <button class="nav-btn next" onclick="nextExercise()" id="next-btn" data-i18n="next">Próximo</button>
+                    <button class="nav-btn prev" onclick="prevExercise()" id="prev-btn" disabled>Anterior</button>
+                    <button class="nav-btn next" onclick="nextExercise()" id="next-btn">Próximo</button>
                 </div>
             </div>
 
-            <!-- Calendar Screen -->
+            <!-- CALENDAR -->
             <div id="calendar-screen" class="screen">
                 <div class="card">
-                    <div class="card-title">📅 <span data-i18n="trainingCalendar">Calendário de Treinos</span></div>
+                    <div class="card-title">📅 Calendário de Treinos</div>
                     <div class="calendar-header">
                         <button class="calendar-nav" onclick="changeMonth(-1)">‹</button>
                         <span class="calendar-month" id="calendar-month">Abril 2026</span>
@@ -1592,95 +1159,93 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-title">📊 <span data-i18n="weeklyEvolution">Evolução Semanal</span></div>
+                    <div class="card-title">📊 Evolução Semanal</div>
                     <div class="evolution-chart" id="evolution-chart"></div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">🏆 <span data-i18n="yourStats">Suas Estatísticas</span></div>
+                    <div class="card-title">🏆 Suas Estatísticas</div>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-value" id="total-workouts">0</div>
-                            <div class="stat-label" data-i18n="completedWorkouts">Treinos Completos</div>
+                            <div class="stat-label">Treinos Completos</div>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
                             <div class="stat-value" id="current-streak">0</div>
-                            <div class="stat-label" data-i18n="dayStreak">Dias Seguidos</div>
+                            <div class="stat-label">Dias Seguidos</div>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
                             <div class="stat-value" id="total-minutes">0</div>
-                            <div class="stat-label" data-i18n="totalMinutes">Minutos Totais</div>
+                            <div class="stat-label">Minutos Totais</div>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
                             <div class="stat-value" id="best-streak">0</div>
-                            <div class="stat-label" data-i18n="bestStreak">Melhor Sequência</div>
+                            <div class="stat-label">Melhor Sequência</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Profile Screen -->
+            <!-- PROFILE -->
             <div id="profile-screen" class="screen">
                 <button class="switch-user-btn" onclick="showLoginScreen()">
                     <span style="font-size: 1.5rem;" id="profile-avatar-btn">🏃</span>
                     <div style="flex: 1; text-align: left;">
                         <div style="font-weight: 600;" id="profile-name-btn">Nome</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="tapToSwitch">Toque para trocar de usuário</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Toque para trocar de usuário</div>
                     </div>
                     <span>→</span>
                 </button>
 
                 <div class="card">
-                    <div class="card-title">🦵 <span data-i18n="injuredKnee">Joelho Afetado</span></div>
+                    <div class="card-title">🦵 Joelho Afetado</div>
                     <div class="knee-options" id="profile-knee-options">
                         <div class="knee-option" onclick="updateKnee('left')" id="profile-knee-left">
                             <div class="knee-option-icon">🦵</div>
-                            <div class="knee-option-label" data-i18n="leftKnee">Esquerdo</div>
+                            <div class="knee-option-label">Esquerdo</div>
                         </div>
                         <div class="knee-option" onclick="updateKnee('right')" id="profile-knee-right">
                             <div class="knee-option-icon" style="transform: scaleX(-1);">🦵</div>
-                            <div class="knee-option-label" data-i18n="rightKnee">Direito</div>
+                            <div class="knee-option-label">Direito</div>
                         </div>
                         <div class="knee-option" onclick="updateKnee('both')" id="profile-knee-both">
                             <div class="knee-option-icon">🦵🦵</div>
-                            <div class="knee-option-label" data-i18n="bothKnees">Ambos</div>
+                            <div class="knee-option-label">Ambos</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">👤 <span data-i18n="yourProfile">Seu Perfil</span></div>
-                    <input type="number" class="user-input" id="user-age" placeholder="Idade" data-i18n-placeholder="agePlaceholder">
-                    <button class="nav-btn next" style="width: 100%; margin-top: 10px;" onclick="saveProfile()" data-i18n="saveProfile">
-                        💾 Salvar Perfil
-                    </button>
+                    <div class="card-title">👤 Seu Perfil</div>
+                    <input type="number" class="user-input" id="user-age" placeholder="Idade">
+                    <button class="nav-btn next" style="width: 100%; margin-top: 10px;" onclick="saveProfile()">💾 Salvar</button>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">ℹ️ <span data-i18n="aboutApp">Sobre o App</span></div>
-                    <p style="color: var(--text-muted); line-height: 1.6;" data-i18n="aboutText">
+                    <div class="card-title">ℹ️ Sobre o App</div>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
                         Este aplicativo foi desenvolvido com base em protocolos de fisioterapia para fortalecimento muscular ao redor do joelho.
                     </p>
-                    <p style="color: var(--danger); margin-top: 10px; font-size: 0.85rem;" data-i18n="disclaimer">
+                    <p style="color: var(--danger); margin-top: 10px; font-size: 0.85rem;">
                         ⚠️ Consulte sempre um profissional de saúde antes de iniciar qualquer programa de exercícios.
                     </p>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">🗑️ <span data-i18n="dangerZone">Zona de Perigo</span></div>
-                    <button class="nav-btn prev" style="width: 100%; background: var(--danger); color: white;" onclick="deleteCurrentUser()" data-i18n="deleteProfile">
+                    <div class="card-title">🗑️ Zona de Perigo</div>
+                    <button class="nav-btn prev" style="width: 100%; background: var(--danger); color: white;" onclick="deleteCurrentUser()">
                         Excluir Meu Perfil
                     </button>
                 </div>
             </div>
 
-            <!-- Completion Modal -->
+            <!-- COMPLETION MODAL -->
             <div class="modal-overlay" id="completion-modal">
                 <div class="modal">
                     <div class="modal-icon">🎉</div>
-                    <h2 class="modal-title" data-i18n="congratulations">Parabéns!</h2>
-                    <p class="modal-text" data-i18n="workoutComplete">Você completou o treino de hoje!</p>
-                    <button class="modal-btn" onclick="closeModal()" data-i18n="close">Fechar</button>
+                    <h2 class="modal-title">Parabéns!</h2>
+                    <p class="modal-text">Você completou o treino de hoje!</p>
+                    <button class="modal-btn" onclick="closeModal()">Fechar</button>
                 </div>
             </div>
         </div>
@@ -1690,951 +1255,109 @@
         // ==================== AVATARS ====================
         const avatars = ['🏃', '🚴', '🏋️', '🧘', '⚽', '🏀', '🎾', '🏊', '🥋', '💪', '🦵', '❤️'];
 
-        // ==================== SVG ILLUSTRATIONS ====================
-        // Cada exercício tem 3 posições: start, middle, end
-        const exerciseIllustrations = {
-            // STANDING - pessoa em pé
-            standing: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="82" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
+        // ==================== EXERCISE VIDEOS ====================
+        // Vídeos gratuitos do Pexels (licença livre para uso)
+        const exerciseVideos = {
+            // Agachamentos e pernas
+            squat: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4',
+            squat_band: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4',
+            wall_sit: 'https://videos.pexels.com/video-files/4761563/4761563-uhd_1440_2560_25fps.mp4',
+            lunge: 'https://videos.pexels.com/video-files/4761449/4761449-uhd_1440_2560_25fps.mp4',
 
-            // SINGLE LEG STAND
-            single_leg_start: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="82" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            single_leg_mid: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="14" y="26" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(-20 17 26)"/>
-                <rect x="40" y="26" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(20 43 26)"/>
-                <rect x="26" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="20" rx="3" fill="#1e40af" transform="rotate(-45 34 50)"/>
-                <ellipse cx="30" cy="82" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            single_leg_end: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="12" y="28" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(-30 15 28)"/>
-                <rect x="42" y="28" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(30 45 28)"/>
-                <rect x="26" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="20" rx="3" fill="#1e40af" transform="rotate(-90 34 50)"/>
-                <ellipse cx="30" cy="82" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
+            // Ponte e glúteos
+            bridge: 'https://videos.pexels.com/video-files/4761612/4761612-uhd_1440_2560_25fps.mp4',
 
-            // SQUAT
-            squat_start: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="30" cy="58" rx="18" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
-            squat_mid: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="22" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="32" width="16" height="24" rx="4" fill="#3b82f6"/>
-                <rect x="16" y="34" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="38" y="34" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="18" y="54" width="7" height="16" rx="3" fill="#1e40af" transform="rotate(50 21 54)"/>
-                <rect x="35" y="54" width="7" height="16" rx="3" fill="#1e40af" transform="rotate(-50 38 54)"/>
-                <rect x="10" y="68" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-50 13 68)"/>
-                <rect x="43" y="68" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(50 46 68)"/>
-                <ellipse cx="18" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="42" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="30" cy="62" rx="20" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
-            squat_end: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="32" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="42" width="16" height="20" rx="4" fill="#3b82f6"/>
-                <rect x="14" y="44" width="6" height="18" rx="3" fill="#fcd34d"/>
-                <rect x="40" y="44" width="6" height="18" rx="3" fill="#fcd34d"/>
-                <rect x="14" y="60" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(80 17 60)"/>
-                <rect x="39" y="60" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-80 42 60)"/>
-                <rect x="6" y="66" width="7" height="16" rx="3" fill="#1e40af" transform="rotate(-80 9 66)"/>
-                <rect x="47" y="66" width="7" height="16" rx="3" fill="#1e40af" transform="rotate(80 50 66)"/>
-                <ellipse cx="15" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="45" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="30" cy="68" rx="22" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
+            // Equilíbrio
+            balance: 'https://videos.pexels.com/video-files/4761792/4761792-uhd_1440_2560_25fps.mp4',
 
-            // BRIDGE
-            bridge_start: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="35" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="30" y="40" width="28" height="12" rx="4" fill="#3b82f6"/>
-                <rect x="15" y="38" width="18" height="6" rx="3" fill="#1e40af"/>
-                <rect x="10" y="44" width="10" height="6" rx="3" fill="#1e40af"/>
-                <ellipse cx="12" cy="50" rx="4" ry="2" fill="#374151"/>
-            </svg>`,
-            bridge_mid: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="30" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="30" y="32" width="28" height="12" rx="4" fill="#3b82f6" transform="rotate(-15 44 38)"/>
-                <rect x="15" y="36" width="18" height="6" rx="3" fill="#1e40af"/>
-                <rect x="10" y="44" width="10" height="6" rx="3" fill="#1e40af"/>
-                <ellipse cx="12" cy="50" rx="4" ry="2" fill="#374151"/>
-            </svg>`,
-            bridge_end: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="25" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="30" y="24" width="28" height="12" rx="4" fill="#3b82f6" transform="rotate(-30 44 30)"/>
-                <rect x="15" y="32" width="18" height="6" rx="3" fill="#1e40af" transform="rotate(-20 24 35)"/>
-                <rect x="8" y="42" width="10" height="6" rx="3" fill="#1e40af"/>
-                <ellipse cx="10" cy="50" rx="4" ry="2" fill="#374151"/>
-                <path d="M30 28 L30 18" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow)"/>
-            </svg>`,
+            // Panturrilha
+            calf_raise: 'https://videos.pexels.com/video-files/4761563/4761563-uhd_1440_2560_25fps.mp4',
 
-            // WALL SIT
-            wall_start: `<svg viewBox="0 0 60 100">
-                <rect x="50" y="10" width="6" height="80" fill="#94a3b8"/>
-                <circle cx="35" cy="18" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="28" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="23" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="41" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="27" y="56" width="7" height="26" rx="3" fill="#1e40af"/>
-                <rect x="36" y="56" width="7" height="26" rx="3" fill="#1e40af"/>
-                <ellipse cx="30" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="40" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            wall_mid: `<svg viewBox="0 0 60 100">
-                <rect x="50" y="10" width="6" height="80" fill="#94a3b8"/>
-                <circle cx="35" cy="28" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="38" width="16" height="24" rx="4" fill="#3b82f6"/>
-                <rect x="21" y="40" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="41" y="40" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="20" y="60" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(45 23 60)"/>
-                <rect x="36" y="60" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-45 39 60)"/>
-                <rect x="10" y="70" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-45 13 70)"/>
-                <rect x="40" y="70" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(45 43 70)"/>
-                <ellipse cx="18" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="42" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            wall_end: `<svg viewBox="0 0 60 100">
-                <rect x="50" y="10" width="6" height="80" fill="#94a3b8"/>
-                <circle cx="35" cy="38" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="48" width="16" height="20" rx="4" fill="#3b82f6"/>
-                <rect x="19" y="50" width="6" height="18" rx="3" fill="#fcd34d"/>
-                <rect x="41" y="50" width="6" height="18" rx="3" fill="#fcd34d"/>
-                <rect x="14" y="64" width="7" height="12" rx="3" fill="#1e40af" transform="rotate(90 17 64)"/>
-                <rect x="38" y="64" width="7" height="12" rx="3" fill="#1e40af" transform="rotate(-90 41 64)"/>
-                <rect x="6" y="68" width="7" height="16" rx="3" fill="#1e40af" transform="rotate(-90 9 68)"/>
-                <rect x="42" y="68" width="7" height="16" rx="3" fill="#1e40af" transform="rotate(90 45 68)"/>
-                <ellipse cx="12" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="48" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
+            // Step
+            step_up: 'https://videos.pexels.com/video-files/4761449/4761449-uhd_1440_2560_25fps.mp4',
 
-            // CALF RAISE
-            calf_start: `<svg viewBox="0 0 60 100">
-                <rect x="15" y="78" width="30" height="6" rx="2" fill="#f59e0b"/>
-                <circle cx="30" cy="18" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="28" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="56" width="7" height="22" rx="3" fill="#1e40af"/>
-                <rect x="31" y="56" width="7" height="22" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="78" rx="5" ry="2" fill="#374151"/>
-                <ellipse cx="35" cy="78" rx="5" ry="2" fill="#374151"/>
-            </svg>`,
-            calf_mid: `<svg viewBox="0 0 60 100">
-                <rect x="15" y="78" width="30" height="6" rx="2" fill="#f59e0b"/>
-                <circle cx="30" cy="10" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="20" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="22" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="22" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="48" width="7" height="26" rx="3" fill="#1e40af"/>
-                <rect x="31" y="48" width="7" height="26" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="74" rx="4" ry="4" fill="#374151"/>
-                <ellipse cx="35" cy="74" rx="4" ry="4" fill="#374151"/>
-            </svg>`,
-            calf_end: `<svg viewBox="0 0 60 100">
-                <rect x="15" y="78" width="30" height="6" rx="2" fill="#f59e0b"/>
-                <circle cx="30" cy="4" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="14" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="16" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="16" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="42" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="42" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="72" rx="3" ry="5" fill="#374151"/>
-                <ellipse cx="35" cy="72" rx="3" ry="5" fill="#374151"/>
-            </svg>`,
+            // Deadlift/Stiff
+            deadlift: 'https://videos.pexels.com/video-files/4761612/4761612-uhd_1440_2560_25fps.mp4',
 
-            // LUNGE
-            lunge_start: `<svg viewBox="0 0 70 100">
-                <circle cx="35" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="23" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="41" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="27" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="36" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="30" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="40" cy="82" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            lunge_mid: `<svg viewBox="0 0 70 100">
-                <circle cx="35" cy="18" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="28" width="16" height="26" rx="4" fill="#3b82f6"/>
-                <rect x="21" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="43" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="18" y="52" width="7" height="18" rx="3" fill="#1e40af" transform="rotate(-30 21 52)"/>
-                <rect x="40" y="52" width="7" height="18" rx="3" fill="#1e40af" transform="rotate(30 43 52)"/>
-                <rect x="8" y="66" width="7" height="16" rx="3" fill="#1e40af"/>
-                <rect x="50" y="66" width="7" height="16" rx="3" fill="#1e40af"/>
-                <ellipse cx="12" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="54" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            lunge_end: `<svg viewBox="0 0 70 100">
-                <circle cx="35" cy="28" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="38" width="16" height="22" rx="4" fill="#3b82f6"/>
-                <rect x="19" y="40" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="45" y="40" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="12" y="56" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-50 15 56)"/>
-                <rect x="44" y="56" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(50 47 56)"/>
-                <rect x="2" y="64" width="7" height="18" rx="3" fill="#1e40af"/>
-                <rect x="54" y="64" width="7" height="18" rx="3" fill="#1e40af"/>
-                <ellipse cx="6" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="58" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
+            // Lateral
+            lateral: 'https://videos.pexels.com/video-files/4761792/4761792-uhd_1440_2560_25fps.mp4',
 
-            // STEP UP
-            step_start: `<svg viewBox="0 0 70 100">
-                <rect x="5" y="60" width="30" height="24" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
-                <circle cx="45" cy="18" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="37" y="28" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="33" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="51" y="30" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="37" y="56" width="7" height="28" rx="3" fill="#1e40af"/>
-                <rect x="46" y="56" width="7" height="28" rx="3" fill="#1e40af"/>
-                <ellipse cx="40" cy="86" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="50" cy="86" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            step_mid: `<svg viewBox="0 0 70 100">
-                <rect x="5" y="60" width="30" height="24" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
-                <circle cx="35" cy="14" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="24" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="23" y="26" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="41" y="26" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="20" y="50" width="7" height="12" rx="3" fill="#1e40af" transform="rotate(-60 23 50)"/>
-                <rect x="36" y="50" width="7" height="28" rx="3" fill="#1e40af"/>
-                <ellipse cx="20" cy="60" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="40" cy="86" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            step_end: `<svg viewBox="0 0 70 100">
-                <rect x="5" y="60" width="30" height="24" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
-                <circle cx="25" cy="8" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="17" y="18" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="13" y="20" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="31" y="20" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="17" y="46" width="7" height="14" rx="3" fill="#1e40af"/>
-                <rect x="26" y="46" width="7" height="14" rx="3" fill="#1e40af"/>
-                <ellipse cx="20" cy="60" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="30" cy="60" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
+            // Prancha
+            plank: 'https://videos.pexels.com/video-files/4761612/4761612-uhd_1440_2560_25fps.mp4',
 
-            // DEADLIFT / STIFF
-            deadlift_start: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="82" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            deadlift_mid: `<svg viewBox="0 0 60 100">
-                <circle cx="42" cy="22" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="24" y="26" width="16" height="28" rx="4" fill="#3b82f6" transform="rotate(45 32 40)"/>
-                <rect x="38" y="38" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(45 41 49)"/>
-                <rect x="16" y="38" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(45 19 49)"/>
-                <rect x="22" y="56" width="7" height="26" rx="3" fill="#1e40af"/>
-                <rect x="31" y="56" width="7" height="26" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            deadlift_end: `<svg viewBox="0 0 60 100">
-                <circle cx="50" cy="38" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="32" width="16" height="28" rx="4" fill="#3b82f6" transform="rotate(80 30 46)"/>
-                <rect x="42" y="50" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(80 45 61)"/>
-                <rect x="10" y="50" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(80 13 61)"/>
-                <rect x="22" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <rect x="31" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="84" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
+            // Salto
+            jump: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4',
 
-            // CLAMSHELL (deitado de lado)
-            clamshell_start: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="38" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="35" y="34" width="24" height="12" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="40" width="20" height="6" rx="3" fill="#1e40af"/>
-                <rect x="18" y="46" width="20" height="6" rx="3" fill="#1e40af"/>
-                <ellipse cx="18" cy="43" rx="4" ry="2" fill="#374151"/>
-                <ellipse cx="18" cy="49" rx="4" ry="2" fill="#374151"/>
-                <ellipse cx="30" cy="43" rx="10" ry="3" fill="none" stroke="#ef4444" stroke-width="2"/>
-            </svg>`,
-            clamshell_mid: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="38" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="35" y="34" width="24" height="12" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="34" width="20" height="6" rx="3" fill="#1e40af" transform="rotate(-25 28 37)"/>
-                <rect x="18" y="46" width="20" height="6" rx="3" fill="#1e40af"/>
-                <ellipse cx="14" cy="32" rx="4" ry="2" fill="#374151"/>
-                <ellipse cx="18" cy="49" rx="4" ry="2" fill="#374151"/>
-                <ellipse cx="30" cy="40" rx="12" ry="5" fill="none" stroke="#ef4444" stroke-width="2"/>
-            </svg>`,
-            clamshell_end: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="38" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="35" y="34" width="24" height="12" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="28" width="20" height="6" rx="3" fill="#1e40af" transform="rotate(-50 28 31)"/>
-                <rect x="18" y="46" width="20" height="6" rx="3" fill="#1e40af"/>
-                <ellipse cx="10" cy="22" rx="4" ry="2" fill="#374151"/>
-                <ellipse cx="18" cy="49" rx="4" ry="2" fill="#374151"/>
-                <ellipse cx="30" cy="36" rx="14" ry="8" fill="none" stroke="#ef4444" stroke-width="2"/>
-            </svg>`,
-
-            // KICKBACK (4 apoios)
-            kickback_start: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="28" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="40" y="26" width="20" height="10" rx="4" fill="#3b82f6"/>
-                <rect x="58" y="36" width="6" height="14" rx="3" fill="#fcd34d"/>
-                <rect x="40" y="36" width="6" height="14" rx="3" fill="#fcd34d"/>
-                <rect x="20" y="36" width="6" height="14" rx="3" fill="#1e40af"/>
-                <rect x="30" y="36" width="6" height="14" rx="3" fill="#1e40af"/>
-                <ellipse cx="62" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="44" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="23" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="33" cy="50" rx="3" ry="2" fill="#374151"/>
-            </svg>`,
-            kickback_mid: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="28" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="40" y="26" width="20" height="10" rx="4" fill="#3b82f6"/>
-                <rect x="58" y="36" width="6" height="14" rx="3" fill="#fcd34d"/>
-                <rect x="40" y="36" width="6" height="14" rx="3" fill="#fcd34d"/>
-                <rect x="16" y="30" width="6" height="14" rx="3" fill="#1e40af" transform="rotate(-45 19 37)"/>
-                <rect x="30" y="36" width="6" height="14" rx="3" fill="#1e40af"/>
-                <ellipse cx="62" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="44" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="10" cy="26" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="33" cy="50" rx="3" ry="2" fill="#374151"/>
-            </svg>`,
-            kickback_end: `<svg viewBox="0 0 80 60">
-                <rect x="10" y="50" width="60" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="65" cy="28" r="8" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="40" y="26" width="20" height="10" rx="4" fill="#3b82f6"/>
-                <rect x="58" y="36" width="6" height="14" rx="3" fill="#fcd34d"/>
-                <rect x="40" y="36" width="6" height="14" rx="3" fill="#fcd34d"/>
-                <rect x="10" y="24" width="6" height="14" rx="3" fill="#1e40af" transform="rotate(-90 13 31)"/>
-                <rect x="30" y="36" width="6" height="14" rx="3" fill="#1e40af"/>
-                <ellipse cx="62" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="44" cy="50" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="4" cy="24" rx="3" ry="2" fill="#374151"/>
-                <ellipse cx="33" cy="50" rx="3" ry="2" fill="#374151"/>
-            </svg>`,
-
-            // ABDUCTION (lateral)
-            abduction_start: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="22" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="30" cy="78" rx="16" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
-            abduction_mid: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="14" y="50" width="7" height="30" rx="3" fill="#1e40af" transform="rotate(-20 17 50)"/>
-                <rect x="35" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="10" cy="78" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="38" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="28" cy="76" rx="20" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
-            abduction_end: `<svg viewBox="0 0 60 100">
-                <circle cx="30" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="22" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="18" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="36" y="24" width="6" height="22" rx="3" fill="#fcd34d"/>
-                <rect x="6" y="50" width="7" height="30" rx="3" fill="#1e40af" transform="rotate(-40 9 50)"/>
-                <rect x="35" y="50" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="2" cy="72" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="38" cy="82" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="24" cy="72" rx="24" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
-
-            // JUMP
-            jump_start: `<svg viewBox="0 0 60 100">
-                <rect x="10" y="86" width="40" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="30" cy="32" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="42" width="16" height="22" rx="4" fill="#3b82f6"/>
-                <rect x="16" y="44" width="6" height="18" rx="3" fill="#fcd34d"/>
-                <rect x="38" y="44" width="6" height="18" rx="3" fill="#fcd34d"/>
-                <rect x="18" y="62" width="7" height="12" rx="3" fill="#1e40af" transform="rotate(40 21 62)"/>
-                <rect x="35" y="62" width="7" height="12" rx="3" fill="#1e40af" transform="rotate(-40 38 62)"/>
-                <rect x="10" y="72" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-40 13 72)"/>
-                <rect x="43" y="72" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(40 46 72)"/>
-                <ellipse cx="18" cy="86" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="42" cy="86" rx="6" ry="3" fill="#374151"/>
-            </svg>`,
-            jump_mid: `<svg viewBox="0 0 60 100">
-                <rect x="10" y="86" width="40" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="30" cy="18" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="28" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="14" y="30" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(-30 17 41)"/>
-                <rect x="40" y="30" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(30 43 41)"/>
-                <rect x="22" y="56" width="7" height="24" rx="3" fill="#1e40af"/>
-                <rect x="31" y="56" width="7" height="24" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="82" rx="5" ry="2" fill="#374151"/>
-                <ellipse cx="35" cy="82" rx="5" ry="2" fill="#374151"/>
-            </svg>`,
-            jump_end: `<svg viewBox="0 0 60 100">
-                <rect x="10" y="86" width="40" height="4" rx="2" fill="#94a3b8"/>
-                <circle cx="30" cy="4" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="22" y="14" width="16" height="28" rx="4" fill="#3b82f6"/>
-                <rect x="10" y="18" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(-50 13 29)"/>
-                <rect x="44" y="18" width="6" height="22" rx="3" fill="#fcd34d" transform="rotate(50 47 29)"/>
-                <rect x="22" y="42" width="7" height="30" rx="3" fill="#1e40af"/>
-                <rect x="31" y="42" width="7" height="30" rx="3" fill="#1e40af"/>
-                <ellipse cx="25" cy="74" rx="5" ry="2" fill="#374151"/>
-                <ellipse cx="35" cy="74" rx="5" ry="2" fill="#374151"/>
-            </svg>`,
-
-            // MONSTER WALK
-            monster_start: `<svg viewBox="0 0 70 100">
-                <circle cx="35" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="27" y="22" width="16" height="26" rx="4" fill="#3b82f6"/>
-                <rect x="23" y="24" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="41" y="24" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="20" y="46" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(30 23 46)"/>
-                <rect x="43" y="46" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-30 46 46)"/>
-                <rect x="12" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <rect x="51" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <ellipse cx="15" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="55" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="35" cy="54" rx="20" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`,
-            monster_mid: `<svg viewBox="0 0 70 100">
-                <circle cx="28" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="20" y="22" width="16" height="26" rx="4" fill="#3b82f6"/>
-                <rect x="16" y="24" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="34" y="24" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="14" y="46" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(20 17 46)"/>
-                <rect x="34" y="46" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-40 37 46)"/>
-                <rect x="8" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <rect x="48" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <ellipse cx="11" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="52" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="30" cy="54" rx="22" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-                <path d="M5 50 L15 50" stroke="#22c55e" stroke-width="3" marker-end="url(#arrowhead)"/>
-            </svg>`,
-            monster_end: `<svg viewBox="0 0 70 100">
-                <circle cx="20" cy="12" r="10" fill="#fcd34d" stroke="#d97706" stroke-width="1.5"/>
-                <rect x="12" y="22" width="16" height="26" rx="4" fill="#3b82f6"/>
-                <rect x="8" y="24" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="26" y="24" width="6" height="20" rx="3" fill="#fcd34d"/>
-                <rect x="6" y="46" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(10 9 46)"/>
-                <rect x="26" y="46" width="7" height="14" rx="3" fill="#1e40af" transform="rotate(-50 29 46)"/>
-                <rect x="2" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <rect x="44" y="58" width="7" height="24" rx="3" fill="#1e40af"/>
-                <ellipse cx="5" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="48" cy="84" rx="6" ry="3" fill="#374151"/>
-                <ellipse cx="24" cy="54" rx="24" ry="4" fill="none" stroke="#ef4444" stroke-width="3"/>
-            </svg>`
+            // Genérico fitness
+            generic: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4'
         };
 
-        // Mapeamento de exercícios para ilustrações
-        const exerciseToIllustration = {
-            'single_leg_stand': { start: 'single_leg_start', mid: 'single_leg_mid', end: 'single_leg_end', movement: '⬆️ Levante a perna e mantenha o equilíbrio' },
-            'mini_band_squat': { start: 'squat_start', mid: 'squat_mid', end: 'squat_end', movement: '⬇️ Desça controladamente mantendo os joelhos para fora' },
-            'glute_bridge': { start: 'bridge_start', mid: 'bridge_mid', end: 'bridge_end', movement: '⬆️ Eleve o quadril contraindo os glúteos' },
-            'wall_sit': { start: 'wall_start', mid: 'wall_mid', end: 'wall_end', movement: '⬇️ Deslize até 90° e mantenha' },
-            'calf_raise': { start: 'calf_start', mid: 'calf_mid', end: 'calf_end', movement: '⬆️ Eleve-se na ponta dos pés' },
-            'static_lunge': { start: 'lunge_start', mid: 'lunge_mid', end: 'lunge_end', movement: '⬇️ Desça o joelho de trás em direção ao chão' },
-            'lateral_step_up': { start: 'step_start', mid: 'step_mid', end: 'step_end', movement: '⬆️ Suba no degrau com uma perna' },
-            'romanian_deadlift': { start: 'deadlift_start', mid: 'deadlift_mid', end: 'deadlift_end', movement: '⬇️ Incline o tronco mantendo as costas retas' },
-            'clamshell': { start: 'clamshell_start', mid: 'clamshell_mid', end: 'clamshell_end', movement: '↗️ Abra os joelhos como uma concha' },
-            'glute_kickback': { start: 'kickback_start', mid: 'kickback_mid', end: 'kickback_end', movement: '⬅️ Estenda a perna para trás' },
-            'band_abduction': { start: 'abduction_start', mid: 'abduction_mid', end: 'abduction_end', movement: '↔️ Afaste a perna lateralmente' },
-            'jump_landing': { start: 'jump_start', mid: 'jump_mid', end: 'jump_end', movement: '⬆️ Salte e aterrisse suavemente' },
-            'monster_walk': { start: 'monster_start', mid: 'monster_mid', end: 'monster_end', movement: '↔️ Caminhe lateralmente mantendo tensão na band' },
-            // Exercícios que usam ilustrações existentes
-            'unstable_balance': { start: 'single_leg_start', mid: 'single_leg_mid', end: 'single_leg_end', movement: '⬆️ Mantenha equilíbrio em superfície instável' },
-            'seated_knee_ext': { start: 'wall_start', mid: 'wall_mid', end: 'standing', movement: '➡️ Estenda o joelho contra resistência' },
-            'wall_leg_press': { start: 'wall_start', mid: 'wall_mid', end: 'wall_end', movement: '⬇️⬆️ Flexione e estenda as pernas' },
-            'sumo_squat': { start: 'squat_start', mid: 'squat_mid', end: 'squat_end', movement: '⬇️ Desça com pés bem afastados' },
-            'terminal_knee_ext': { start: 'standing', mid: 'standing', end: 'standing', movement: '➡️ Estenda o joelho contra resistência' },
-            'single_leg_bridge': { start: 'bridge_start', mid: 'bridge_mid', end: 'bridge_end', movement: '⬆️ Eleve com uma perna só' },
-            'standing_knee_flex': { start: 'standing', mid: 'standing', end: 'standing', movement: '⬆️ Flexione o joelho levando calcanhar ao glúteo' },
-            'good_morning': { start: 'deadlift_start', mid: 'deadlift_mid', end: 'deadlift_end', movement: '⬇️ Incline mantendo costas retas' },
-            'eccentric_calf': { start: 'calf_end', mid: 'calf_mid', end: 'calf_start', movement: '⬇️ Desça lentamente (5 segundos)' },
-            'bulgarian_squat': { start: 'lunge_start', mid: 'lunge_mid', end: 'lunge_end', movement: '⬇️ Desça com pé traseiro elevado' },
-            'lateral_shuffle': { start: 'monster_start', mid: 'monster_mid', end: 'monster_end', movement: '↔️ Desloque rapidamente para os lados' },
-            'step_down': { start: 'step_end', mid: 'step_mid', end: 'step_start', movement: '⬇️ Desça controladamente do degrau' },
-            'dynamic_balance': { start: 'single_leg_start', mid: 'single_leg_mid', end: 'single_leg_end', movement: '↔️ Alcance em diferentes direções' },
-            'plank_leg_raise': { start: 'kickback_start', mid: 'kickback_mid', end: 'kickback_end', movement: '⬆️ Eleve a perna em posição de prancha' },
-            'pistol_squat': { start: 'squat_start', mid: 'squat_mid', end: 'squat_end', movement: '⬇️ Agache em uma perna só' }
+        // Fallback icons para quando vídeo não carregar
+        const exerciseIcons = {
+            squat: '🏋️',
+            bridge: '🌉',
+            balance: '🧘',
+            calf_raise: '🦶',
+            lunge: '🚶',
+            step_up: '📶',
+            deadlift: '💪',
+            lateral: '↔️',
+            plank: '🧱',
+            jump: '⬆️',
+            generic: '🏃'
         };
 
-        // ==================== TRANSLATIONS ====================
-        const translations = {
-            pt: {
-                loginSubtitle: "Quem vai treinar hoje?",
-                existingUser: "Já tenho perfil",
-                newUser: "Criar perfil",
-                selectProfile: "Selecione seu perfil:",
-                noUsersYet: "Nenhum perfil cadastrado ainda.",
-                createFirst: "Crie seu primeiro perfil!",
-                chooseAvatar: "Escolha seu avatar:",
-                nickname: "Apelido:",
-                whichKnee: "Qual joelho está machucado?",
-                leftKnee: "Esquerdo",
-                rightKnee: "Direito",
-                bothKnees: "Ambos",
-                createPin: "Crie um PIN de 4 dígitos:",
-                pinHint: "O PIN protege seus dados de outros usuários",
-                createProfile: "✨ Criar Perfil",
-                enterPin: "Digite seu PIN:",
-                wrongPin: "PIN incorreto. Tente novamente.",
-                cancel: "Cancelar",
-                hello: "Olá",
-                navHome: "Início",
-                navTraining: "Treino",
-                navCalendar: "Calendário",
-                navProfile: "Perfil",
-                welcomeBack: "Bem-vindo",
-                keepGoing: "Continue sua jornada de recuperação",
-                workouts: "Treinos",
-                streak: "Sequência",
-                minutes: "Minutos",
-                painTitle: "Como está seu joelho hoje?",
-                painSelect: "Selecione seu nível de dor",
-                painLevels: ["Sem dor", "Dor leve", "Dor moderada", "Dor considerável", "Dor intensa"],
-                painEvolution: "Evolução da Dor",
-                selectProgram: "Escolha seu programa",
-                program1Title: "Propriocepção Básica",
-                program1Desc: "Foco em equilíbrio e consciência corporal.",
-                program2Title: "Fortalecimento Quadríceps",
-                program2Desc: "Exercícios para fortalecer a coxa.",
-                program3Title: "Cadeia Posterior",
-                program3Desc: "Fortalecimento de isquiotibiais e glúteos.",
-                program4Title: "Estabilização Avançada",
-                program4Desc: "Exercícios dinâmicos de equilíbrio.",
-                levelBeginner: "Iniciante",
-                levelIntermediate: "Intermediário",
-                levelAdvanced: "Avançado",
-                exercises: "exercícios",
-                startTraining: "🚀 Iniciar Treino",
-                exercise: "Exercício",
-                of: "de",
-                duration: "Duração",
-                repetitions: "Repetições",
-                equipment: "Equipamento",
-                start: "Iniciar",
-                pause: "Pausar",
-                reset: "Resetar",
-                howToExecute: "Como executar:",
-                previous: "Anterior",
-                next: "Próximo",
-                finish: "Finalizar",
-                illustrationTitle: "Sequência do Movimento",
-                stepStart: "Início",
-                stepMid: "Meio",
-                stepEnd: "Final",
-                trainingCalendar: "Calendário de Treinos",
-                weeklyEvolution: "Evolução Semanal",
-                yourStats: "Suas Estatísticas",
-                completedWorkouts: "Treinos Completos",
-                dayStreak: "Dias Seguidos",
-                totalMinutes: "Minutos Totais",
-                bestStreak: "Melhor Sequência",
-                tapToSwitch: "Toque para trocar de usuário",
-                injuredKnee: "Joelho Afetado",
-                yourProfile: "Seu Perfil",
-                agePlaceholder: "Idade",
-                saveProfile: "💾 Salvar Perfil",
-                aboutApp: "Sobre o App",
-                aboutText: "Este aplicativo foi desenvolvido com base em protocolos de fisioterapia para fortalecimento muscular ao redor do joelho.",
-                disclaimer: "⚠️ Consulte sempre um profissional de saúde antes de iniciar qualquer programa de exercícios.",
-                dangerZone: "Zona de Perigo",
-                deleteProfile: "Excluir Meu Perfil",
-                congratulations: "Parabéns!",
-                workoutComplete: "Você completou o treino de hoje!",
-                close: "Fechar",
-                months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-                weekdays: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
-                weekdaysShort: ["D", "S", "T", "Q", "Q", "S", "S"],
-                profileSaved: "Perfil salvo com sucesso!",
-                selectProgramFirst: "Por favor, selecione um programa primeiro.",
-                confirmDelete: "Tem certeza que deseja excluir seu perfil?",
-                fillAllFields: "Por favor, preencha todos os campos.",
-                nicknameExists: "Este apelido já existe.",
-                kneeLabels: { left: "🦵 Esquerdo", right: "🦵 Direito", both: "🦵 Ambos" }
+        // ==================== PROGRAMS ====================
+        const programs = [
+            {
+                name: "Propriocepção Básica",
+                exercises: [
+                    { name: "Apoio Unipodal", videoKey: "balance", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna do chão", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo à frente", "Troque de lado"] },
+                    { name: "Agachamento com Mini Band", videoKey: "squat_band", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Coloque a mini band acima dos joelhos", "Pés na largura dos ombros", "Desça até 60° de flexão do joelho", "Mantenha os joelhos empurrando para fora", "Suba contraindo os glúteos"] },
+                    { name: "Ponte de Glúteos", videoKey: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de costas com joelhos flexionados", "Pés apoiados no chão", "Eleve o quadril contraindo os glúteos", "Mantenha 2 segundos no topo", "Desça controladamente"] },
+                    { name: "Equilíbrio Instável", videoKey: "balance", muscleTarget: "Proprioceptores", duration: 30, sets: "3 séries cada lado", equipment: "Almofada", instructions: ["Coloque uma almofada no chão", "Fique em apoio unipodal sobre ela", "Mantenha 30 segundos", "Feche os olhos para aumentar dificuldade", "Troque de lado"] },
+                    { name: "Abdução com Mini Band", videoKey: "lateral", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Coloque a mini band nos tornozelos", "Mantenha uma perna fixa no chão", "Afaste a outra perna lateralmente", "Controle a volta à posição inicial", "Mantenha o tronco estável"] },
+                    { name: "Elevação de Panturrilha", videoKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Degrau", instructions: ["Apoie-se na parede para equilíbrio", "Eleve-se na ponta dos pés", "Mantenha 2 segundos no topo", "Desça controladamente", "Use um degrau para maior amplitude"] }
+                ]
             },
-            en: {
-                loginSubtitle: "Who's training today?",
-                existingUser: "I have a profile",
-                newUser: "Create profile",
-                selectProfile: "Select your profile:",
-                noUsersYet: "No profiles yet.",
-                createFirst: "Create your first profile!",
-                chooseAvatar: "Choose your avatar:",
-                nickname: "Nickname:",
-                whichKnee: "Which knee is injured?",
-                leftKnee: "Left",
-                rightKnee: "Right",
-                bothKnees: "Both",
-                createPin: "Create a 4-digit PIN:",
-                pinHint: "PIN protects your data",
-                createProfile: "✨ Create Profile",
-                enterPin: "Enter your PIN:",
-                wrongPin: "Wrong PIN. Try again.",
-                cancel: "Cancel",
-                hello: "Hello",
-                navHome: "Home",
-                navTraining: "Training",
-                navCalendar: "Calendar",
-                navProfile: "Profile",
-                welcomeBack: "Welcome",
-                keepGoing: "Continue your recovery journey",
-                workouts: "Workouts",
-                streak: "Streak",
-                minutes: "Minutes",
-                painTitle: "How is your knee today?",
-                painSelect: "Select your pain level",
-                painLevels: ["No pain", "Mild", "Moderate", "Considerable", "Intense"],
-                painEvolution: "Pain Evolution",
-                selectProgram: "Choose your program",
-                program1Title: "Basic Proprioception",
-                program1Desc: "Focus on balance and body awareness.",
-                program2Title: "Quadriceps Strengthening",
-                program2Desc: "Exercises to strengthen the thigh.",
-                program3Title: "Posterior Chain",
-                program3Desc: "Hamstrings and glutes strengthening.",
-                program4Title: "Advanced Stabilization",
-                program4Desc: "Dynamic balance exercises.",
-                levelBeginner: "Beginner",
-                levelIntermediate: "Intermediate",
-                levelAdvanced: "Advanced",
-                exercises: "exercises",
-                startTraining: "🚀 Start Training",
-                exercise: "Exercise",
-                of: "of",
-                duration: "Duration",
-                repetitions: "Repetitions",
-                equipment: "Equipment",
-                start: "Start",
-                pause: "Pause",
-                reset: "Reset",
-                howToExecute: "How to execute:",
-                previous: "Previous",
-                next: "Next",
-                finish: "Finish",
-                illustrationTitle: "Movement Sequence",
-                stepStart: "Start",
-                stepMid: "Middle",
-                stepEnd: "End",
-                trainingCalendar: "Training Calendar",
-                weeklyEvolution: "Weekly Evolution",
-                yourStats: "Your Statistics",
-                completedWorkouts: "Completed Workouts",
-                dayStreak: "Day Streak",
-                totalMinutes: "Total Minutes",
-                bestStreak: "Best Streak",
-                tapToSwitch: "Tap to switch user",
-                injuredKnee: "Injured Knee",
-                yourProfile: "Your Profile",
-                agePlaceholder: "Age",
-                saveProfile: "💾 Save Profile",
-                aboutApp: "About the App",
-                aboutText: "This app was developed based on physiotherapy protocols.",
-                disclaimer: "⚠️ Always consult a healthcare professional.",
-                dangerZone: "Danger Zone",
-                deleteProfile: "Delete My Profile",
-                congratulations: "Congratulations!",
-                workoutComplete: "You completed today's workout!",
-                close: "Close",
-                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-                weekdaysShort: ["S", "M", "T", "W", "T", "F", "S"],
-                profileSaved: "Profile saved!",
-                selectProgramFirst: "Please select a program first.",
-                confirmDelete: "Are you sure you want to delete your profile?",
-                fillAllFields: "Please fill in all fields.",
-                nicknameExists: "This nickname already exists.",
-                kneeLabels: { left: "🦵 Left", right: "🦵 Right", both: "🦵 Both" }
+            {
+                name: "Fortalecimento Quadríceps",
+                exercises: [
+                    { name: "Agachamento na Parede", videoKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até os joelhos ficarem a 90°", "Mantenha a posição isométrica", "Pés afastados na largura dos ombros", "Joelhos não passam da ponta dos pés"] },
+                    { name: "Extensão de Joelho Sentado", videoKey: "generic", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Sente em uma cadeira alta", "Prenda a band no tornozelo e em ponto fixo", "Estenda o joelho contra a resistência", "Mantenha 2 segundos na extensão", "Retorne controladamente"] },
+                    { name: "Step Up Lateral", videoKey: "step_up", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Posicione-se ao lado do degrau", "Suba lateralmente com uma perna", "Estenda completamente o joelho no topo", "Desça controladamente", "Mantenha o tronco ereto"] },
+                    { name: "Afundo Estático", videoKey: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Dê um passo à frente", "Desça o joelho de trás em direção ao chão", "Mantenha o joelho da frente alinhado", "Suba e repita"] },
+                    { name: "Leg Press na Parede", videoKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 15 rep", equipment: "Bola", instructions: ["Coloque a bola entre as costas e a parede", "Pés à frente do corpo", "Desça flexionando os joelhos", "Suba empurrando a bola", "Movimento controlado"] },
+                    { name: "Agachamento Sumô", videoKey: "squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pés bem afastados", "Pontas dos pés para fora", "Desça mantendo joelhos para fora", "Tronco ereto", "Contraia glúteos ao subir"] },
+                    { name: "Terminal Knee Extension", videoKey: "generic", muscleTarget: "VMO", duration: 35, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band em ponto fixo baixo", "Passe atrás do joelho", "Flexione levemente o joelho", "Estenda contra a resistência", "Foque na contração do quadríceps"] }
+                ]
             },
-            es: {
-                loginSubtitle: "¿Quién entrena hoy?",
-                existingUser: "Ya tengo perfil",
-                newUser: "Crear perfil",
-                selectProfile: "Selecciona tu perfil:",
-                noUsersYet: "Ningún perfil aún.",
-                createFirst: "¡Crea tu primer perfil!",
-                chooseAvatar: "Elige tu avatar:",
-                nickname: "Apodo:",
-                whichKnee: "¿Cuál rodilla está lesionada?",
-                leftKnee: "Izquierda",
-                rightKnee: "Derecha",
-                bothKnees: "Ambas",
-                createPin: "Crea un PIN de 4 dígitos:",
-                pinHint: "El PIN protege tus datos",
-                createProfile: "✨ Crear Perfil",
-                enterPin: "Ingresa tu PIN:",
-                wrongPin: "PIN incorrecto.",
-                cancel: "Cancelar",
-                hello: "Hola",
-                navHome: "Inicio",
-                navTraining: "Entreno",
-                navCalendar: "Calendario",
-                navProfile: "Perfil",
-                welcomeBack: "Bienvenido",
-                keepGoing: "Continúa tu recuperación",
-                workouts: "Entrenos",
-                streak: "Racha",
-                minutes: "Minutos",
-                painTitle: "¿Cómo está tu rodilla hoy?",
-                painSelect: "Selecciona tu nivel de dolor",
-                painLevels: ["Sin dolor", "Leve", "Moderado", "Considerable", "Intenso"],
-                painEvolution: "Evolución del Dolor",
-                selectProgram: "Elige tu programa",
-                program1Title: "Propiocepción Básica",
-                program1Desc: "Enfoque en equilibrio.",
-                program2Title: "Fortalecimiento Cuádriceps",
-                program2Desc: "Ejercicios para el muslo.",
-                program3Title: "Cadena Posterior",
-                program3Desc: "Isquiotibiales y glúteos.",
-                program4Title: "Estabilización Avanzada",
-                program4Desc: "Ejercicios dinámicos.",
-                levelBeginner: "Principiante",
-                levelIntermediate: "Intermedio",
-                levelAdvanced: "Avanzado",
-                exercises: "ejercicios",
-                startTraining: "🚀 Iniciar Entreno",
-                exercise: "Ejercicio",
-                of: "de",
-                duration: "Duración",
-                repetitions: "Repeticiones",
-                equipment: "Equipamiento",
-                start: "Iniciar",
-                pause: "Pausar",
-                reset: "Resetear",
-                howToExecute: "Cómo ejecutar:",
-                previous: "Anterior",
-                next: "Siguiente",
-                finish: "Finalizar",
-                illustrationTitle: "Secuencia del Movimiento",
-                stepStart: "Inicio",
-                stepMid: "Medio",
-                stepEnd: "Final",
-                trainingCalendar: "Calendario de Entrenos",
-                weeklyEvolution: "Evolución Semanal",
-                yourStats: "Tus Estadísticas",
-                completedWorkouts: "Entrenos Completos",
-                dayStreak: "Días Seguidos",
-                totalMinutes: "Minutos Totales",
-                bestStreak: "Mejor Racha",
-                tapToSwitch: "Toca para cambiar",
-                injuredKnee: "Rodilla Afectada",
-                yourProfile: "Tu Perfil",
-                agePlaceholder: "Edad",
-                saveProfile: "💾 Guardar",
-                aboutApp: "Sobre la App",
-                aboutText: "App basada en protocolos de fisioterapia.",
-                disclaimer: "⚠️ Consulte un profesional.",
-                dangerZone: "Zona de Peligro",
-                deleteProfile: "Eliminar Perfil",
-                congratulations: "¡Felicitaciones!",
-                workoutComplete: "¡Completaste el entreno!",
-                close: "Cerrar",
-                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                weekdays: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                weekdaysShort: ["D", "L", "M", "M", "J", "V", "S"],
-                profileSaved: "¡Perfil guardado!",
-                selectProgramFirst: "Selecciona un programa.",
-                confirmDelete: "¿Eliminar tu perfil?",
-                fillAllFields: "Completa todos los campos.",
-                nicknameExists: "Este apodo ya existe.",
-                kneeLabels: { left: "🦵 Izquierda", right: "🦵 Derecha", both: "🦵 Ambas" }
+            {
+                name: "Cadeia Posterior",
+                exercises: [
+                    { name: "Stiff com Mini Band", videoKey: "deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band com os dois pés", "Segure a band com as mãos", "Incline o tronco para frente", "Mantenha as pernas semi-estendidas", "Suba contraindo glúteos e isquios"] },
+                    { name: "Ponte Unilateral", videoKey: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril com a perna de apoio", "Mantenha 2 segundos no topo", "Troque de lado"] },
+                    { name: "Flexão de Joelho em Pé", videoKey: "generic", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band no tornozelo", "Fique de pé com apoio", "Flexione o joelho contra a resistência", "Leve o calcanhar em direção ao glúteo", "Retorne controladamente"] },
+                    { name: "Good Morning", videoKey: "deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Passe atrás do pescoço", "Incline o tronco para frente", "Mantenha as costas retas", "Contraia ao subir"] },
+                    { name: "Clamshell", videoKey: "lateral", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de lado com band acima dos joelhos", "Joelhos flexionados a 45°", "Abra os joelhos como uma concha", "Mantenha os pés unidos", "Controle a descida"] },
+                    { name: "Kickback de Glúteo", videoKey: "plank", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Posição de quatro apoios", "Band nos tornozelos", "Estenda uma perna para trás", "Contraia o glúteo no topo", "Não deixe o pé tocar o chão"] },
+                    { name: "Panturrilha Excêntrica", videoKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Fique na ponta de um degrau", "Eleve-se na ponta dos pés", "Desça lentamente (5 segundos)", "Deixe o calcanhar ir bem abaixo", "Suba e repita"] }
+                ]
+            },
+            {
+                name: "Estabilização Avançada",
+                exercises: [
+                    { name: "Agachamento Búlgaro", videoKey: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Apoie o pé de trás em um banco", "Desça flexionando o joelho da frente", "Mantenha o tronco ereto", "Joelho não passa da ponta do pé", "Suba empurrando com o calcanhar"] },
+                    { name: "Monster Walk", videoKey: "lateral", muscleTarget: "Glúteo médio", duration: 45, sets: "3 séries x 20 passos", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Caminhe lateralmente", "Mantenha tensão constante na band", "Volte para o outro lado"] },
+                    { name: "Salto com Aterrissagem", videoKey: "jump", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Pés afastados na largura dos ombros", "Salte verticalmente", "Aterrisse suavemente", "Absorva o impacto flexionando joelhos", "Mantenha joelhos alinhados"] },
+                    { name: "Prancha com Elevação", videoKey: "plank", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Posição de prancha", "Band nos tornozelos", "Eleve uma perna", "Mantenha 2 segundos", "Alterne as pernas"] },
+                    { name: "Pistol Squat Assistido", videoKey: "squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure em um apoio fixo", "Estenda uma perna à frente", "Desça em agachamento unilateral", "Use o apoio para ajudar a subir", "Mantenha o joelho alinhado"] },
+                    { name: "Lateral Shuffle", videoKey: "lateral", muscleTarget: "Abdutores, Agilidade", duration: 40, sets: "3 séries x 30 seg", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Desloque-se lateralmente", "Passos rápidos e curtos", "Mude de direção"] },
+                    { name: "Step Down Controlado", videoKey: "step_up", muscleTarget: "Quadríceps, Controle", duration: 45, sets: "3 séries x 10 rep", equipment: "Degrau", instructions: ["Fique em cima do degrau", "Desça uma perna lentamente", "Toque o calcanhar no chão", "Suba controladamente", "Mantenha o joelho alinhado"] },
+                    { name: "Equilíbrio Dinâmico", videoKey: "balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 8 rep", equipment: "Nenhum", instructions: ["Fique em apoio unipodal", "Alcance para frente com as mãos", "Depois para o lado", "Depois para trás", "Mantenha o equilíbrio"] }
+                ]
             }
-        };
-
-        // ==================== EXERCISE PROGRAMS ====================
-        const programs = {
-            pt: [
-                {
-                    name: "Propriocepção Básica",
-                    exercises: [
-                        { name: "Apoio Unipodal", illustrationKey: "single_leg_stand", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna do chão", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo à frente", "Troque de lado"] },
-                        { name: "Agachamento com Mini Band", illustrationKey: "mini_band_squat", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Coloque a mini band acima dos joelhos", "Pés na largura dos ombros", "Desça até 60° de flexão do joelho", "Mantenha os joelhos empurrando para fora", "Suba contraindo os glúteos"] },
-                        { name: "Ponte de Glúteos", illustrationKey: "glute_bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de costas com joelhos flexionados", "Pés apoiados no chão", "Eleve o quadril contraindo os glúteos", "Mantenha 2 segundos no topo", "Desça controladamente"] },
-                        { name: "Equilíbrio Instável", illustrationKey: "unstable_balance", muscleTarget: "Proprioceptores", duration: 30, sets: "3 séries cada lado", equipment: "Almofada", instructions: ["Coloque uma almofada no chão", "Fique em apoio unipodal sobre ela", "Mantenha 30 segundos", "Feche os olhos para aumentar dificuldade", "Troque de lado"] },
-                        { name: "Abdução com Mini Band", illustrationKey: "band_abduction", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Coloque a mini band nos tornozelos", "Mantenha uma perna fixa no chão", "Afaste a outra perna lateralmente", "Controle a volta à posição inicial", "Mantenha o tronco estável"] },
-                        { name: "Elevação de Panturrilha", illustrationKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Degrau", instructions: ["Apoie-se na parede para equilíbrio", "Eleve-se na ponta dos pés", "Mantenha 2 segundos no topo", "Desça controladamente", "Use um degrau para maior amplitude"] }
-                    ]
-                },
-                {
-                    name: "Fortalecimento Quadríceps",
-                    exercises: [
-                        { name: "Agachamento na Parede", illustrationKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até os joelhos ficarem a 90°", "Mantenha a posição isométrica", "Pés afastados na largura dos ombros", "Joelhos não passam da ponta dos pés"] },
-                        { name: "Extensão de Joelho Sentado", illustrationKey: "seated_knee_ext", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Sente em uma cadeira alta", "Prenda a band no tornozelo e em ponto fixo", "Estenda o joelho contra a resistência", "Mantenha 2 segundos na extensão", "Retorne controladamente"] },
-                        { name: "Step Up Lateral", illustrationKey: "lateral_step_up", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Posicione-se ao lado do degrau", "Suba lateralmente com uma perna", "Estenda completamente o joelho no topo", "Desça controladamente", "Mantenha o tronco ereto"] },
-                        { name: "Afundo Estático", illustrationKey: "static_lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Dê um passo à frente", "Desça o joelho de trás em direção ao chão", "Mantenha o joelho da frente alinhado", "Suba e repita"] },
-                        { name: "Leg Press na Parede", illustrationKey: "wall_leg_press", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 15 rep", equipment: "Bola", instructions: ["Coloque a bola entre as costas e a parede", "Pés à frente do corpo", "Desça flexionando os joelhos", "Suba empurrando a bola", "Movimento controlado"] },
-                        { name: "Agachamento Sumô", illustrationKey: "sumo_squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pés bem afastados", "Pontas dos pés para fora", "Desça mantendo joelhos para fora", "Tronco ereto", "Contraia glúteos ao subir"] },
-                        { name: "Terminal Knee Extension", illustrationKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band em ponto fixo baixo", "Passe atrás do joelho", "Flexione levemente o joelho", "Estenda contra a resistência", "Foque na contração do quadríceps"] }
-                    ]
-                },
-                {
-                    name: "Cadeia Posterior",
-                    exercises: [
-                        { name: "Stiff com Mini Band", illustrationKey: "romanian_deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band com os dois pés", "Segure a band com as mãos", "Incline o tronco para frente", "Mantenha as pernas semi-estendidas", "Suba contraindo glúteos e isquios"] },
-                        { name: "Ponte Unilateral", illustrationKey: "single_leg_bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril com a perna de apoio", "Mantenha 2 segundos no topo", "Troque de lado"] },
-                        { name: "Flexão de Joelho em Pé", illustrationKey: "standing_knee_flex", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band no tornozelo", "Fique de pé com apoio", "Flexione o joelho contra a resistência", "Leve o calcanhar em direção ao glúteo", "Retorne controladamente"] },
-                        { name: "Good Morning", illustrationKey: "good_morning", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Passe atrás do pescoço", "Incline o tronco para frente", "Mantenha as costas retas", "Contraia ao subir"] },
-                        { name: "Clamshell", illustrationKey: "clamshell", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de lado com band acima dos joelhos", "Joelhos flexionados a 45°", "Abra os joelhos como uma concha", "Mantenha os pés unidos", "Controle a descida"] },
-                        { name: "Kickback de Glúteo", illustrationKey: "glute_kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Posição de quatro apoios", "Band nos tornozelos", "Estenda uma perna para trás", "Contraia o glúteo no topo", "Não deixe o pé tocar o chão"] },
-                        { name: "Panturrilha Excêntrica", illustrationKey: "eccentric_calf", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Fique na ponta de um degrau", "Eleve-se na ponta dos pés", "Desça lentamente (5 segundos)", "Deixe o calcanhar ir bem abaixo", "Suba e repita"] }
-                    ]
-                },
-                {
-                    name: "Estabilização Avançada",
-                    exercises: [
-                        { name: "Agachamento Búlgaro", illustrationKey: "bulgarian_squat", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Apoie o pé de trás em um banco", "Desça flexionando o joelho da frente", "Mantenha o tronco ereto", "Joelho não passa da ponta do pé", "Suba empurrando com o calcanhar"] },
-                        { name: "Monster Walk", illustrationKey: "monster_walk", muscleTarget: "Glúteo médio", duration: 45, sets: "3 séries x 20 passos", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Caminhe lateralmente", "Mantenha tensão constante na band", "Volte para o outro lado"] },
-                        { name: "Salto com Aterrissagem", illustrationKey: "jump_landing", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Pés afastados na largura dos ombros", "Salte verticalmente", "Aterrisse suavemente", "Absorva o impacto flexionando joelhos", "Mantenha joelhos alinhados"] },
-                        { name: "Prancha com Elevação", illustrationKey: "plank_leg_raise", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Posição de prancha", "Band nos tornozelos", "Eleve uma perna", "Mantenha 2 segundos", "Alterne as pernas"] },
-                        { name: "Pistol Squat Assistido", illustrationKey: "pistol_squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure em um apoio fixo", "Estenda uma perna à frente", "Desça em agachamento unilateral", "Use o apoio para ajudar a subir", "Mantenha o joelho alinhado"] },
-                        { name: "Lateral Shuffle", illustrationKey: "lateral_shuffle", muscleTarget: "Abdutores, Agilidade", duration: 40, sets: "3 séries x 30 seg", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Desloque-se lateralmente", "Passos rápidos e curtos", "Mude de direção"] },
-                        { name: "Step Down Controlado", illustrationKey: "step_down", muscleTarget: "Quadríceps, Controle", duration: 45, sets: "3 séries x 10 rep", equipment: "Degrau", instructions: ["Fique em cima do degrau", "Desça uma perna lentamente", "Toque o calcanhar no chão", "Suba controladamente", "Mantenha o joelho alinhado"] },
-                        { name: "Equilíbrio Dinâmico", illustrationKey: "dynamic_balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 8 rep", equipment: "Nenhum", instructions: ["Fique em apoio unipodal", "Alcance para frente com as mãos", "Depois para o lado", "Depois para trás", "Mantenha o equilíbrio"] }
-                    ]
-                }
-            ],
-            en: [
-                {
-                    name: "Basic Proprioception",
-                    exercises: [
-                        { name: "Single Leg Stand", illustrationKey: "single_leg_stand", muscleTarget: "Stabilizers", duration: 30, sets: "3 sets each side", equipment: "None", instructions: ["Stand with feet together", "Lift one leg off the ground", "Hold balance for 30 seconds", "Look at a fixed point ahead", "Switch sides"] },
-                        { name: "Mini Band Squat", illustrationKey: "mini_band_squat", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Place mini band above knees", "Feet shoulder-width apart", "Lower to 60° knee flexion", "Keep knees pushing outward", "Rise contracting glutes"] },
-                        { name: "Glute Bridge", illustrationKey: "glute_bridge", muscleTarget: "Glutes, Hamstrings", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Lie on back with knees bent", "Feet flat on floor", "Raise hips contracting glutes", "Hold 2 seconds at top", "Lower controlled"] },
-                        { name: "Unstable Balance", illustrationKey: "unstable_balance", muscleTarget: "Proprioceptors", duration: 30, sets: "3 sets each side", equipment: "Pillow", instructions: ["Place pillow on floor", "Stand on one leg on it", "Hold 30 seconds", "Close eyes to increase difficulty", "Switch sides"] },
-                        { name: "Band Abduction", illustrationKey: "band_abduction", muscleTarget: "Gluteus medius", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Place band at ankles", "Keep one leg fixed", "Move other leg sideways", "Control return", "Keep torso stable"] },
-                        { name: "Calf Raise", illustrationKey: "calf_raise", muscleTarget: "Gastrocnemius, Soleus", duration: 35, sets: "3 sets x 20 reps", equipment: "Step", instructions: ["Hold wall for balance", "Rise on tiptoes", "Hold 2 seconds at top", "Lower controlled", "Use step for range"] }
-                    ]
-                },
-                {
-                    name: "Quadriceps Strengthening",
-                    exercises: [
-                        { name: "Wall Sit", illustrationKey: "wall_sit", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 45 sec", equipment: "Wall", instructions: ["Back against wall", "Slide to 90° knee angle", "Hold isometric position", "Feet shoulder-width apart", "Knees don't pass toes"] },
-                        { name: "Seated Knee Extension", illustrationKey: "seated_knee_ext", muscleTarget: "Quadriceps", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Sit on high chair", "Attach band to ankle and fixed point", "Extend knee against resistance", "Hold 2 seconds extended", "Return controlled"] },
-                        { name: "Lateral Step Up", illustrationKey: "lateral_step_up", muscleTarget: "Quadriceps, Glutes", duration: 50, sets: "3 sets x 12 reps", equipment: "Step", instructions: ["Stand beside step", "Step up sideways", "Fully extend knee at top", "Step down controlled", "Keep torso upright"] },
-                        { name: "Static Lunge", illustrationKey: "static_lunge", muscleTarget: "Quadriceps, Glutes", duration: 40, sets: "3 sets x 10 reps", equipment: "Mini Band", instructions: ["Band above knees", "Step forward", "Lower back knee toward floor", "Keep front knee aligned", "Rise and repeat"] },
-                        { name: "Wall Leg Press", illustrationKey: "wall_leg_press", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 15 reps", equipment: "Ball", instructions: ["Ball between back and wall", "Feet forward", "Lower bending knees", "Rise pushing ball", "Controlled movement"] },
-                        { name: "Sumo Squat", illustrationKey: "sumo_squat", muscleTarget: "Adductors, Quadriceps", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Wide stance", "Toes pointed out", "Lower keeping knees out", "Torso upright", "Contract glutes rising"] },
-                        { name: "Terminal Knee Extension", illustrationKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Attach band low", "Loop behind knee", "Slight knee bend", "Extend against resistance", "Focus on quad contraction"] }
-                    ]
-                },
-                {
-                    name: "Posterior Chain",
-                    exercises: [
-                        { name: "Romanian Deadlift", illustrationKey: "romanian_deadlift", muscleTarget: "Hamstrings, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Step on band", "Hold band with hands", "Lean torso forward", "Keep legs semi-extended", "Rise contracting glutes"] },
-                        { name: "Single Leg Bridge", illustrationKey: "single_leg_bridge", muscleTarget: "Glutes, Hamstrings", duration: 40, sets: "3 sets x 10 reps", equipment: "None", instructions: ["Lie on back", "Extend one leg", "Raise hips with support leg", "Hold 2 seconds at top", "Switch sides"] },
-                        { name: "Standing Knee Flexion", illustrationKey: "standing_knee_flex", muscleTarget: "Hamstrings", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Attach band to ankle", "Stand with support", "Flex knee against resistance", "Heel toward glute", "Return controlled"] },
-                        { name: "Good Morning", illustrationKey: "good_morning", muscleTarget: "Hamstrings, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Step on band", "Loop behind neck", "Lean torso forward", "Keep back straight", "Contract rising"] },
-                        { name: "Clamshell", illustrationKey: "clamshell", muscleTarget: "Gluteus medius", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Lie on side with band above knees", "Knees bent at 45°", "Open knees like clamshell", "Keep feet together", "Control descent"] },
-                        { name: "Glute Kickback", illustrationKey: "glute_kickback", muscleTarget: "Gluteus maximus", duration: 40, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["All fours position", "Band at ankles", "Extend one leg back", "Contract glute at top", "Don't touch floor"] },
-                        { name: "Eccentric Calf", illustrationKey: "eccentric_calf", muscleTarget: "Gastrocnemius, Soleus", duration: 50, sets: "3 sets x 15 reps", equipment: "Step", instructions: ["Stand on step edge", "Rise on tiptoes", "Lower slowly (5 seconds)", "Let heel go well below", "Rise and repeat"] }
-                    ]
-                },
-                {
-                    name: "Advanced Stabilization",
-                    exercises: [
-                        { name: "Bulgarian Squat", illustrationKey: "bulgarian_squat", muscleTarget: "Quadriceps, Glutes", duration: 50, sets: "3 sets x 10 reps", equipment: "Bench", instructions: ["Rear foot on bench", "Lower bending front knee", "Keep torso upright", "Knee doesn't pass toe", "Rise pushing with heel"] },
-                        { name: "Monster Walk", illustrationKey: "monster_walk", muscleTarget: "Gluteus medius", duration: 45, sets: "3 sets x 20 steps", equipment: "Mini Band", instructions: ["Band above knees", "Semi-squat position", "Walk sideways", "Keep constant band tension", "Return other direction"] },
-                        { name: "Jump Landing", illustrationKey: "jump_landing", muscleTarget: "Quadriceps, Glutes", duration: 40, sets: "3 sets x 10 reps", equipment: "None", instructions: ["Feet shoulder-width apart", "Jump vertically", "Land softly", "Absorb impact bending knees", "Keep knees aligned"] },
-                        { name: "Plank Leg Raise", illustrationKey: "plank_leg_raise", muscleTarget: "Core, Glutes", duration: 45, sets: "3 sets x 10 reps", equipment: "Mini Band", instructions: ["Plank position", "Band at ankles", "Raise one leg", "Hold 2 seconds", "Alternate legs"] },
-                        { name: "Assisted Pistol Squat", illustrationKey: "pistol_squat", muscleTarget: "Quadriceps, Balance", duration: 50, sets: "3 sets x 8 reps", equipment: "Support", instructions: ["Hold fixed support", "Extend one leg forward", "Lower in single-leg squat", "Use support to rise", "Keep knee aligned"] },
-                        { name: "Lateral Shuffle", illustrationKey: "lateral_shuffle", muscleTarget: "Abductors, Agility", duration: 40, sets: "3 sets x 30 sec", equipment: "Mini Band", instructions: ["Band above knees", "Semi-squat position", "Move sideways", "Quick short steps", "Change direction"] },
-                        { name: "Controlled Step Down", illustrationKey: "step_down", muscleTarget: "Quadriceps, Control", duration: 45, sets: "3 sets x 10 reps", equipment: "Step", instructions: ["Stand on step", "Lower one leg slowly", "Touch heel to floor", "Rise controlled", "Keep knee aligned"] },
-                        { name: "Dynamic Balance", illustrationKey: "dynamic_balance", muscleTarget: "Proprioception, Core", duration: 45, sets: "3 sets x 8 reps", equipment: "None", instructions: ["Single leg stand", "Reach forward with hands", "Then sideways", "Then backward", "Maintain balance"] }
-                    ]
-                }
-            ],
-            es: [
-                {
-                    name: "Propiocepción Básica",
-                    exercises: [
-                        { name: "Apoyo Unipodal", illustrationKey: "single_leg_stand", muscleTarget: "Estabilizadores", duration: 30, sets: "3 series cada lado", equipment: "Ninguno", instructions: ["Párate con pies juntos", "Levanta una pierna", "Mantén equilibrio 30 seg", "Mira un punto fijo", "Cambia de lado"] },
-                        { name: "Sentadilla con Mini Band", illustrationKey: "mini_band_squat", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Pies al ancho de hombros", "Baja a 60° de flexión", "Rodillas hacia afuera", "Sube contrayendo glúteos"] },
-                        { name: "Puente de Glúteos", illustrationKey: "glute_bridge", muscleTarget: "Glúteos, Isquiotibiales", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Acuéstate boca arriba", "Rodillas flexionadas", "Eleva cadera contrayendo", "Mantén 2 seg arriba", "Baja controlado"] },
-                        { name: "Equilibrio Inestable", illustrationKey: "unstable_balance", muscleTarget: "Propioceptores", duration: 30, sets: "3 series cada lado", equipment: "Almohada", instructions: ["Almohada en el suelo", "Párate en una pierna", "Mantén 30 segundos", "Cierra ojos para dificultar", "Cambia de lado"] },
-                        { name: "Abducción con Band", illustrationKey: "band_abduction", muscleTarget: "Glúteo medio", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en tobillos", "Una pierna fija", "Separa lateralmente", "Controla la vuelta", "Tronco estable"] },
-                        { name: "Elevación de Pantorrilla", illustrationKey: "calf_raise", muscleTarget: "Gastrocnemio, Sóleo", duration: 35, sets: "3 series x 20 rep", equipment: "Escalón", instructions: ["Apóyate en pared", "Elévate en puntas", "Mantén 2 seg arriba", "Baja controlado", "Usa escalón para rango"] }
-                    ]
-                },
-                {
-                    name: "Fortalecimiento Cuádriceps",
-                    exercises: [
-                        { name: "Sentadilla en Pared", illustrationKey: "wall_sit", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 45 seg", equipment: "Pared", instructions: ["Espalda contra pared", "Desliza a 90°", "Mantén posición", "Pies separados", "Rodillas no pasan pies"] },
-                        { name: "Extensión de Rodilla", illustrationKey: "seated_knee_ext", muscleTarget: "Cuádriceps", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Siéntate en silla alta", "Band en tobillo", "Extiende contra resistencia", "Mantén 2 seg", "Regresa controlado"] },
-                        { name: "Step Up Lateral", illustrationKey: "lateral_step_up", muscleTarget: "Cuádriceps, Glúteos", duration: 50, sets: "3 series x 12 rep", equipment: "Escalón", instructions: ["Al lado del escalón", "Sube lateralmente", "Extiende rodilla arriba", "Baja controlado", "Tronco erguido"] },
-                        { name: "Zancada Estática", illustrationKey: "static_lunge", muscleTarget: "Cuádriceps, Glúteos", duration: 40, sets: "3 series x 10 rep", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Paso adelante", "Baja rodilla trasera", "Rodilla alineada", "Sube y repite"] },
-                        { name: "Leg Press en Pared", illustrationKey: "wall_leg_press", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 15 rep", equipment: "Pelota", instructions: ["Pelota entre espalda y pared", "Pies adelante", "Baja flexionando", "Sube empujando", "Movimiento controlado"] },
-                        { name: "Sentadilla Sumo", illustrationKey: "sumo_squat", muscleTarget: "Aductores, Cuádriceps", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pies muy separados", "Puntas hacia afuera", "Baja con rodillas afuera", "Tronco erguido", "Contrae al subir"] },
-                        { name: "Terminal Knee Extension", illustrationKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en punto fijo bajo", "Detrás de rodilla", "Flexión leve", "Extiende contra resistencia", "Enfoca en cuádriceps"] }
-                    ]
-                },
-                {
-                    name: "Cadena Posterior",
-                    exercises: [
-                        { name: "Peso Muerto Rumano", illustrationKey: "romanian_deadlift", muscleTarget: "Isquiotibiales, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pisa la band", "Sujeta con manos", "Inclina tronco", "Piernas semi-extendidas", "Sube contrayendo"] },
-                        { name: "Puente Unilateral", illustrationKey: "single_leg_bridge", muscleTarget: "Glúteos, Isquiotibiales", duration: 40, sets: "3 series x 10 rep", equipment: "Ninguno", instructions: ["Acuéstate boca arriba", "Extiende una pierna", "Eleva cadera", "Mantén 2 seg", "Cambia de lado"] },
-                        { name: "Flexión de Rodilla de Pie", illustrationKey: "standing_knee_flex", muscleTarget: "Isquiotibiales", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en tobillo", "De pie con apoyo", "Flexiona contra resistencia", "Talón al glúteo", "Regresa controlado"] },
-                        { name: "Good Morning", illustrationKey: "good_morning", muscleTarget: "Isquiotibiales, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pisa la band", "Pasa detrás del cuello", "Inclina tronco", "Espalda recta", "Contrae al subir"] },
-                        { name: "Clamshell", illustrationKey: "clamshell", muscleTarget: "Glúteo medio", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["De lado con band", "Rodillas a 45°", "Abre como concha", "Pies unidos", "Controla bajada"] },
-                        { name: "Kickback de Glúteo", illustrationKey: "glute_kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Cuatro apoyos", "Band en tobillos", "Extiende pierna atrás", "Contrae glúteo", "No toques suelo"] },
-                        { name: "Pantorrilla Excéntrica", illustrationKey: "eccentric_calf", muscleTarget: "Gastrocnemio, Sóleo", duration: 50, sets: "3 series x 15 rep", equipment: "Escalón", instructions: ["En borde del escalón", "Elévate en puntas", "Baja lento (5 seg)", "Talón bien abajo", "Sube y repite"] }
-                    ]
-                },
-                {
-                    name: "Estabilización Avanzada",
-                    exercises: [
-                        { name: "Sentadilla Búlgara", illustrationKey: "bulgarian_squat", muscleTarget: "Cuádriceps, Glúteos", duration: 50, sets: "3 series x 10 rep", equipment: "Banco", instructions: ["Pie trasero en banco", "Baja flexionando", "Tronco erguido", "Rodilla no pasa pie", "Sube con talón"] },
-                        { name: "Monster Walk", illustrationKey: "monster_walk", muscleTarget: "Glúteo medio", duration: 45, sets: "3 series x 20 pasos", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Semi-agachado", "Camina lateral", "Tensión constante", "Regresa al otro lado"] },
-                        { name: "Salto con Aterrizaje", illustrationKey: "jump_landing", muscleTarget: "Cuádriceps, Glúteos", duration: 40, sets: "3 series x 10 rep", equipment: "Ninguno", instructions: ["Pies separados", "Salta vertical", "Aterriza suave", "Absorbe impacto", "Rodillas alineadas"] },
-                        { name: "Plancha con Elevación", illustrationKey: "plank_leg_raise", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 series x 10 rep", equipment: "Mini Band", instructions: ["Posición plancha", "Band en tobillos", "Eleva una pierna", "Mantén 2 seg", "Alterna piernas"] },
-                        { name: "Pistol Squat Asistido", illustrationKey: "pistol_squat", muscleTarget: "Cuádriceps, Equilibrio", duration: 50, sets: "3 series x 8 rep", equipment: "Apoyo", instructions: ["Sujétate de apoyo", "Extiende una pierna", "Baja unilateral", "Usa apoyo para subir", "Rodilla alineada"] },
-                        { name: "Lateral Shuffle", illustrationKey: "lateral_shuffle", muscleTarget: "Abductores, Agilidad", duration: 40, sets: "3 series x 30 seg", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Semi-agachado", "Desplaza lateral", "Pasos rápidos", "Cambia dirección"] },
-                        { name: "Step Down Controlado", illustrationKey: "step_down", muscleTarget: "Cuádriceps, Control", duration: 45, sets: "3 series x 10 rep", equipment: "Escalón", instructions: ["Arriba del escalón", "Baja una pierna lento", "Toca talón", "Sube controlado", "Rodilla alineada"] },
-                        { name: "Equilibrio Dinámico", illustrationKey: "dynamic_balance", muscleTarget: "Propiocepción, Core", duration: 45, sets: "3 series x 8 rep", equipment: "Ninguno", instructions: ["Apoyo unipodal", "Alcanza adelante", "Luego al lado", "Luego atrás", "Mantén equilibrio"] }
-                    ]
-                }
-            ]
-        };
+        ];
 
         // ==================== STATE ====================
         let currentLang = 'pt';
@@ -2667,39 +1390,32 @@
         function saveUserData(userData) {
             const users = getAllUsers();
             const index = users.findIndex(u => u.nickname.toLowerCase() === userData.nickname.toLowerCase());
-            if (index >= 0) {
-                users[index] = userData;
-            } else {
-                users.push(userData);
-            }
+            if (index >= 0) users[index] = userData;
+            else users.push(userData);
             saveAllUsers(users);
         }
 
         function deleteUser(nickname) {
             const users = getAllUsers();
-            const filtered = users.filter(u => u.nickname.toLowerCase() !== nickname.toLowerCase());
-            saveAllUsers(filtered);
+            saveAllUsers(users.filter(u => u.nickname.toLowerCase() !== nickname.toLowerCase()));
         }
 
-        // ==================== INITIALIZATION ====================
+        // ==================== INIT ====================
         document.addEventListener('DOMContentLoaded', () => {
             initAvatarGrid();
             loadUserList();
-            applyTranslations();
         });
 
         function initAvatarGrid() {
-            const grid = document.getElementById('avatar-grid');
-            grid.innerHTML = avatars.map(avatar => `
-                <button class="avatar-option" onclick="selectAvatar('${avatar}')">${avatar}</button>
-            `).join('');
+            document.getElementById('avatar-grid').innerHTML = avatars.map(avatar => 
+                `<button class="avatar-option" onclick="selectAvatar('${avatar}')">${avatar}</button>`
+            ).join('');
         }
 
         function selectAvatar(avatar) {
             selectedAvatar = avatar;
-            document.querySelectorAll('.avatar-option').forEach(btn => {
-                btn.classList.toggle('selected', btn.textContent === avatar);
-            });
+            document.querySelectorAll('.avatar-option').forEach(btn => 
+                btn.classList.toggle('selected', btn.textContent === avatar));
         }
 
         function selectKnee(knee) {
@@ -2708,7 +1424,7 @@
             document.getElementById('knee-' + knee).classList.add('selected');
         }
 
-        // ==================== LOGIN SYSTEM ====================
+        // ==================== LOGIN ====================
         function showLoginTab(tab) {
             document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
@@ -2724,23 +1440,16 @@
             if (users.length === 0) {
                 userList.style.display = 'none';
                 noUsersMsg.style.display = 'block';
-                document.querySelector('.existing-users-title').style.display = 'none';
             } else {
                 userList.style.display = 'block';
                 noUsersMsg.style.display = 'none';
-                document.querySelector('.existing-users-title').style.display = 'block';
-
                 const kneeLabels = { left: 'E', right: 'D', both: 'A' };
-
                 userList.innerHTML = users.map(user => `
                     <div class="user-card" onclick="selectUserForLogin('${user.nickname}')">
                         <div class="user-avatar">${user.avatar}</div>
                         <div class="user-info">
-                            <div class="user-name">
-                                ${user.nickname}
-                                <span class="user-knee-badge">🦵${kneeLabels[user.knee] || '?'}</span>
-                            </div>
-                            <div class="user-stats">${user.stats?.totalWorkouts || 0} treinos • ${user.stats?.currentStreak || 0} dias</div>
+                            <div class="user-name">${user.nickname}<span class="user-knee-badge">🦵${kneeLabels[user.knee] || '?'}</span></div>
+                            <div class="user-stats">${user.stats?.totalWorkouts || 0} treinos</div>
                         </div>
                         <button class="user-delete" onclick="event.stopPropagation(); confirmDeleteUser('${user.nickname}')">×</button>
                     </div>
@@ -2786,18 +1495,17 @@
             const pin = [1,2,3,4].map(i => document.getElementById('new-pin-' + i).value).join('');
 
             if (!nickname || !selectedAvatar || !selectedKnee || pin.length !== 4) {
-                alert(t('fillAllFields'));
+                alert('Preencha todos os campos!');
                 return;
             }
 
             if (getUserData(nickname)) {
-                alert(t('nicknameExists'));
+                alert('Este apelido já existe!');
                 return;
             }
 
             const newUser = {
                 nickname, avatar: selectedAvatar, knee: selectedKnee, pin,
-                createdAt: new Date().toISOString(),
                 stats: { totalWorkouts: 0, totalMinutes: 0, currentStreak: 0, bestStreak: 0 },
                 completedDates: [], painHistory: [], profile: {}
             };
@@ -2805,6 +1513,7 @@
             saveUserData(newUser);
             loginUser(newUser);
 
+            // Reset form
             document.getElementById('new-nickname').value = '';
             for (let i = 1; i <= 4; i++) document.getElementById('new-pin-' + i).value = '';
             selectedAvatar = null;
@@ -2820,8 +1529,6 @@
             updateUserInterface();
             renderCalendar();
             updateStats();
-            renderPainHistory();
-            renderEvolutionChart();
             updateKneeDisplay();
         }
 
@@ -2834,7 +1541,7 @@
         }
 
         function confirmDeleteUser(nickname) {
-            if (confirm(t('confirmDelete'))) {
+            if (confirm('Excluir este perfil?')) {
                 deleteUser(nickname);
                 loadUserList();
                 if (currentUser && currentUser.nickname === nickname) showLoginScreen();
@@ -2842,18 +1549,19 @@
         }
 
         function deleteCurrentUser() {
-            if (confirm(t('confirmDelete'))) {
+            if (confirm('Excluir seu perfil?')) {
                 deleteUser(currentUser.nickname);
                 showLoginScreen();
             }
         }
 
-        // ==================== KNEE MANAGEMENT ====================
+        // ==================== KNEE ====================
         function updateKneeDisplay() {
             if (!currentUser) return;
-            const kneeLabel = t('kneeLabels')[currentUser.knee] || '🦵 ?';
-            document.getElementById('header-knee-indicator').textContent = kneeLabel;
-            document.getElementById('welcome-knee-info').textContent = kneeLabel;
+            const labels = { left: '🦵 E', right: '🦵 D', both: '🦵 Ambos' };
+            const fullLabels = { left: '🦵 Esquerdo', right: '🦵 Direito', both: '🦵 Ambos' };
+            document.getElementById('header-knee-indicator').textContent = labels[currentUser.knee] || '🦵 ?';
+            document.getElementById('welcome-knee-info').textContent = fullLabels[currentUser.knee] || '🦵 ?';
             document.querySelectorAll('#profile-knee-options .knee-option').forEach(opt => opt.classList.remove('selected'));
             if (currentUser.knee) {
                 const el = document.getElementById('profile-knee-' + currentUser.knee);
@@ -2868,7 +1576,7 @@
             updateKneeDisplay();
         }
 
-        // ==================== USER INTERFACE ====================
+        // ==================== UI ====================
         function updateUserInterface() {
             if (!currentUser) return;
             document.getElementById('header-avatar').textContent = currentUser.avatar;
@@ -2886,25 +1594,9 @@
         // ==================== LANGUAGE ====================
         function setLanguage(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent === lang.toUpperCase()));
-            applyTranslations();
-            updateKneeDisplay();
+            document.querySelectorAll('.lang-btn').forEach(btn => 
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase()));
         }
-
-        function applyTranslations() {
-            const trans = translations[currentLang];
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (trans[key]) el.textContent = trans[key];
-            });
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (trans[key]) el.placeholder = trans[key];
-            });
-            renderCalendar();
-        }
-
-        function t(key) { return translations[currentLang][key] || key; }
 
         // ==================== NAVIGATION ====================
         function showScreen(screenId) {
@@ -2914,11 +1606,13 @@
             document.querySelector(`.nav-tab[onclick="showScreen('${screenId}')"]`).classList.add('active');
         }
 
-        // ==================== PAIN TRACKING ====================
+        // ==================== PAIN ====================
         function selectPain(level) {
             currentPain = level;
-            document.querySelectorAll('.pain-level').forEach(el => el.classList.toggle('selected', parseInt(el.dataset.pain) === level));
-            document.getElementById('pain-description').textContent = t('painLevels')[level];
+            const labels = ["Sem dor", "Dor leve", "Dor moderada", "Dor considerável", "Dor intensa"];
+            document.querySelectorAll('.pain-level').forEach(el => 
+                el.classList.toggle('selected', parseInt(el.dataset.pain) === level));
+            document.getElementById('pain-description').textContent = labels[level];
 
             if (currentUser) {
                 const today = new Date().toISOString().split('T')[0];
@@ -2928,56 +1622,105 @@
                 else currentUser.painHistory.push({ date: today, level });
                 currentUser.painHistory = currentUser.painHistory.slice(-30);
                 saveUserData(currentUser);
-                renderPainHistory();
             }
         }
 
-        function renderPainHistory() {
-            if (!currentUser || !currentUser.painHistory || currentUser.painHistory.length === 0) {
-                document.getElementById('pain-evolution-card').style.display = 'none';
-                return;
-            }
-            document.getElementById('pain-evolution-card').style.display = 'block';
-            const container = document.getElementById('pain-history');
-            const emojis = ['😊', '🙂', '😐', '😟', '😣'];
-            const recent = currentUser.painHistory.slice(-7);
-            container.innerHTML = recent.map(entry => {
-                const date = new Date(entry.date);
-                return `<div class="pain-history-item"><div class="pain-history-emoji">${emojis[entry.level]}</div><div class="pain-history-date">${t('weekdaysShort')[date.getDay()]} ${date.getDate()}</div></div>`;
-            }).join('');
-        }
-
-        // ==================== PROGRAM SELECTION ====================
+        // ==================== PROGRAM ====================
         function selectProgram(index) {
             selectedProgram = index;
-            document.querySelectorAll('.program-card').forEach((card, i) => card.classList.toggle('selected', i === index));
+            document.querySelectorAll('.program-card').forEach((card, i) => 
+                card.classList.toggle('selected', i === index));
+        }
+
+        // ==================== VIDEO ====================
+        function loadExerciseVideo(videoKey) {
+            const video = document.getElementById('exercise-video');
+            const container = document.getElementById('video-container');
+            const loading = document.getElementById('video-loading');
+            const fallback = document.getElementById('video-fallback');
+
+            const videoUrl = exerciseVideos[videoKey] || exerciseVideos.generic;
+
+            // Show loading
+            container.style.display = 'block';
+            loading.style.display = 'block';
+            fallback.style.display = 'none';
+
+            // Set video source
+            video.src = videoUrl;
+
+            // Handle video load
+            video.onloadeddata = () => {
+                loading.style.display = 'none';
+                video.play().catch(() => {});
+            };
+
+            // Handle video error - show fallback
+            video.onerror = () => {
+                container.style.display = 'none';
+                fallback.style.display = 'block';
+                document.getElementById('fallback-icon').textContent = exerciseIcons[videoKey] || '🏃';
+                document.getElementById('fallback-text').textContent = 'Vídeo não disponível - siga as instruções abaixo';
+            };
+
+            // Timeout fallback
+            setTimeout(() => {
+                if (loading.style.display !== 'none') {
+                    container.style.display = 'none';
+                    fallback.style.display = 'block';
+                    document.getElementById('fallback-icon').textContent = exerciseIcons[videoKey] || '🏃';
+                    document.getElementById('fallback-text').textContent = 'Conexão lenta - siga as instruções';
+                }
+            }, 8000);
+        }
+
+        function toggleVideoPlay() {
+            const video = document.getElementById('exercise-video');
+            if (video.paused) video.play();
+            else video.pause();
+        }
+
+        function toggleVideoMute() {
+            const video = document.getElementById('exercise-video');
+            video.muted = !video.muted;
+        }
+
+        function restartVideo() {
+            const video = document.getElementById('exercise-video');
+            video.currentTime = 0;
+            video.play();
         }
 
         // ==================== TRAINING ====================
         function startTraining() {
-            if (selectedProgram === null) { alert(t('selectProgramFirst')); return; }
+            if (selectedProgram === null) {
+                alert('Selecione um programa primeiro!');
+                return;
+            }
             currentExerciseIndex = 0;
             showScreen('training');
             loadExercise();
         }
 
         function loadExercise() {
-            const program = programs[currentLang][selectedProgram];
+            const program = programs[selectedProgram];
             const exercise = program.exercises[currentExerciseIndex];
             const total = program.exercises.length;
 
             document.getElementById('current-exercise').textContent = currentExerciseIndex + 1;
             document.getElementById('total-exercises').textContent = total;
             document.getElementById('progress-fill').style.width = ((currentExerciseIndex + 1) / total * 100) + '%';
+
+            // Load video
+            loadExerciseVideo(exercise.videoKey);
+            document.getElementById('video-title').textContent = exercise.name;
+            document.getElementById('video-subtitle').textContent = exercise.muscleTarget;
+
             document.getElementById('exercise-name').textContent = exercise.name;
             document.getElementById('muscle-target').textContent = '🎯 ' + exercise.muscleTarget;
             document.getElementById('exercise-duration').textContent = exercise.duration + ' seg';
             document.getElementById('exercise-reps').textContent = exercise.sets;
             document.getElementById('exercise-equipment').textContent = exercise.equipment;
-
-            // Load illustration
-            loadExerciseIllustration(exercise.illustrationKey);
-
             document.getElementById('instructions-list').innerHTML = exercise.instructions.map(i => `<li>${i}</li>`).join('');
 
             timerSeconds = exercise.duration;
@@ -2985,93 +1728,69 @@
             resetTimer();
 
             document.getElementById('prev-btn').disabled = currentExerciseIndex === 0;
-            document.getElementById('next-btn').textContent = currentExerciseIndex === total - 1 ? t('finish') : t('next');
-        }
-
-        function loadExerciseIllustration(key) {
-            const container = document.getElementById('exercise-illustration');
-            const illust = exerciseToIllustration[key];
-
-            if (!illust) {
-                container.innerHTML = `<div class="illustration-title">${t('illustrationTitle')}</div><p style="text-align:center;color:var(--text-muted);">Ilustração não disponível</p>`;
-                return;
-            }
-
-            const startSvg = exerciseIllustrations[illust.start] || exerciseIllustrations.standing;
-            const midSvg = exerciseIllustrations[illust.mid] || exerciseIllustrations.standing;
-            const endSvg = exerciseIllustrations[illust.end] || exerciseIllustrations.standing;
-
-            container.innerHTML = `
-                <div class="illustration-title">${t('illustrationTitle')}</div>
-                <div class="illustration-sequence">
-                    <div class="illustration-step">
-                        <div class="step-figure">${startSvg}</div>
-                        <div class="step-number">1</div>
-                        <div class="step-label">${t('stepStart')}</div>
-                    </div>
-                    <div class="illustration-arrow">→</div>
-                    <div class="illustration-step">
-                        <div class="step-figure">${midSvg}</div>
-                        <div class="step-number">2</div>
-                        <div class="step-label">${t('stepMid')}</div>
-                    </div>
-                    <div class="illustration-arrow">→</div>
-                    <div class="illustration-step">
-                        <div class="step-figure">${endSvg}</div>
-                        <div class="step-number">3</div>
-                        <div class="step-label">${t('stepEnd')}</div>
-                    </div>
-                </div>
-                <div class="movement-indicator">
-                    <span class="arrow-icon">${illust.movement.split(' ')[0]}</span>
-                    <span class="movement-text">${illust.movement.substring(illust.movement.indexOf(' ') + 1)}</span>
-                </div>
-            `;
+            document.getElementById('next-btn').textContent = currentExerciseIndex === total - 1 ? 'Finalizar' : 'Próximo';
         }
 
         function prevExercise() {
-            if (currentExerciseIndex > 0) { currentExerciseIndex--; loadExercise(); }
+            if (currentExerciseIndex > 0) {
+                currentExerciseIndex--;
+                loadExercise();
+            }
         }
 
         function nextExercise() {
-            const program = programs[currentLang][selectedProgram];
-            if (currentExerciseIndex < program.exercises.length - 1) { currentExerciseIndex++; loadExercise(); }
-            else completeWorkout();
+            const program = programs[selectedProgram];
+            if (currentExerciseIndex < program.exercises.length - 1) {
+                currentExerciseIndex++;
+                loadExercise();
+            } else {
+                completeWorkout();
+            }
         }
 
         // ==================== TIMER ====================
-        function toggleTimer() { timerRunning ? pauseTimer() : startTimer(); }
+        function toggleTimer() {
+            timerRunning ? pauseTimer() : startTimer();
+        }
 
         function startTimer() {
             timerRunning = true;
-            document.getElementById('timer-btn').textContent = t('pause');
+            document.getElementById('timer-btn').textContent = 'Pausar';
             document.getElementById('timer-btn').classList.remove('start');
             document.getElementById('timer-btn').classList.add('pause');
             timerInterval = setInterval(() => {
-                if (timerSeconds > 0) { timerSeconds--; updateTimerDisplay(); }
-                else { pauseTimer(); if (navigator.vibrate) navigator.vibrate([200, 100, 200]); }
+                if (timerSeconds > 0) {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    pauseTimer();
+                    if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+                }
             }, 1000);
         }
 
         function pauseTimer() {
             timerRunning = false;
             clearInterval(timerInterval);
-            document.getElementById('timer-btn').textContent = t('start');
+            document.getElementById('timer-btn').textContent = 'Iniciar';
             document.getElementById('timer-btn').classList.remove('pause');
             document.getElementById('timer-btn').classList.add('start');
         }
 
         function resetTimer() {
             pauseTimer();
-            const program = programs[currentLang][selectedProgram];
-            if (program && program.exercises[currentExerciseIndex]) timerSeconds = program.exercises[currentExerciseIndex].duration;
+            const program = programs[selectedProgram];
+            if (program && program.exercises[currentExerciseIndex]) {
+                timerSeconds = program.exercises[currentExerciseIndex].duration;
+            }
             updateTimerDisplay();
         }
 
         function updateTimerDisplay() {
             const minutes = Math.floor(timerSeconds / 60);
             const seconds = timerSeconds % 60;
-            document.getElementById('timer-display').textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+            document.getElementById('timer-display').textContent = 
+                String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
         }
 
         // ==================== WORKOUT COMPLETION ====================
@@ -3081,7 +1800,7 @@
             if (!currentUser.completedDates.includes(today)) currentUser.completedDates.push(today);
             if (!currentUser.stats) currentUser.stats = { totalWorkouts: 0, totalMinutes: 0, currentStreak: 0, bestStreak: 0 };
             currentUser.stats.totalWorkouts++;
-            const program = programs[currentLang][selectedProgram];
+            const program = programs[selectedProgram];
             const totalDuration = program.exercises.reduce((sum, ex) => sum + ex.duration, 0);
             currentUser.stats.totalMinutes += Math.round(totalDuration / 60 * 3);
             calculateStreak();
@@ -3089,20 +1808,26 @@
             updateUserInterface();
             updateStats();
             renderCalendar();
-            renderEvolutionChart();
             document.getElementById('completion-modal').classList.add('active');
         }
 
         function calculateStreak() {
-            if (!currentUser.completedDates || currentUser.completedDates.length === 0) { currentUser.stats.currentStreak = 0; return; }
+            if (!currentUser.completedDates || currentUser.completedDates.length === 0) {
+                currentUser.stats.currentStreak = 0;
+                return;
+            }
             const sortedDates = [...currentUser.completedDates].sort().reverse();
             let streak = 0;
             let checkDate = new Date();
             for (let i = 0; i < sortedDates.length; i++) {
                 const dateStr = checkDate.toISOString().split('T')[0];
-                if (sortedDates.includes(dateStr)) { streak++; checkDate.setDate(checkDate.getDate() - 1); }
-                else if (i === 0) { checkDate.setDate(checkDate.getDate() - 1); i--; }
-                else break;
+                if (sortedDates.includes(dateStr)) {
+                    streak++;
+                    checkDate.setDate(checkDate.getDate() - 1);
+                } else if (i === 0) {
+                    checkDate.setDate(checkDate.getDate() - 1);
+                    i--;
+                } else break;
             }
             currentUser.stats.currentStreak = streak;
             if (streak > (currentUser.stats.bestStreak || 0)) currentUser.stats.bestStreak = streak;
@@ -3119,26 +1844,33 @@
             const monthLabel = document.getElementById('calendar-month');
             const year = currentMonth.getFullYear();
             const month = currentMonth.getMonth();
-            monthLabel.textContent = t('months')[month] + ' ' + year;
+            const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+            monthLabel.textContent = months[month] + ' ' + year;
             grid.innerHTML = '';
-            t('weekdays').forEach(day => {
+
+            weekdays.forEach(day => {
                 const header = document.createElement('div');
                 header.className = 'calendar-day-header';
                 header.textContent = day;
                 grid.appendChild(header);
             });
+
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const daysInPrevMonth = new Date(year, month, 0).getDate();
             const today = new Date();
             const todayStr = today.toISOString().split('T')[0];
             const completedDates = currentUser?.completedDates || [];
+
             for (let i = firstDay - 1; i >= 0; i--) {
                 const day = document.createElement('div');
                 day.className = 'calendar-day other-month';
                 day.textContent = daysInPrevMonth - i;
                 grid.appendChild(day);
             }
+
             for (let i = 1; i <= daysInMonth; i++) {
                 const day = document.createElement('div');
                 day.className = 'calendar-day';
@@ -3148,6 +1880,7 @@
                 if (completedDates.includes(dateStr)) day.classList.add('completed');
                 grid.appendChild(day);
             }
+
             const totalCells = firstDay + daysInMonth;
             const remainingCells = 42 - totalCells;
             for (let i = 1; i <= remainingCells && i <= 14; i++) {
@@ -3158,7 +1891,10 @@
             }
         }
 
-        function changeMonth(delta) { currentMonth.setMonth(currentMonth.getMonth() + delta); renderCalendar(); }
+        function changeMonth(delta) {
+            currentMonth.setMonth(currentMonth.getMonth() + delta);
+            renderCalendar();
+        }
 
         // ==================== STATS ====================
         function updateStats() {
@@ -3168,23 +1904,18 @@
             document.getElementById('current-streak').textContent = stats.currentStreak;
             document.getElementById('total-minutes').textContent = stats.totalMinutes;
             document.getElementById('best-streak').textContent = stats.bestStreak;
-        }
 
-        // ==================== EVOLUTION CHART ====================
-        function renderEvolutionChart() {
+            // Evolution chart
             const container = document.getElementById('evolution-chart');
-            if (!currentUser || !currentUser.completedDates) {
-                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); width: 100%;">Complete treinos para ver evolução</p>';
-                return;
-            }
             const days = [];
+            const weekdaysShort = ["D", "S", "T", "Q", "Q", "S", "S"];
             for (let i = 6; i >= 0; i--) {
                 const date = new Date();
                 date.setDate(date.getDate() - i);
-                days.push({ date: date.toISOString().split('T')[0], dayName: t('weekdaysShort')[date.getDay()] });
+                days.push({ date: date.toISOString().split('T')[0], dayName: weekdaysShort[date.getDay()] });
             }
             container.innerHTML = days.map(day => {
-                const completed = currentUser.completedDates.includes(day.date);
+                const completed = currentUser.completedDates?.includes(day.date);
                 return `<div class="chart-bar-container"><div class="chart-bar" style="height: ${completed ? 80 : 8}px;"></div><div class="chart-label">${day.dayName}</div></div>`;
             }).join('');
         }
@@ -3194,7 +1925,7 @@
             if (!currentUser) return;
             currentUser.profile = { age: document.getElementById('user-age').value };
             saveUserData(currentUser);
-            alert(t('profileSaved'));
+            alert('Perfil salvo!');
         }
     </script>
 </body>
