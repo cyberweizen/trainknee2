@@ -16,6 +16,10 @@
             --text-dark: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
+            --skin: #fdbf6f;
+            --skin-dark: #e8a850;
+            --clothes: #3b82f6;
+            --clothes-dark: #2563eb;
         }
 
         * {
@@ -53,6 +57,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .login-overlay.hidden {
@@ -67,6 +72,8 @@
             max-width: 400px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: slideUp 0.5s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes slideUp {
@@ -179,6 +186,48 @@
             border-color: var(--primary);
             background: #dbeafe;
             transform: scale(1.1);
+        }
+
+        /* Knee Selection */
+        .knee-selection {
+            margin-bottom: 20px;
+        }
+
+        .knee-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .knee-option {
+            flex: 1;
+            padding: 15px;
+            border: 3px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .knee-option:hover {
+            border-color: var(--primary);
+            background: #dbeafe;
+        }
+
+        .knee-option.selected {
+            border-color: var(--primary);
+            background: #dbeafe;
+        }
+
+        .knee-option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .knee-option-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
         }
 
         /* Input Fields */
@@ -325,6 +374,15 @@
             color: var(--text-muted);
         }
 
+        .user-knee-badge {
+            font-size: 0.7rem;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+
         .user-delete {
             width: 30px;
             height: 30px;
@@ -439,6 +497,14 @@
         .header-info p {
             font-size: 0.75rem;
             opacity: 0.9;
+        }
+
+        .header-knee-indicator {
+            font-size: 0.65rem;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
         }
 
         /* Language Selector */
@@ -562,6 +628,15 @@
             font-size: 0.9rem;
         }
 
+        .welcome-knee-info {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
         .welcome-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -679,81 +754,422 @@
             color: var(--text-muted);
         }
 
-        .miniband-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: #fef3c7;
-            color: #92400e;
-            padding: 4px 10px;
+        /* ==================== EXERCISE ANIMATIONS ==================== */
+        .exercise-animation-container {
+            width: 100%;
+            max-width: 280px;
+            margin: 15px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            position: relative;
+            aspect-ratio: 1;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .exercise-animation {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Base figure styles */
+        .figure {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .figure .head {
+            width: 40px;
+            height: 40px;
+            background: var(--skin);
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid var(--skin-dark);
+        }
+
+        .figure .body {
+            width: 30px;
+            height: 60px;
+            background: var(--clothes);
+            border-radius: 15px 15px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .figure .arm {
+            width: 12px;
+            height: 45px;
+            background: var(--skin);
+            border-radius: 6px;
+            position: absolute;
+            top: 40px;
+            transform-origin: top center;
+            border: 2px solid var(--skin-dark);
+        }
+
+        .figure .arm.left { left: -5px; }
+        .figure .arm.right { right: -5px; }
+
+        .figure .leg {
+            width: 14px;
+            height: 55px;
+            background: var(--clothes-dark);
+            border-radius: 7px;
+            position: absolute;
+            top: 90px;
+            transform-origin: top center;
+        }
+
+        .figure .leg.left { left: 5px; }
+        .figure .leg.right { right: 5px; }
+
+        .figure .foot {
+            width: 20px;
+            height: 10px;
+            background: #333;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            bottom: -8px;
+        }
+
+        /* Floor */
+        .floor {
+            position: absolute;
+            bottom: 10%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: #94a3b8;
+            border-radius: 2px;
+        }
+
+        /* Equipment */
+        .mini-band {
+            position: absolute;
+            width: 50px;
+            height: 15px;
+            border: 4px solid #ef4444;
+            border-radius: 25px;
+            background: transparent;
+        }
+
+        .wall {
+            position: absolute;
+            right: 15%;
+            top: 20%;
+            bottom: 15%;
+            width: 8px;
+            background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
+            border-radius: 4px;
+        }
+
+        .step-box {
+            position: absolute;
+            bottom: 10%;
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 4px;
+        }
+
+        /* Animation Label */
+        .animation-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
         }
 
-        /* Exercise Display */
-        .exercise-container {
-            text-align: center;
+        /* ==================== SPECIFIC EXERCISE ANIMATIONS ==================== */
+
+        /* Single Leg Stand */
+        @keyframes singleLegStand {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(-3deg); }
+            75% { transform: translateX(-50%) rotate(3deg); }
         }
 
-        .exercise-media-container {
-            width: 100%;
-            max-width: 320px;
-            margin: 15px auto;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #000;
-            position: relative;
-            aspect-ratio: 4/3;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        @keyframes legLift {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-45deg); }
         }
 
-        .exercise-media {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .anim-single-leg .figure {
+            animation: singleLegStand 2s ease-in-out infinite;
         }
 
-        .exercise-media-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-            color: var(--primary);
+        .anim-single-leg .leg.left {
+            animation: legLift 2s ease-in-out infinite;
         }
 
-        .exercise-media-placeholder .icon {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            animation: bounce 1s infinite;
+        /* Squat Animation */
+        @keyframes squatDown {
+            0%, 100% { 
+                transform: translateX(-50%) translateY(0);
+            }
+            50% { 
+                transform: translateX(-50%) translateY(30px);
+            }
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes squatLegs {
+            0%, 100% { 
+                transform: rotate(0deg);
+                height: 55px;
+            }
+            50% { 
+                transform: rotate(45deg);
+                height: 40px;
+            }
         }
 
-        .media-loading {
+        .anim-squat .figure {
+            animation: squatDown 2s ease-in-out infinite;
+        }
+
+        .anim-squat .leg {
+            animation: squatLegs 2s ease-in-out infinite;
+        }
+
+        .anim-squat .leg.right {
+            animation: squatLegs 2s ease-in-out infinite reverse;
+        }
+
+        /* Glute Bridge */
+        @keyframes bridgeUp {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        .anim-bridge .figure {
+            transform: translateX(-50%) rotate(90deg);
+            bottom: 25%;
+        }
+
+        .anim-bridge .body {
+            animation: bridgeUp 2s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        /* Wall Sit */
+        .anim-wall-sit .figure {
+            transform: translateX(-30%);
+        }
+
+        .anim-wall-sit .leg {
+            transform: rotate(90deg);
+        }
+
+        @keyframes wallSitShake {
+            0%, 100% { transform: translateX(-30%); }
+            50% { transform: translateX(-32%); }
+        }
+
+        .anim-wall-sit .figure {
+            animation: wallSitShake 0.5s ease-in-out infinite;
+        }
+
+        /* Calf Raise */
+        @keyframes calfRaise {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        .anim-calf-raise .figure {
+            animation: calfRaise 1.5s ease-in-out infinite;
+        }
+
+        /* Lunge */
+        @keyframes lungeDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(25px); }
+        }
+
+        .anim-lunge .figure {
+            animation: lungeDown 2s ease-in-out infinite;
+        }
+
+        .anim-lunge .leg.left {
+            transform: rotate(-30deg);
+        }
+
+        .anim-lunge .leg.right {
+            transform: rotate(30deg);
+        }
+
+        /* Step Up */
+        @keyframes stepUp {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-30px); }
+        }
+
+        .anim-step-up .figure {
+            animation: stepUp 2s ease-in-out infinite;
+        }
+
+        /* Deadlift */
+        @keyframes deadlift {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(45deg); }
+        }
+
+        .anim-deadlift .figure {
+            animation: deadlift 2.5s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        /* Clamshell */
+        @keyframes clamshellOpen {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-45deg); }
+        }
+
+        .anim-clamshell .figure {
+            transform: translateX(-50%) rotate(90deg);
+            bottom: 30%;
+        }
+
+        .anim-clamshell .leg.left {
+            animation: clamshellOpen 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        /* Kickback */
+        @keyframes kickback {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-60deg); }
+        }
+
+        .anim-kickback .figure {
+            transform: translateX(-50%) rotate(45deg);
+            bottom: 35%;
+        }
+
+        .anim-kickback .leg.right {
+            animation: kickback 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        /* Plank */
+        @keyframes plankHold {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(2deg); }
+        }
+
+        .anim-plank .figure {
+            transform: translateX(-50%) rotate(90deg);
+            bottom: 25%;
+            animation: plankHold 2s ease-in-out infinite;
+        }
+
+        /* Jump */
+        @keyframes jumpUp {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-50px); }
+        }
+
+        .anim-jump .figure {
+            animation: jumpUp 1s ease-in-out infinite;
+        }
+
+        /* Monster Walk */
+        @keyframes monsterWalk {
+            0%, 100% { transform: translateX(-70%); }
+            50% { transform: translateX(-30%); }
+        }
+
+        @keyframes legSpread {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(20deg); }
+        }
+
+        .anim-monster-walk .figure {
+            animation: monsterWalk 2s ease-in-out infinite;
+        }
+
+        .anim-monster-walk .leg.left {
+            animation: legSpread 1s ease-in-out infinite;
+        }
+
+        .anim-monster-walk .leg.right {
+            animation: legSpread 1s ease-in-out infinite reverse;
+        }
+
+        /* Abduction */
+        @keyframes abduction {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-50deg); }
+        }
+
+        .anim-abduction .leg.left {
+            animation: abduction 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        /* Knee Extension */
+        @keyframes kneeExtend {
+            0%, 100% { transform: rotate(90deg); }
+            50% { transform: rotate(0deg); }
+        }
+
+        .anim-knee-ext .figure {
+            bottom: 35%;
+        }
+
+        .anim-knee-ext .leg.left {
+            animation: kneeExtend 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        /* Balance Reach */
+        @keyframes balanceReach {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            33% { transform: translateX(-50%) rotate(-20deg); }
+            66% { transform: translateX(-50%) rotate(20deg); }
+        }
+
+        .anim-balance-reach .figure {
+            animation: balanceReach 3s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        .anim-balance-reach .leg.left {
+            animation: legLift 3s ease-in-out infinite;
+        }
+
+        /* Arrow indicators */
+        .arrow {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            font-size: 1.5rem;
+            color: var(--primary);
+            animation: arrowPulse 1s ease-in-out infinite;
         }
 
-        @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+        @keyframes arrowPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
 
+        .arrow.up { top: 15%; left: 50%; transform: translateX(-50%); }
+        .arrow.down { bottom: 20%; left: 50%; transform: translateX(-50%); }
+        .arrow.left { left: 15%; top: 50%; }
+        .arrow.right { right: 15%; top: 50%; }
+
+        /* ==================== REST OF STYLES ==================== */
         .video-hint {
             text-align: center;
             font-size: 0.75rem;
@@ -766,6 +1182,7 @@
             font-weight: 700;
             margin: 15px 0;
             color: var(--text-dark);
+            text-align: center;
         }
 
         .muscle-target {
@@ -775,7 +1192,11 @@
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
-            margin-top: 5px;
+            margin: 5px auto;
+        }
+
+        .exercise-container {
+            text-align: center;
         }
 
         .exercise-details {
@@ -1029,23 +1450,8 @@
         }
 
         /* Evolution Chart */
-        .evolution-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-
-        .evolution-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .evolution-chart {
-            height: 150px;
+            height: 120px;
             display: flex;
             align-items: flex-end;
             gap: 8px;
@@ -1116,6 +1522,26 @@
             border-color: var(--primary);
         }
 
+        /* Switch User Button */
+        .switch-user-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: var(--bg-light);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .switch-user-btn:hover {
+            border-color: var(--primary);
+            background: #dbeafe;
+        }
+
         /* Completion Modal */
         .modal-overlay {
             display: none;
@@ -1176,25 +1602,6 @@
             cursor: pointer;
         }
 
-        /* Switch User Button */
-        .switch-user-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 15px;
-            background: var(--bg-light);
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 15px;
-        }
-
-        .switch-user-btn:hover {
-            border-color: var(--primary);
-            background: #dbeafe;
-        }
-
         /* Responsive */
         @media (max-width: 480px) {
             .app-container {
@@ -1208,6 +1615,10 @@
             .pin-input {
                 width: 50px;
                 height: 55px;
+            }
+
+            .exercise-animation-container {
+                max-width: 250px;
             }
         }
     </style>
@@ -1258,6 +1669,25 @@
                         <input type="text" class="login-input" id="new-nickname" placeholder="Ex: João, Maria..." maxlength="15">
                     </div>
 
+                    <!-- KNEE SELECTION -->
+                    <div class="knee-selection">
+                        <label class="avatar-label" data-i18n="whichKnee">Qual joelho está machucado?</label>
+                        <div class="knee-options">
+                            <div class="knee-option" onclick="selectKnee('left')" id="knee-left">
+                                <div class="knee-option-icon">🦵</div>
+                                <div class="knee-option-label" data-i18n="leftKnee">Esquerdo</div>
+                            </div>
+                            <div class="knee-option" onclick="selectKnee('right')" id="knee-right">
+                                <div class="knee-option-icon" style="transform: scaleX(-1);">🦵</div>
+                                <div class="knee-option-label" data-i18n="rightKnee">Direito</div>
+                            </div>
+                            <div class="knee-option" onclick="selectKnee('both')" id="knee-both">
+                                <div class="knee-option-icon">🦵🦵</div>
+                                <div class="knee-option-label" data-i18n="bothKnees">Ambos</div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="login-input-group">
                         <label class="login-input-label" data-i18n="createPin">Crie um PIN de 4 dígitos:</label>
                         <div class="pin-container">
@@ -1304,7 +1734,10 @@
                         <div class="header-avatar" id="header-avatar" onclick="showLoginScreen()">🏃</div>
                         <div class="header-info">
                             <h1>KneeRecovery Pro</h1>
-                            <p><span data-i18n="hello">Olá</span>, <span id="header-username">Atleta</span>!</p>
+                            <p>
+                                <span data-i18n="hello">Olá</span>, <span id="header-username">Atleta</span>!
+                                <span class="header-knee-indicator" id="header-knee-indicator">🦵 Esquerdo</span>
+                            </p>
                         </div>
                     </div>
                     <div class="lang-selector">
@@ -1332,6 +1765,7 @@
                         <div class="welcome-text">
                             <h2><span data-i18n="welcomeBack">Bem-vindo</span>, <span id="welcome-name">Atleta</span>!</h2>
                             <p data-i18n="keepGoing">Continue sua jornada de recuperação</p>
+                            <div class="welcome-knee-info" id="welcome-knee-info">🦵 Joelho Esquerdo</div>
                         </div>
                     </div>
                     <div class="welcome-stats">
@@ -1370,9 +1804,7 @@
                     <div class="card-title">
                         📈 <span data-i18n="painEvolution">Evolução da Dor</span>
                     </div>
-                    <div class="pain-history" id="pain-history">
-                        <!-- Pain history items will be loaded here -->
-                    </div>
+                    <div class="pain-history" id="pain-history"></div>
                 </div>
 
                 <!-- Program Selection -->
@@ -1447,9 +1879,9 @@
                 </div>
 
                 <div class="card exercise-container">
-                    <div class="exercise-media-container" id="media-container">
-                        <div class="media-loading" id="media-loading"></div>
-                        <img id="exercise-media" class="exercise-media" src="" alt="Exercise demonstration" style="display: none;">
+                    <!-- Exercise Animation Container -->
+                    <div class="exercise-animation-container" id="animation-container">
+                        <!-- Animation will be rendered here -->
                     </div>
                     <p class="video-hint" data-i18n="videoHint">👆 Observe o movimento correto</p>
 
@@ -1513,9 +1945,7 @@
                     <div class="card-title">
                         📊 <span data-i18n="weeklyEvolution">Evolução Semanal</span>
                     </div>
-                    <div class="evolution-chart" id="evolution-chart">
-                        <!-- Chart bars will be generated -->
-                    </div>
+                    <div class="evolution-chart" id="evolution-chart"></div>
                 </div>
 
                 <div class="card">
@@ -1557,15 +1987,29 @@
 
                 <div class="card">
                     <div class="card-title">
+                        🦵 <span data-i18n="injuredKnee">Joelho Afetado</span>
+                    </div>
+                    <div class="knee-options" id="profile-knee-options">
+                        <div class="knee-option" onclick="updateKnee('left')" id="profile-knee-left">
+                            <div class="knee-option-icon">🦵</div>
+                            <div class="knee-option-label" data-i18n="leftKnee">Esquerdo</div>
+                        </div>
+                        <div class="knee-option" onclick="updateKnee('right')" id="profile-knee-right">
+                            <div class="knee-option-icon" style="transform: scaleX(-1);">🦵</div>
+                            <div class="knee-option-label" data-i18n="rightKnee">Direito</div>
+                        </div>
+                        <div class="knee-option" onclick="updateKnee('both')" id="profile-knee-both">
+                            <div class="knee-option-icon">🦵🦵</div>
+                            <div class="knee-option-label" data-i18n="bothKnees">Ambos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
                         👤 <span data-i18n="yourProfile">Seu Perfil</span>
                     </div>
                     <input type="number" class="user-input" id="user-age" placeholder="Idade" data-i18n-placeholder="agePlaceholder">
-                    <select class="user-input" id="injury-side">
-                        <option value="" data-i18n="selectSide">Selecione o lado afetado</option>
-                        <option value="left" data-i18n="leftKnee">Joelho Esquerdo</option>
-                        <option value="right" data-i18n="rightKnee">Joelho Direito</option>
-                        <option value="both" data-i18n="bothKnees">Ambos os Joelhos</option>
-                    </select>
                     <button class="nav-btn next" style="width: 100%; margin-top: 10px;" onclick="saveProfile()" data-i18n="saveProfile">
                         💾 Salvar Perfil
                     </button>
@@ -1609,6 +2053,314 @@
         // ==================== AVATARS ====================
         const avatars = ['🏃', '🚴', '🏋️', '🧘', '⚽', '🏀', '🎾', '🏊', '🥋', '💪', '🦵', '❤️'];
 
+        // ==================== EXERCISE ANIMATIONS ====================
+        const exerciseAnimations = {
+            'single_leg_stand': {
+                class: 'anim-single-leg',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow up">⬆️</div>
+                `,
+                label: 'Equilíbrio unipodal'
+            },
+            'mini_band_squat': {
+                class: 'anim-squat',
+                html: `
+                    <div class="floor"></div>
+                    <div class="mini-band" style="bottom: 32%; left: 50%; transform: translateX(-50%);"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow down">⬇️</div>
+                `,
+                label: 'Agachamento'
+            },
+            'glute_bridge': {
+                class: 'anim-bridge',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow up">⬆️</div>
+                `,
+                label: 'Ponte de glúteos'
+            },
+            'wall_sit': {
+                class: 'anim-wall-sit',
+                html: `
+                    <div class="floor"></div>
+                    <div class="wall"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                `,
+                label: 'Agachamento na parede'
+            },
+            'calf_raise': {
+                class: 'anim-calf-raise',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow up">⬆️</div>
+                `,
+                label: 'Elevação de panturrilha'
+            },
+            'band_abduction': {
+                class: 'anim-abduction',
+                html: `
+                    <div class="floor"></div>
+                    <div class="mini-band" style="bottom: 15%; left: 50%; transform: translateX(-50%);"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow left">⬅️</div>
+                `,
+                label: 'Abdução lateral'
+            },
+            'static_lunge': {
+                class: 'anim-lunge',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow down">⬇️</div>
+                `,
+                label: 'Afundo'
+            },
+            'lateral_step_up': {
+                class: 'anim-step-up',
+                html: `
+                    <div class="floor"></div>
+                    <div class="step-box" style="left: 35%;"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow up">⬆️</div>
+                `,
+                label: 'Step up'
+            },
+            'romanian_deadlift': {
+                class: 'anim-deadlift',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow down">⬇️</div>
+                `,
+                label: 'Stiff / Peso morto'
+            },
+            'clamshell': {
+                class: 'anim-clamshell',
+                html: `
+                    <div class="floor"></div>
+                    <div class="mini-band" style="bottom: 40%; left: 50%; transform: translateX(-50%) rotate(90deg);"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                `,
+                label: 'Clamshell'
+            },
+            'glute_kickback': {
+                class: 'anim-kickback',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow right">➡️</div>
+                `,
+                label: 'Kickback'
+            },
+            'plank_leg_raise': {
+                class: 'anim-plank',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                `,
+                label: 'Prancha'
+            },
+            'jump_landing': {
+                class: 'anim-jump',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow up">⬆️</div>
+                `,
+                label: 'Salto'
+            },
+            'monster_walk': {
+                class: 'anim-monster-walk',
+                html: `
+                    <div class="floor"></div>
+                    <div class="mini-band" style="bottom: 32%; left: 50%; transform: translateX(-50%);"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                    <div class="arrow left">⬅️</div>
+                    <div class="arrow right">➡️</div>
+                `,
+                label: 'Monster Walk'
+            },
+            'balance_reach': {
+                class: 'anim-balance-reach',
+                html: `
+                    <div class="floor"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                `,
+                label: 'Equilíbrio dinâmico'
+            },
+            'knee_extension': {
+                class: 'anim-knee-ext',
+                html: `
+                    <div class="floor"></div>
+                    <div class="step-box" style="left: 30%; height: 40px;"></div>
+                    <div class="figure">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm left"></div>
+                        <div class="arm right"></div>
+                        <div class="leg left"><div class="foot"></div></div>
+                        <div class="leg right"><div class="foot"></div></div>
+                    </div>
+                `,
+                label: 'Extensão de joelho'
+            }
+        };
+
+        // Default animation for exercises without specific animation
+        const defaultAnimation = {
+            class: 'anim-squat',
+            html: `
+                <div class="floor"></div>
+                <div class="figure">
+                    <div class="head"></div>
+                    <div class="body"></div>
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
+                    <div class="leg left"><div class="foot"></div></div>
+                    <div class="leg right"><div class="foot"></div></div>
+                </div>
+            `,
+            label: 'Exercício'
+        };
+
+        // Map exercise keys to animations
+        const exerciseToAnimation = {
+            'single_leg_stand': 'single_leg_stand',
+            'mini_band_squat': 'mini_band_squat',
+            'glute_bridge': 'glute_bridge',
+            'unstable_balance': 'single_leg_stand',
+            'band_abduction': 'band_abduction',
+            'calf_raise': 'calf_raise',
+            'wall_sit': 'wall_sit',
+            'seated_knee_ext': 'knee_extension',
+            'lateral_step_up': 'lateral_step_up',
+            'static_lunge': 'static_lunge',
+            'wall_leg_press': 'wall_sit',
+            'sumo_squat': 'mini_band_squat',
+            'terminal_knee_ext': 'knee_extension',
+            'romanian_deadlift': 'romanian_deadlift',
+            'single_leg_bridge': 'glute_bridge',
+            'standing_knee_flex': 'calf_raise',
+            'good_morning': 'romanian_deadlift',
+            'clamshell': 'clamshell',
+            'glute_kickback': 'glute_kickback',
+            'eccentric_calf': 'calf_raise',
+            'bulgarian_squat': 'static_lunge',
+            'monster_walk': 'monster_walk',
+            'jump_landing': 'jump_landing',
+            'plank_leg_raise': 'plank_leg_raise',
+            'pistol_squat': 'mini_band_squat',
+            'lateral_shuffle': 'monster_walk',
+            'step_down': 'lateral_step_up',
+            'dynamic_balance': 'balance_reach'
+        };
+
         // ==================== TRANSLATIONS ====================
         const translations = {
             pt: {
@@ -1621,6 +2373,10 @@
                 createFirst: "Crie seu primeiro perfil!",
                 chooseAvatar: "Escolha seu avatar:",
                 nickname: "Apelido:",
+                whichKnee: "Qual joelho está machucado?",
+                leftKnee: "Esquerdo",
+                rightKnee: "Direito",
+                bothKnees: "Ambos",
                 createPin: "Crie um PIN de 4 dígitos:",
                 pinHint: "O PIN protege seus dados de outros usuários",
                 createProfile: "✨ Criar Perfil",
@@ -1676,12 +2432,9 @@
                 totalMinutes: "Minutos Totais",
                 bestStreak: "Melhor Sequência",
                 tapToSwitch: "Toque para trocar de usuário",
+                injuredKnee: "Joelho Afetado",
                 yourProfile: "Seu Perfil",
                 agePlaceholder: "Idade",
-                selectSide: "Selecione o lado afetado",
-                leftKnee: "Joelho Esquerdo",
-                rightKnee: "Joelho Direito",
-                bothKnees: "Ambos os Joelhos",
                 saveProfile: "💾 Salvar Perfil",
                 aboutApp: "Sobre o App",
                 aboutText: "Este aplicativo foi desenvolvido com base em protocolos de fisioterapia para fortalecimento muscular ao redor do joelho.",
@@ -1697,9 +2450,9 @@
                 profileSaved: "Perfil salvo com sucesso!",
                 selectProgramFirst: "Por favor, selecione um programa primeiro.",
                 confirmDelete: "Tem certeza que deseja excluir seu perfil? Todos os dados serão perdidos.",
-                profileCreated: "Perfil criado com sucesso!",
                 fillAllFields: "Por favor, preencha todos os campos.",
-                nicknameExists: "Este apelido já existe. Escolha outro."
+                nicknameExists: "Este apelido já existe. Escolha outro.",
+                kneeLabels: { left: "🦵 Joelho Esquerdo", right: "🦵 Joelho Direito", both: "🦵 Ambos os Joelhos" }
             },
             en: {
                 appTitle: "KneeRecovery Pro",
@@ -1711,6 +2464,10 @@
                 createFirst: "Create your first profile!",
                 chooseAvatar: "Choose your avatar:",
                 nickname: "Nickname:",
+                whichKnee: "Which knee is injured?",
+                leftKnee: "Left",
+                rightKnee: "Right",
+                bothKnees: "Both",
                 createPin: "Create a 4-digit PIN:",
                 pinHint: "The PIN protects your data from other users",
                 createProfile: "✨ Create Profile",
@@ -1766,12 +2523,9 @@
                 totalMinutes: "Total Minutes",
                 bestStreak: "Best Streak",
                 tapToSwitch: "Tap to switch user",
+                injuredKnee: "Injured Knee",
                 yourProfile: "Your Profile",
                 agePlaceholder: "Age",
-                selectSide: "Select affected side",
-                leftKnee: "Left Knee",
-                rightKnee: "Right Knee",
-                bothKnees: "Both Knees",
                 saveProfile: "💾 Save Profile",
                 aboutApp: "About the App",
                 aboutText: "This app was developed based on physiotherapy protocols for muscle strengthening around the knee.",
@@ -1787,9 +2541,9 @@
                 profileSaved: "Profile saved successfully!",
                 selectProgramFirst: "Please select a program first.",
                 confirmDelete: "Are you sure you want to delete your profile? All data will be lost.",
-                profileCreated: "Profile created successfully!",
                 fillAllFields: "Please fill in all fields.",
-                nicknameExists: "This nickname already exists. Choose another."
+                nicknameExists: "This nickname already exists. Choose another.",
+                kneeLabels: { left: "🦵 Left Knee", right: "🦵 Right Knee", both: "🦵 Both Knees" }
             },
             es: {
                 appTitle: "KneeRecovery Pro",
@@ -1801,6 +2555,10 @@
                 createFirst: "¡Crea tu primer perfil!",
                 chooseAvatar: "Elige tu avatar:",
                 nickname: "Apodo:",
+                whichKnee: "¿Cuál rodilla está lesionada?",
+                leftKnee: "Izquierda",
+                rightKnee: "Derecha",
+                bothKnees: "Ambas",
                 createPin: "Crea un PIN de 4 dígitos:",
                 pinHint: "El PIN protege tus datos de otros usuarios",
                 createProfile: "✨ Crear Perfil",
@@ -1856,12 +2614,9 @@
                 totalMinutes: "Minutos Totales",
                 bestStreak: "Mejor Racha",
                 tapToSwitch: "Toca para cambiar de usuario",
+                injuredKnee: "Rodilla Afectada",
                 yourProfile: "Tu Perfil",
                 agePlaceholder: "Edad",
-                selectSide: "Selecciona el lado afectado",
-                leftKnee: "Rodilla Izquierda",
-                rightKnee: "Rodilla Derecha",
-                bothKnees: "Ambas Rodillas",
                 saveProfile: "💾 Guardar Perfil",
                 aboutApp: "Sobre la App",
                 aboutText: "Esta aplicación fue desarrollada basada en protocolos de fisioterapia para fortalecimiento muscular alrededor de la rodilla.",
@@ -1877,42 +2632,10 @@
                 profileSaved: "¡Perfil guardado con éxito!",
                 selectProgramFirst: "Por favor, selecciona un programa primero.",
                 confirmDelete: "¿Estás seguro de que quieres eliminar tu perfil? Todos los datos se perderán.",
-                profileCreated: "¡Perfil creado con éxito!",
                 fillAllFields: "Por favor, completa todos los campos.",
-                nicknameExists: "Este apodo ya existe. Elige otro."
+                nicknameExists: "Este apodo ya existe. Elige otro.",
+                kneeLabels: { left: "🦵 Rodilla Izquierda", right: "🦵 Rodilla Derecha", both: "🦵 Ambas Rodillas" }
             }
-        };
-
-        // ==================== EXERCISE MEDIA ====================
-        const exerciseMedia = {
-            "single_leg_stand": "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/single-leg-balance.gif",
-            "mini_band_squat": "https://www.inspireusafoundation.org/wp-content/uploads/2022/11/resistance-band-squat.gif",
-            "glute_bridge": "https://www.inspireusafoundation.org/wp-content/uploads/2022/08/glute-bridge.gif",
-            "unstable_balance": "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/single-leg-balance.gif",
-            "band_abduction": "https://www.inspireusafoundation.org/wp-content/uploads/2022/06/standing-hip-abduction.gif",
-            "calf_raise": "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/standing-calf-raise.gif",
-            "wall_sit": "https://www.inspireusafoundation.org/wp-content/uploads/2022/09/wall-sit.gif",
-            "seated_knee_ext": "https://www.inspireusafoundation.org/wp-content/uploads/2023/08/seated-leg-extension.gif",
-            "lateral_step_up": "https://www.inspireusafoundation.org/wp-content/uploads/2022/03/dumbbell-step-up.gif",
-            "static_lunge": "https://www.inspireusafoundation.org/wp-content/uploads/2022/06/forward-lunge.gif",
-            "wall_leg_press": "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/wall-squat.gif",
-            "sumo_squat": "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/sumo-squat.gif",
-            "terminal_knee_ext": "https://www.inspireusafoundation.org/wp-content/uploads/2023/05/terminal-knee-extension.gif",
-            "romanian_deadlift": "https://www.inspireusafoundation.org/wp-content/uploads/2022/03/dumbbell-romanian-deadlift.gif",
-            "single_leg_bridge": "https://www.inspireusafoundation.org/wp-content/uploads/2022/11/single-leg-glute-bridge.gif",
-            "standing_knee_flex": "https://www.inspireusafoundation.org/wp-content/uploads/2022/06/standing-leg-curl.gif",
-            "good_morning": "https://www.inspireusafoundation.org/wp-content/uploads/2022/02/good-morning.gif",
-            "clamshell": "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/clamshell.gif",
-            "glute_kickback": "https://www.inspireusafoundation.org/wp-content/uploads/2022/04/donkey-kicks.gif",
-            "eccentric_calf": "https://www.inspireusafoundation.org/wp-content/uploads/2022/09/standing-calf-raise.gif",
-            "bulgarian_squat": "https://www.inspireusafoundation.org/wp-content/uploads/2022/03/bulgarian-split-squat.gif",
-            "monster_walk": "https://www.inspireusafoundation.org/wp-content/uploads/2022/09/monster-walk.gif",
-            "jump_landing": "https://www.inspireusafoundation.org/wp-content/uploads/2022/06/squat-jump.gif",
-            "plank_leg_raise": "https://www.inspireusafoundation.org/wp-content/uploads/2022/09/plank-leg-raise.gif",
-            "pistol_squat": "https://www.inspireusafoundation.org/wp-content/uploads/2023/01/pistol-squat.gif",
-            "lateral_shuffle": "https://www.inspireusafoundation.org/wp-content/uploads/2022/08/lateral-shuffle.gif",
-            "step_down": "https://www.inspireusafoundation.org/wp-content/uploads/2023/02/step-down.gif",
-            "dynamic_balance": "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/single-leg-deadlift.gif"
         };
 
         // ==================== EXERCISE PROGRAMS ====================
@@ -1921,49 +2644,49 @@
                 {
                     name: "Propriocepção Básica",
                     exercises: [
-                        { name: "Apoio Unipodal", mediaKey: "single_leg_stand", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo", "Troque de lado"] },
-                        { name: "Agachamento com Mini Band", mediaKey: "mini_band_squat", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Mini band acima dos joelhos", "Pés na largura dos ombros", "Desça até 60° de flexão", "Joelhos empurrando para fora", "Suba contraindo glúteos"] },
-                        { name: "Ponte de Glúteos", mediaKey: "glute_bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de costas", "Joelhos flexionados", "Eleve o quadril", "Contraia os glúteos", "Desça controladamente"] },
-                        { name: "Equilíbrio Instável", mediaKey: "unstable_balance", muscleTarget: "Proprioceptores", duration: 30, sets: "3 séries cada lado", equipment: "Almofada", instructions: ["Almofada no chão", "Apoio unipodal", "Mantenha 30 segundos", "Feche os olhos para dificultar", "Troque de lado"] },
-                        { name: "Abdução com Mini Band", mediaKey: "band_abduction", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Mini band nos tornozelos", "Uma perna fixa", "Afaste lateralmente", "Controle a volta", "Tronco estável"] },
-                        { name: "Elevação de Panturrilha", mediaKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Degrau", instructions: ["Apoio na parede", "Eleve na ponta dos pés", "Mantenha 2 segundos", "Desça controlado", "Use degrau para amplitude"] }
+                        { name: "Apoio Unipodal", animKey: "single_leg_stand", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo", "Troque de lado"] },
+                        { name: "Agachamento com Mini Band", animKey: "mini_band_squat", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Mini band acima dos joelhos", "Pés na largura dos ombros", "Desça até 60° de flexão", "Joelhos empurrando para fora", "Suba contraindo glúteos"] },
+                        { name: "Ponte de Glúteos", animKey: "glute_bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de costas", "Joelhos flexionados", "Eleve o quadril", "Contraia os glúteos", "Desça controladamente"] },
+                        { name: "Equilíbrio Instável", animKey: "unstable_balance", muscleTarget: "Proprioceptores", duration: 30, sets: "3 séries cada lado", equipment: "Almofada", instructions: ["Almofada no chão", "Apoio unipodal", "Mantenha 30 segundos", "Feche os olhos para dificultar", "Troque de lado"] },
+                        { name: "Abdução com Mini Band", animKey: "band_abduction", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Mini band nos tornozelos", "Uma perna fixa", "Afaste lateralmente", "Controle a volta", "Tronco estável"] },
+                        { name: "Elevação de Panturrilha", animKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Degrau", instructions: ["Apoio na parede", "Eleve na ponta dos pés", "Mantenha 2 segundos", "Desça controlado", "Use degrau para amplitude"] }
                     ]
                 },
                 {
                     name: "Fortalecimento Quadríceps",
                     exercises: [
-                        { name: "Agachamento na Parede", mediaKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Costas na parede", "Deslize até 90°", "Mantenha a posição", "Pés afastados", "Joelhos não passam dos pés"] },
-                        { name: "Extensão de Joelho", mediaKey: "seated_knee_ext", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Sente em cadeira alta", "Band no tornozelo", "Estenda contra resistência", "Mantenha 2 segundos", "Retorne controlado"] },
-                        { name: "Step Up Lateral", mediaKey: "lateral_step_up", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Ao lado do degrau", "Suba lateralmente", "Estenda o joelho no topo", "Desça controlado", "Tronco ereto"] },
-                        { name: "Afundo Estático", mediaKey: "static_lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Passo à frente", "Desça o joelho de trás", "Joelho alinhado", "Suba e repita"] },
-                        { name: "Leg Press na Parede", mediaKey: "wall_leg_press", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 15 rep", equipment: "Bola", instructions: ["Bola entre costas e parede", "Pés à frente", "Desça flexionando", "Suba empurrando", "Movimento controlado"] },
-                        { name: "Agachamento Sumô", mediaKey: "sumo_squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pés bem afastados", "Pontas para fora", "Desça com joelhos para fora", "Tronco ereto", "Contraia ao subir"] },
-                        { name: "Terminal Knee Extension", mediaKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Band em ponto fixo", "Atrás do joelho", "Flexione levemente", "Estenda contra resistência", "Foque no quadríceps"] }
+                        { name: "Agachamento na Parede", animKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Costas na parede", "Deslize até 90°", "Mantenha a posição", "Pés afastados", "Joelhos não passam dos pés"] },
+                        { name: "Extensão de Joelho", animKey: "seated_knee_ext", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Sente em cadeira alta", "Band no tornozelo", "Estenda contra resistência", "Mantenha 2 segundos", "Retorne controlado"] },
+                        { name: "Step Up Lateral", animKey: "lateral_step_up", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Ao lado do degrau", "Suba lateralmente", "Estenda o joelho no topo", "Desça controlado", "Tronco ereto"] },
+                        { name: "Afundo Estático", animKey: "static_lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Passo à frente", "Desça o joelho de trás", "Joelho alinhado", "Suba e repita"] },
+                        { name: "Leg Press na Parede", animKey: "wall_leg_press", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 15 rep", equipment: "Bola", instructions: ["Bola entre costas e parede", "Pés à frente", "Desça flexionando", "Suba empurrando", "Movimento controlado"] },
+                        { name: "Agachamento Sumô", animKey: "sumo_squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pés bem afastados", "Pontas para fora", "Desça com joelhos para fora", "Tronco ereto", "Contraia ao subir"] },
+                        { name: "Terminal Knee Extension", animKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Band em ponto fixo", "Atrás do joelho", "Flexione levemente", "Estenda contra resistência", "Foque no quadríceps"] }
                     ]
                 },
                 {
                     name: "Cadeia Posterior",
                     exercises: [
-                        { name: "Stiff com Mini Band", mediaKey: "romanian_deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Segure com as mãos", "Incline o tronco", "Pernas semi-estendidas", "Suba contraindo"] },
-                        { name: "Ponte Unilateral", mediaKey: "single_leg_bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril", "Mantenha 2 segundos", "Troque de lado"] },
-                        { name: "Flexão de Joelho em Pé", mediaKey: "standing_knee_flex", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Band no tornozelo", "De pé com apoio", "Flexione contra resistência", "Calcanhar ao glúteo", "Retorne controlado"] },
-                        { name: "Good Morning", mediaKey: "good_morning", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Passe atrás do pescoço", "Incline o tronco", "Costas retas", "Contraia ao subir"] },
-                        { name: "Clamshell", mediaKey: "clamshell", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["De lado com band", "Joelhos a 45°", "Abra como concha", "Pés unidos", "Controle a descida"] },
-                        { name: "Kickback de Glúteo", mediaKey: "glute_kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Quatro apoios", "Band nos tornozelos", "Estenda a perna", "Contraia o glúteo", "Não toque o chão"] },
-                        { name: "Panturrilha Excêntrica", mediaKey: "eccentric_calf", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Na ponta do degrau", "Eleve-se", "Desça lento (5 seg)", "Calcanhar bem abaixo", "Suba e repita"] }
+                        { name: "Stiff com Mini Band", animKey: "romanian_deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Segure com as mãos", "Incline o tronco", "Pernas semi-estendidas", "Suba contraindo"] },
+                        { name: "Ponte Unilateral", animKey: "single_leg_bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril", "Mantenha 2 segundos", "Troque de lado"] },
+                        { name: "Flexão de Joelho em Pé", animKey: "standing_knee_flex", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Band no tornozelo", "De pé com apoio", "Flexione contra resistência", "Calcanhar ao glúteo", "Retorne controlado"] },
+                        { name: "Good Morning", animKey: "good_morning", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Passe atrás do pescoço", "Incline o tronco", "Costas retas", "Contraia ao subir"] },
+                        { name: "Clamshell", animKey: "clamshell", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["De lado com band", "Joelhos a 45°", "Abra como concha", "Pés unidos", "Controle a descida"] },
+                        { name: "Kickback de Glúteo", animKey: "glute_kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Quatro apoios", "Band nos tornozelos", "Estenda a perna", "Contraia o glúteo", "Não toque o chão"] },
+                        { name: "Panturrilha Excêntrica", animKey: "eccentric_calf", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Na ponta do degrau", "Eleve-se", "Desça lento (5 seg)", "Calcanhar bem abaixo", "Suba e repita"] }
                     ]
                 },
                 {
                     name: "Estabilização Avançada",
                     exercises: [
-                        { name: "Agachamento Búlgaro", mediaKey: "bulgarian_squat", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Pé no banco atrás", "Desça flexionando", "Tronco ereto", "Joelho não passa do pé", "Suba com o calcanhar"] },
-                        { name: "Monster Walk", mediaKey: "monster_walk", muscleTarget: "Glúteo médio", duration: 45, sets: "3 séries x 20 passos", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Semi-agachado", "Caminhe lateralmente", "Mantenha tensão", "Volte para o outro lado"] },
-                        { name: "Salto com Aterrissagem", mediaKey: "jump_landing", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Pés afastados", "Salte verticalmente", "Aterrisse suavemente", "Absorva o impacto", "Joelhos alinhados"] },
-                        { name: "Prancha com Elevação", mediaKey: "plank_leg_raise", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Posição de prancha", "Band nos tornozelos", "Eleve uma perna", "Mantenha 2 segundos", "Alterne as pernas"] },
-                        { name: "Pistol Squat Assistido", mediaKey: "pistol_squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure um apoio", "Estenda uma perna", "Desça unilateral", "Use apoio para subir", "Joelho alinhado"] },
-                        { name: "Lateral Shuffle", mediaKey: "lateral_shuffle", muscleTarget: "Abdutores, Agilidade", duration: 40, sets: "3 séries x 30 seg", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Semi-agachado", "Desloque lateralmente", "Passos rápidos", "Mude de direção"] },
-                        { name: "Step Down Controlado", mediaKey: "step_down", muscleTarget: "Quadríceps, Controle", duration: 45, sets: "3 séries x 10 rep", equipment: "Degrau", instructions: ["Em cima do degrau", "Desça uma perna lento", "Toque o calcanhar", "Suba controlado", "Joelho alinhado"] },
-                        { name: "Equilíbrio Dinâmico", mediaKey: "dynamic_balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 8 rep", equipment: "Nenhum", instructions: ["Apoio unipodal", "Alcance para frente", "Depois para o lado", "Depois para trás", "Mantenha o equilíbrio"] }
+                        { name: "Agachamento Búlgaro", animKey: "bulgarian_squat", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Pé no banco atrás", "Desça flexionando", "Tronco ereto", "Joelho não passa do pé", "Suba com o calcanhar"] },
+                        { name: "Monster Walk", animKey: "monster_walk", muscleTarget: "Glúteo médio", duration: 45, sets: "3 séries x 20 passos", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Semi-agachado", "Caminhe lateralmente", "Mantenha tensão", "Volte para o outro lado"] },
+                        { name: "Salto com Aterrissagem", animKey: "jump_landing", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Pés afastados", "Salte verticalmente", "Aterrisse suavemente", "Absorva o impacto", "Joelhos alinhados"] },
+                        { name: "Prancha com Elevação", animKey: "plank_leg_raise", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Posição de prancha", "Band nos tornozelos", "Eleve uma perna", "Mantenha 2 segundos", "Alterne as pernas"] },
+                        { name: "Pistol Squat Assistido", animKey: "pistol_squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure um apoio", "Estenda uma perna", "Desça unilateral", "Use apoio para subir", "Joelho alinhado"] },
+                        { name: "Lateral Shuffle", animKey: "lateral_shuffle", muscleTarget: "Abdutores, Agilidade", duration: 40, sets: "3 séries x 30 seg", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Semi-agachado", "Desloque lateralmente", "Passos rápidos", "Mude de direção"] },
+                        { name: "Step Down Controlado", animKey: "step_down", muscleTarget: "Quadríceps, Controle", duration: 45, sets: "3 séries x 10 rep", equipment: "Degrau", instructions: ["Em cima do degrau", "Desça uma perna lento", "Toque o calcanhar", "Suba controlado", "Joelho alinhado"] },
+                        { name: "Equilíbrio Dinâmico", animKey: "dynamic_balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 8 rep", equipment: "Nenhum", instructions: ["Apoio unipodal", "Alcance para frente", "Depois para o lado", "Depois para trás", "Mantenha o equilíbrio"] }
                     ]
                 }
             ],
@@ -1971,49 +2694,49 @@
                 {
                     name: "Basic Proprioception",
                     exercises: [
-                        { name: "Single Leg Stand", mediaKey: "single_leg_stand", muscleTarget: "Stabilizers", duration: 30, sets: "3 sets each side", equipment: "None", instructions: ["Stand with feet together", "Lift one leg", "Hold balance for 30 seconds", "Look at a fixed point", "Switch sides"] },
-                        { name: "Mini Band Squat", mediaKey: "mini_band_squat", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Mini band above knees", "Feet shoulder-width apart", "Lower to 60° flexion", "Knees pushing outward", "Rise contracting glutes"] },
-                        { name: "Glute Bridge", mediaKey: "glute_bridge", muscleTarget: "Glutes, Hamstrings", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Lie on back", "Knees bent", "Raise hips", "Contract glutes", "Lower controlled"] },
-                        { name: "Unstable Balance", mediaKey: "unstable_balance", muscleTarget: "Proprioceptors", duration: 30, sets: "3 sets each side", equipment: "Pillow", instructions: ["Pillow on floor", "Single leg stand", "Hold 30 seconds", "Close eyes to increase difficulty", "Switch sides"] },
-                        { name: "Mini Band Abduction", mediaKey: "band_abduction", muscleTarget: "Gluteus medius", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Mini band at ankles", "One leg fixed", "Move sideways", "Control return", "Stable torso"] },
-                        { name: "Calf Raise", mediaKey: "calf_raise", muscleTarget: "Gastrocnemius, Soleus", duration: 35, sets: "3 sets x 20 reps", equipment: "Step", instructions: ["Wall support", "Rise on tiptoes", "Hold 2 seconds", "Lower controlled", "Use step for range"] }
+                        { name: "Single Leg Stand", animKey: "single_leg_stand", muscleTarget: "Stabilizers", duration: 30, sets: "3 sets each side", equipment: "None", instructions: ["Stand with feet together", "Lift one leg", "Hold balance for 30 seconds", "Look at a fixed point", "Switch sides"] },
+                        { name: "Mini Band Squat", animKey: "mini_band_squat", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Mini band above knees", "Feet shoulder-width apart", "Lower to 60° flexion", "Knees pushing outward", "Rise contracting glutes"] },
+                        { name: "Glute Bridge", animKey: "glute_bridge", muscleTarget: "Glutes, Hamstrings", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Lie on back", "Knees bent", "Raise hips", "Contract glutes", "Lower controlled"] },
+                        { name: "Unstable Balance", animKey: "unstable_balance", muscleTarget: "Proprioceptors", duration: 30, sets: "3 sets each side", equipment: "Pillow", instructions: ["Pillow on floor", "Single leg stand", "Hold 30 seconds", "Close eyes to increase difficulty", "Switch sides"] },
+                        { name: "Mini Band Abduction", animKey: "band_abduction", muscleTarget: "Gluteus medius", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Mini band at ankles", "One leg fixed", "Move sideways", "Control return", "Stable torso"] },
+                        { name: "Calf Raise", animKey: "calf_raise", muscleTarget: "Gastrocnemius, Soleus", duration: 35, sets: "3 sets x 20 reps", equipment: "Step", instructions: ["Wall support", "Rise on tiptoes", "Hold 2 seconds", "Lower controlled", "Use step for range"] }
                     ]
                 },
                 {
                     name: "Quadriceps Strengthening",
                     exercises: [
-                        { name: "Wall Sit", mediaKey: "wall_sit", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 45 sec", equipment: "Wall", instructions: ["Back against wall", "Slide to 90°", "Hold position", "Feet apart", "Knees don't pass toes"] },
-                        { name: "Knee Extension", mediaKey: "seated_knee_ext", muscleTarget: "Quadriceps", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Sit on high chair", "Band on ankle", "Extend against resistance", "Hold 2 seconds", "Return controlled"] },
-                        { name: "Lateral Step Up", mediaKey: "lateral_step_up", muscleTarget: "Quadriceps, Glutes", duration: 50, sets: "3 sets x 12 reps", equipment: "Step", instructions: ["Beside the step", "Step up sideways", "Extend knee at top", "Step down controlled", "Torso upright"] },
-                        { name: "Static Lunge", mediaKey: "static_lunge", muscleTarget: "Quadriceps, Glutes", duration: 40, sets: "3 sets x 10 reps", equipment: "Mini Band", instructions: ["Band above knees", "Step forward", "Lower back knee", "Knee aligned", "Rise and repeat"] },
-                        { name: "Wall Leg Press", mediaKey: "wall_leg_press", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 15 reps", equipment: "Ball", instructions: ["Ball between back and wall", "Feet forward", "Lower bending", "Rise pushing", "Controlled movement"] },
-                        { name: "Sumo Squat", mediaKey: "sumo_squat", muscleTarget: "Adductors, Quadriceps", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Wide stance", "Toes out", "Lower with knees out", "Torso upright", "Contract rising"] },
-                        { name: "Terminal Knee Extension", mediaKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Band on fixed point", "Behind knee", "Slight bend", "Extend against resistance", "Focus on quad"] }
+                        { name: "Wall Sit", animKey: "wall_sit", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 45 sec", equipment: "Wall", instructions: ["Back against wall", "Slide to 90°", "Hold position", "Feet apart", "Knees don't pass toes"] },
+                        { name: "Knee Extension", animKey: "seated_knee_ext", muscleTarget: "Quadriceps", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Sit on high chair", "Band on ankle", "Extend against resistance", "Hold 2 seconds", "Return controlled"] },
+                        { name: "Lateral Step Up", animKey: "lateral_step_up", muscleTarget: "Quadriceps, Glutes", duration: 50, sets: "3 sets x 12 reps", equipment: "Step", instructions: ["Beside the step", "Step up sideways", "Extend knee at top", "Step down controlled", "Torso upright"] },
+                        { name: "Static Lunge", animKey: "static_lunge", muscleTarget: "Quadriceps, Glutes", duration: 40, sets: "3 sets x 10 reps", equipment: "Mini Band", instructions: ["Band above knees", "Step forward", "Lower back knee", "Knee aligned", "Rise and repeat"] },
+                        { name: "Wall Leg Press", animKey: "wall_leg_press", muscleTarget: "Quadriceps, Glutes", duration: 45, sets: "3 sets x 15 reps", equipment: "Ball", instructions: ["Ball between back and wall", "Feet forward", "Lower bending", "Rise pushing", "Controlled movement"] },
+                        { name: "Sumo Squat", animKey: "sumo_squat", muscleTarget: "Adductors, Quadriceps", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Wide stance", "Toes out", "Lower with knees out", "Torso upright", "Contract rising"] },
+                        { name: "Terminal Knee Extension", animKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Band on fixed point", "Behind knee", "Slight bend", "Extend against resistance", "Focus on quad"] }
                     ]
                 },
                 {
                     name: "Posterior Chain",
                     exercises: [
-                        { name: "Romanian Deadlift", mediaKey: "romanian_deadlift", muscleTarget: "Hamstrings, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Step on band", "Hold with hands", "Lean torso", "Semi-extended legs", "Rise contracting"] },
-                        { name: "Single Leg Bridge", mediaKey: "single_leg_bridge", muscleTarget: "Glutes, Hamstrings", duration: 40, sets: "3 sets x 10 reps", equipment: "None", instructions: ["Lie on back", "Extend one leg", "Raise hips", "Hold 2 seconds", "Switch sides"] },
-                        { name: "Standing Knee Flexion", mediaKey: "standing_knee_flex", muscleTarget: "Hamstrings", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Band on ankle", "Standing with support", "Flex against resistance", "Heel to glute", "Return controlled"] },
-                        { name: "Good Morning", mediaKey: "good_morning", muscleTarget: "Hamstrings, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Step on band", "Loop behind neck", "Lean torso", "Straight back", "Contract rising"] },
-                        { name: "Clamshell", mediaKey: "clamshell", muscleTarget: "Gluteus medius", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Side lying with band", "Knees at 45°", "Open like clamshell", "Feet together", "Control descent"] },
-                        { name: "Glute Kickback", mediaKey: "glute_kickback", muscleTarget: "Gluteus maximus", duration: 40, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["All fours", "Band at ankles", "Extend leg", "Contract glute", "Don't touch floor"] },
-                        { name: "Eccentric Calf", mediaKey: "eccentric_calf", muscleTarget: "Gastrocnemius, Soleus", duration: 50, sets: "3 sets x 15 reps", equipment: "Step", instructions: ["On step edge", "Rise up", "Lower slow (5 sec)", "Heel well below", "Rise and repeat"] }
+                        { name: "Romanian Deadlift", animKey: "romanian_deadlift", muscleTarget: "Hamstrings, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Step on band", "Hold with hands", "Lean torso", "Semi-extended legs", "Rise contracting"] },
+                        { name: "Single Leg Bridge", animKey: "single_leg_bridge", muscleTarget: "Glutes, Hamstrings", duration: 40, sets: "3 sets x 10 reps", equipment: "None", instructions: ["Lie on back", "Extend one leg", "Raise hips", "Hold 2 seconds", "Switch sides"] },
+                        { name: "Standing Knee Flexion", animKey: "standing_knee_flex", muscleTarget: "Hamstrings", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Band on ankle", "Standing with support", "Flex against resistance", "Heel to glute", "Return controlled"] },
+                        { name: "Good Morning", animKey: "good_morning", muscleTarget: "Hamstrings, Glutes", duration: 45, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["Step on band", "Loop behind neck", "Lean torso", "Straight back", "Contract rising"] },
+                        { name: "Clamshell", animKey: "clamshell", muscleTarget: "Gluteus medius", duration: 40, sets: "3 sets x 15 reps", equipment: "Mini Band", instructions: ["Side lying with band", "Knees at 45°", "Open like clamshell", "Feet together", "Control descent"] },
+                        { name: "Glute Kickback", animKey: "glute_kickback", muscleTarget: "Gluteus maximus", duration: 40, sets: "3 sets x 12 reps", equipment: "Mini Band", instructions: ["All fours", "Band at ankles", "Extend leg", "Contract glute", "Don't touch floor"] },
+                        { name: "Eccentric Calf", animKey: "eccentric_calf", muscleTarget: "Gastrocnemius, Soleus", duration: 50, sets: "3 sets x 15 reps", equipment: "Step", instructions: ["On step edge", "Rise up", "Lower slow (5 sec)", "Heel well below", "Rise and repeat"] }
                     ]
                 },
                 {
                     name: "Advanced Stabilization",
                     exercises: [
-                        { name: "Bulgarian Squat", mediaKey: "bulgarian_squat", muscleTarget: "Quadriceps, Glutes", duration: 50, sets: "3 sets x 10 reps", equipment: "Bench", instructions: ["Foot on bench behind", "Lower bending", "Torso upright", "Knee doesn't pass toe", "Rise with heel"] },
-                        { name: "Monster Walk", mediaKey: "monster_walk", muscleTarget: "Gluteus medius", duration: 45, sets: "3 sets x 20 steps", equipment: "Mini Band", instructions: ["Band above knees", "Semi-squat", "Walk sideways", "Maintain tension", "Return other way"] },
-                        { name: "Jump Landing", mediaKey: "jump_landing", muscleTarget: "Quadriceps, Glutes", duration: 40, sets: "3 sets x 10 reps", equipment: "None", instructions: ["Feet apart", "Jump vertically", "Land softly", "Absorb impact", "Knees aligned"] },
-                        { name: "Plank Leg Raise", mediaKey: "plank_leg_raise", muscleTarget: "Core, Glutes", duration: 45, sets: "3 sets x 10 reps", equipment: "Mini Band", instructions: ["Plank position", "Band at ankles", "Raise one leg", "Hold 2 seconds", "Alternate legs"] },
-                        { name: "Assisted Pistol Squat", mediaKey: "pistol_squat", muscleTarget: "Quadriceps, Balance", duration: 50, sets: "3 sets x 8 reps", equipment: "Support", instructions: ["Hold support", "Extend one leg", "Lower unilateral", "Use support to rise", "Knee aligned"] },
-                        { name: "Lateral Shuffle", mediaKey: "lateral_shuffle", muscleTarget: "Abductors, Agility", duration: 40, sets: "3 sets x 30 sec", equipment: "Mini Band", instructions: ["Band above knees", "Semi-squat", "Move sideways", "Quick steps", "Change direction"] },
-                        { name: "Controlled Step Down", mediaKey: "step_down", muscleTarget: "Quadriceps, Control", duration: 45, sets: "3 sets x 10 reps", equipment: "Step", instructions: ["On top of step", "Lower one leg slow", "Touch heel", "Rise controlled", "Knee aligned"] },
-                        { name: "Dynamic Balance", mediaKey: "dynamic_balance", muscleTarget: "Proprioception, Core", duration: 45, sets: "3 sets x 8 reps", equipment: "None", instructions: ["Single leg stand", "Reach forward", "Then sideways", "Then backward", "Maintain balance"] }
+                        { name: "Bulgarian Squat", animKey: "bulgarian_squat", muscleTarget: "Quadriceps, Glutes", duration: 50, sets: "3 sets x 10 reps", equipment: "Bench", instructions: ["Foot on bench behind", "Lower bending", "Torso upright", "Knee doesn't pass toe", "Rise with heel"] },
+                        { name: "Monster Walk", animKey: "monster_walk", muscleTarget: "Gluteus medius", duration: 45, sets: "3 sets x 20 steps", equipment: "Mini Band", instructions: ["Band above knees", "Semi-squat", "Walk sideways", "Maintain tension", "Return other way"] },
+                        { name: "Jump Landing", animKey: "jump_landing", muscleTarget: "Quadriceps, Glutes", duration: 40, sets: "3 sets x 10 reps", equipment: "None", instructions: ["Feet apart", "Jump vertically", "Land softly", "Absorb impact", "Knees aligned"] },
+                        { name: "Plank Leg Raise", animKey: "plank_leg_raise", muscleTarget: "Core, Glutes", duration: 45, sets: "3 sets x 10 reps", equipment: "Mini Band", instructions: ["Plank position", "Band at ankles", "Raise one leg", "Hold 2 seconds", "Alternate legs"] },
+                        { name: "Assisted Pistol Squat", animKey: "pistol_squat", muscleTarget: "Quadriceps, Balance", duration: 50, sets: "3 sets x 8 reps", equipment: "Support", instructions: ["Hold support", "Extend one leg", "Lower unilateral", "Use support to rise", "Knee aligned"] },
+                        { name: "Lateral Shuffle", animKey: "lateral_shuffle", muscleTarget: "Abductors, Agility", duration: 40, sets: "3 sets x 30 sec", equipment: "Mini Band", instructions: ["Band above knees", "Semi-squat", "Move sideways", "Quick steps", "Change direction"] },
+                        { name: "Controlled Step Down", animKey: "step_down", muscleTarget: "Quadriceps, Control", duration: 45, sets: "3 sets x 10 reps", equipment: "Step", instructions: ["On top of step", "Lower one leg slow", "Touch heel", "Rise controlled", "Knee aligned"] },
+                        { name: "Dynamic Balance", animKey: "dynamic_balance", muscleTarget: "Proprioception, Core", duration: 45, sets: "3 sets x 8 reps", equipment: "None", instructions: ["Single leg stand", "Reach forward", "Then sideways", "Then backward", "Maintain balance"] }
                     ]
                 }
             ],
@@ -2021,49 +2744,49 @@
                 {
                     name: "Propiocepción Básica",
                     exercises: [
-                        { name: "Apoyo Unipodal", mediaKey: "single_leg_stand", muscleTarget: "Estabilizadores", duration: 30, sets: "3 series cada lado", equipment: "Ninguno", instructions: ["Párate con pies juntos", "Levanta una pierna", "Mantén el equilibrio 30 seg", "Mira un punto fijo", "Cambia de lado"] },
-                        { name: "Sentadilla con Mini Band", mediaKey: "mini_band_squat", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Pies al ancho de hombros", "Baja hasta 60° de flexión", "Rodillas hacia afuera", "Sube contrayendo glúteos"] },
-                        { name: "Puente de Glúteos", mediaKey: "glute_bridge", muscleTarget: "Glúteos, Isquiotibiales", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Acuéstate boca arriba", "Rodillas flexionadas", "Eleva la cadera", "Contrae glúteos", "Baja controlado"] },
-                        { name: "Equilibrio Inestable", mediaKey: "unstable_balance", muscleTarget: "Propioceptores", duration: 30, sets: "3 series cada lado", equipment: "Almohada", instructions: ["Almohada en el suelo", "Apoyo unipodal", "Mantén 30 segundos", "Cierra ojos para dificultar", "Cambia de lado"] },
-                        { name: "Abducción con Mini Band", mediaKey: "band_abduction", muscleTarget: "Glúteo medio", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en tobillos", "Una pierna fija", "Separa lateralmente", "Controla la vuelta", "Tronco estable"] },
-                        { name: "Elevación de Pantorrilla", mediaKey: "calf_raise", muscleTarget: "Gastrocnemio, Sóleo", duration: 35, sets: "3 series x 20 rep", equipment: "Escalón", instructions: ["Apoyo en pared", "Elévate en puntas", "Mantén 2 segundos", "Baja controlado", "Usa escalón para amplitud"] }
+                        { name: "Apoyo Unipodal", animKey: "single_leg_stand", muscleTarget: "Estabilizadores", duration: 30, sets: "3 series cada lado", equipment: "Ninguno", instructions: ["Párate con pies juntos", "Levanta una pierna", "Mantén el equilibrio 30 seg", "Mira un punto fijo", "Cambia de lado"] },
+                        { name: "Sentadilla con Mini Band", animKey: "mini_band_squat", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Pies al ancho de hombros", "Baja hasta 60° de flexión", "Rodillas hacia afuera", "Sube contrayendo glúteos"] },
+                        { name: "Puente de Glúteos", animKey: "glute_bridge", muscleTarget: "Glúteos, Isquiotibiales", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Acuéstate boca arriba", "Rodillas flexionadas", "Eleva la cadera", "Contrae glúteos", "Baja controlado"] },
+                        { name: "Equilibrio Inestable", animKey: "unstable_balance", muscleTarget: "Propioceptores", duration: 30, sets: "3 series cada lado", equipment: "Almohada", instructions: ["Almohada en el suelo", "Apoyo unipodal", "Mantén 30 segundos", "Cierra ojos para dificultar", "Cambia de lado"] },
+                        { name: "Abducción con Mini Band", animKey: "band_abduction", muscleTarget: "Glúteo medio", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en tobillos", "Una pierna fija", "Separa lateralmente", "Controla la vuelta", "Tronco estable"] },
+                        { name: "Elevación de Pantorrilla", animKey: "calf_raise", muscleTarget: "Gastrocnemio, Sóleo", duration: 35, sets: "3 series x 20 rep", equipment: "Escalón", instructions: ["Apoyo en pared", "Elévate en puntas", "Mantén 2 segundos", "Baja controlado", "Usa escalón para amplitud"] }
                     ]
                 },
                 {
                     name: "Fortalecimiento Cuádriceps",
                     exercises: [
-                        { name: "Sentadilla en Pared", mediaKey: "wall_sit", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 45 seg", equipment: "Pared", instructions: ["Espalda en pared", "Desliza hasta 90°", "Mantén posición", "Pies separados", "Rodillas no pasan pies"] },
-                        { name: "Extensión de Rodilla", mediaKey: "seated_knee_ext", muscleTarget: "Cuádriceps", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Siéntate en silla alta", "Band en tobillo", "Extiende contra resistencia", "Mantén 2 segundos", "Regresa controlado"] },
-                        { name: "Step Up Lateral", mediaKey: "lateral_step_up", muscleTarget: "Cuádriceps, Glúteos", duration: 50, sets: "3 series x 12 rep", equipment: "Escalón", instructions: ["Al lado del escalón", "Sube lateralmente", "Extiende rodilla arriba", "Baja controlado", "Tronco erguido"] },
-                        { name: "Zancada Estática", mediaKey: "static_lunge", muscleTarget: "Cuádriceps, Glúteos", duration: 40, sets: "3 series x 10 rep", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Paso adelante", "Baja rodilla trasera", "Rodilla alineada", "Sube y repite"] },
-                        { name: "Leg Press en Pared", mediaKey: "wall_leg_press", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 15 rep", equipment: "Pelota", instructions: ["Pelota entre espalda y pared", "Pies adelante", "Baja flexionando", "Sube empujando", "Movimiento controlado"] },
-                        { name: "Sentadilla Sumo", mediaKey: "sumo_squat", muscleTarget: "Aductores, Cuádriceps", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pies muy separados", "Puntas hacia afuera", "Baja con rodillas afuera", "Tronco erguido", "Contrae al subir"] },
-                        { name: "Terminal Knee Extension", mediaKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en punto fijo", "Detrás de rodilla", "Flexión leve", "Extiende contra resistencia", "Enfoca en cuádriceps"] }
+                        { name: "Sentadilla en Pared", animKey: "wall_sit", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 45 seg", equipment: "Pared", instructions: ["Espalda en pared", "Desliza hasta 90°", "Mantén posición", "Pies separados", "Rodillas no pasan pies"] },
+                        { name: "Extensión de Rodilla", animKey: "seated_knee_ext", muscleTarget: "Cuádriceps", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Siéntate en silla alta", "Band en tobillo", "Extiende contra resistencia", "Mantén 2 segundos", "Regresa controlado"] },
+                        { name: "Step Up Lateral", animKey: "lateral_step_up", muscleTarget: "Cuádriceps, Glúteos", duration: 50, sets: "3 series x 12 rep", equipment: "Escalón", instructions: ["Al lado del escalón", "Sube lateralmente", "Extiende rodilla arriba", "Baja controlado", "Tronco erguido"] },
+                        { name: "Zancada Estática", animKey: "static_lunge", muscleTarget: "Cuádriceps, Glúteos", duration: 40, sets: "3 series x 10 rep", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Paso adelante", "Baja rodilla trasera", "Rodilla alineada", "Sube y repite"] },
+                        { name: "Leg Press en Pared", animKey: "wall_leg_press", muscleTarget: "Cuádriceps, Glúteos", duration: 45, sets: "3 series x 15 rep", equipment: "Pelota", instructions: ["Pelota entre espalda y pared", "Pies adelante", "Baja flexionando", "Sube empujando", "Movimiento controlado"] },
+                        { name: "Sentadilla Sumo", animKey: "sumo_squat", muscleTarget: "Aductores, Cuádriceps", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pies muy separados", "Puntas hacia afuera", "Baja con rodillas afuera", "Tronco erguido", "Contrae al subir"] },
+                        { name: "Terminal Knee Extension", animKey: "terminal_knee_ext", muscleTarget: "VMO", duration: 35, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en punto fijo", "Detrás de rodilla", "Flexión leve", "Extiende contra resistencia", "Enfoca en cuádriceps"] }
                     ]
                 },
                 {
                     name: "Cadena Posterior",
                     exercises: [
-                        { name: "Peso Muerto Rumano", mediaKey: "romanian_deadlift", muscleTarget: "Isquiotibiales, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pisa la band", "Sujeta con manos", "Inclina tronco", "Piernas semi-extendidas", "Sube contrayendo"] },
-                        { name: "Puente Unilateral", mediaKey: "single_leg_bridge", muscleTarget: "Glúteos, Isquiotibiales", duration: 40, sets: "3 series x 10 rep", equipment: "Ninguno", instructions: ["Acuéstate boca arriba", "Extiende una pierna", "Eleva cadera", "Mantén 2 segundos", "Cambia de lado"] },
-                        { name: "Flexión de Rodilla de Pie", mediaKey: "standing_knee_flex", muscleTarget: "Isquiotibiales", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en tobillo", "De pie con apoyo", "Flexiona contra resistencia", "Talón al glúteo", "Regresa controlado"] },
-                        { name: "Good Morning", mediaKey: "good_morning", muscleTarget: "Isquiotibiales, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pisa la band", "Pasa detrás del cuello", "Inclina tronco", "Espalda recta", "Contrae al subir"] },
-                        { name: "Clamshell", mediaKey: "clamshell", muscleTarget: "Glúteo medio", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["De lado con band", "Rodillas a 45°", "Abre como concha", "Pies unidos", "Controla bajada"] },
-                        { name: "Kickback de Glúteo", mediaKey: "glute_kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Cuatro apoyos", "Band en tobillos", "Extiende pierna", "Contrae glúteo", "No toques suelo"] },
-                        { name: "Pantorrilla Excéntrica", mediaKey: "eccentric_calf", muscleTarget: "Gastrocnemio, Sóleo", duration: 50, sets: "3 series x 15 rep", equipment: "Escalón", instructions: ["En borde del escalón", "Elévate", "Baja lento (5 seg)", "Talón bien abajo", "Sube y repite"] }
+                        { name: "Peso Muerto Rumano", animKey: "romanian_deadlift", muscleTarget: "Isquiotibiales, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pisa la band", "Sujeta con manos", "Inclina tronco", "Piernas semi-extendidas", "Sube contrayendo"] },
+                        { name: "Puente Unilateral", animKey: "single_leg_bridge", muscleTarget: "Glúteos, Isquiotibiales", duration: 40, sets: "3 series x 10 rep", equipment: "Ninguno", instructions: ["Acuéstate boca arriba", "Extiende una pierna", "Eleva cadera", "Mantén 2 segundos", "Cambia de lado"] },
+                        { name: "Flexión de Rodilla de Pie", animKey: "standing_knee_flex", muscleTarget: "Isquiotibiales", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["Band en tobillo", "De pie con apoyo", "Flexiona contra resistencia", "Talón al glúteo", "Regresa controlado"] },
+                        { name: "Good Morning", animKey: "good_morning", muscleTarget: "Isquiotibiales, Glúteos", duration: 45, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Pisa la band", "Pasa detrás del cuello", "Inclina tronco", "Espalda recta", "Contrae al subir"] },
+                        { name: "Clamshell", animKey: "clamshell", muscleTarget: "Glúteo medio", duration: 40, sets: "3 series x 15 rep", equipment: "Mini Band", instructions: ["De lado con band", "Rodillas a 45°", "Abre como concha", "Pies unidos", "Controla bajada"] },
+                        { name: "Kickback de Glúteo", animKey: "glute_kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 series x 12 rep", equipment: "Mini Band", instructions: ["Cuatro apoyos", "Band en tobillos", "Extiende pierna", "Contrae glúteo", "No toques suelo"] },
+                        { name: "Pantorrilla Excéntrica", animKey: "eccentric_calf", muscleTarget: "Gastrocnemio, Sóleo", duration: 50, sets: "3 series x 15 rep", equipment: "Escalón", instructions: ["En borde del escalón", "Elévate", "Baja lento (5 seg)", "Talón bien abajo", "Sube y repite"] }
                     ]
                 },
                 {
                     name: "Estabilización Avanzada",
                     exercises: [
-                        { name: "Sentadilla Búlgara", mediaKey: "bulgarian_squat", muscleTarget: "Cuádriceps, Glúteos", duration: 50, sets: "3 series x 10 rep", equipment: "Banco", instructions: ["Pie en banco atrás", "Baja flexionando", "Tronco erguido", "Rodilla no pasa pie", "Sube con talón"] },
-                        { name: "Monster Walk", mediaKey: "monster_walk", muscleTarget: "Glúteo medio", duration: 45, sets: "3 series x 20 pasos", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Semi-agachado", "Camina lateral", "Mantén tensión", "Regresa al otro lado"] },
-                        { name: "Salto con Aterrizaje", mediaKey: "jump_landing", muscleTarget: "Cuádriceps, Glúteos", duration: 40, sets: "3 series x 10 rep", equipment: "Ninguno", instructions: ["Pies separados", "Salta vertical", "Aterriza suave", "Absorbe impacto", "Rodillas alineadas"] },
-                        { name: "Plancha con Elevación", mediaKey: "plank_leg_raise", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 series x 10 rep", equipment: "Mini Band", instructions: ["Posición plancha", "Band en tobillos", "Eleva una pierna", "Mantén 2 segundos", "Alterna piernas"] },
-                        { name: "Pistol Squat Asistido", mediaKey: "pistol_squat", muscleTarget: "Cuádriceps, Equilibrio", duration: 50, sets: "3 series x 8 rep", equipment: "Apoyo", instructions: ["Sujétate de apoyo", "Extiende una pierna", "Baja unilateral", "Usa apoyo para subir", "Rodilla alineada"] },
-                        { name: "Lateral Shuffle", mediaKey: "lateral_shuffle", muscleTarget: "Abductores, Agilidad", duration: 40, sets: "3 series x 30 seg", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Semi-agachado", "Desplaza lateral", "Pasos rápidos", "Cambia dirección"] },
-                        { name: "Step Down Controlado", mediaKey: "step_down", muscleTarget: "Cuádriceps, Control", duration: 45, sets: "3 series x 10 rep", equipment: "Escalón", instructions: ["Arriba del escalón", "Baja una pierna lento", "Toca talón", "Sube controlado", "Rodilla alineada"] },
-                        { name: "Equilibrio Dinámico", mediaKey: "dynamic_balance", muscleTarget: "Propiocepción, Core", duration: 45, sets: "3 series x 8 rep", equipment: "Ninguno", instructions: ["Apoyo unipodal", "Alcanza adelante", "Luego al lado", "Luego atrás", "Mantén equilibrio"] }
+                        { name: "Sentadilla Búlgara", animKey: "bulgarian_squat", muscleTarget: "Cuádriceps, Glúteos", duration: 50, sets: "3 series x 10 rep", equipment: "Banco", instructions: ["Pie en banco atrás", "Baja flexionando", "Tronco erguido", "Rodilla no pasa pie", "Sube con talón"] },
+                        { name: "Monster Walk", animKey: "monster_walk", muscleTarget: "Glúteo medio", duration: 45, sets: "3 series x 20 pasos", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Semi-agachado", "Camina lateral", "Mantén tensión", "Regresa al otro lado"] },
+                        { name: "Salto con Aterrizaje", animKey: "jump_landing", muscleTarget: "Cuádriceps, Glúteos", duration: 40, sets: "3 series x 10 rep", equipment: "Ninguno", instructions: ["Pies separados", "Salta vertical", "Aterriza suave", "Absorbe impacto", "Rodillas alineadas"] },
+                        { name: "Plancha con Elevación", animKey: "plank_leg_raise", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 series x 10 rep", equipment: "Mini Band", instructions: ["Posición plancha", "Band en tobillos", "Eleva una pierna", "Mantén 2 segundos", "Alterna piernas"] },
+                        { name: "Pistol Squat Asistido", animKey: "pistol_squat", muscleTarget: "Cuádriceps, Equilibrio", duration: 50, sets: "3 series x 8 rep", equipment: "Apoyo", instructions: ["Sujétate de apoyo", "Extiende una pierna", "Baja unilateral", "Usa apoyo para subir", "Rodilla alineada"] },
+                        { name: "Lateral Shuffle", animKey: "lateral_shuffle", muscleTarget: "Abductores, Agilidad", duration: 40, sets: "3 series x 30 seg", equipment: "Mini Band", instructions: ["Band arriba de rodillas", "Semi-agachado", "Desplaza lateral", "Pasos rápidos", "Cambia dirección"] },
+                        { name: "Step Down Controlado", animKey: "step_down", muscleTarget: "Cuádriceps, Control", duration: 45, sets: "3 series x 10 rep", equipment: "Escalón", instructions: ["Arriba del escalón", "Baja una pierna lento", "Toca talón", "Sube controlado", "Rodilla alineada"] },
+                        { name: "Equilibrio Dinámico", animKey: "dynamic_balance", muscleTarget: "Propiocepción, Core", duration: 45, sets: "3 series x 8 rep", equipment: "Ninguno", instructions: ["Apoyo unipodal", "Alcanza adelante", "Luego al lado", "Luego atrás", "Mantén equilibrio"] }
                     ]
                 }
             ]
@@ -2074,6 +2797,7 @@
         let currentUser = null;
         let selectedUserForLogin = null;
         let selectedAvatar = null;
+        let selectedKnee = null;
         let currentPain = null;
         let selectedProgram = null;
         let currentExerciseIndex = 0;
@@ -2134,6 +2858,14 @@
             });
         }
 
+        function selectKnee(knee) {
+            selectedKnee = knee;
+            document.querySelectorAll('.knee-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('knee-' + knee).classList.add('selected');
+        }
+
         // ==================== LOGIN SYSTEM ====================
         function showLoginTab(tab) {
             document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
@@ -2157,11 +2889,16 @@
                 noUsersMsg.style.display = 'none';
                 document.querySelector('.existing-users-title').style.display = 'block';
 
+                const kneeLabels = { left: 'E', right: 'D', both: 'A' };
+
                 userList.innerHTML = users.map(user => `
                     <div class="user-card" onclick="selectUserForLogin('${user.nickname}')">
                         <div class="user-avatar">${user.avatar}</div>
                         <div class="user-info">
-                            <div class="user-name">${user.nickname}</div>
+                            <div class="user-name">
+                                ${user.nickname}
+                                <span class="user-knee-badge">🦵${kneeLabels[user.knee] || '?'}</span>
+                            </div>
                             <div class="user-stats">${user.stats?.totalWorkouts || 0} treinos • ${user.stats?.currentStreak || 0} dias</div>
                         </div>
                         <button class="user-delete" onclick="event.stopPropagation(); confirmDeleteUser('${user.nickname}')">×</button>
@@ -2177,7 +2914,6 @@
             document.getElementById('pin-modal').classList.add('active');
             document.getElementById('pin-error').classList.remove('show');
 
-            // Clear and focus first PIN input
             for (let i = 1; i <= 4; i++) {
                 document.getElementById('verify-pin-' + i).value = '';
             }
@@ -2216,12 +2952,11 @@
             const nickname = document.getElementById('new-nickname').value.trim();
             const pin = [1,2,3,4].map(i => document.getElementById('new-pin-' + i).value).join('');
 
-            if (!nickname || !selectedAvatar || pin.length !== 4) {
+            if (!nickname || !selectedAvatar || !selectedKnee || pin.length !== 4) {
                 alert(t('fillAllFields'));
                 return;
             }
 
-            // Check if nickname exists
             if (getUserData(nickname)) {
                 alert(t('nicknameExists'));
                 return;
@@ -2230,6 +2965,7 @@
             const newUser = {
                 nickname: nickname,
                 avatar: selectedAvatar,
+                knee: selectedKnee,
                 pin: pin,
                 createdAt: new Date().toISOString(),
                 stats: {
@@ -2252,7 +2988,9 @@
                 document.getElementById('new-pin-' + i).value = '';
             }
             selectedAvatar = null;
+            selectedKnee = null;
             document.querySelectorAll('.avatar-option').forEach(btn => btn.classList.remove('selected'));
+            document.querySelectorAll('.knee-option').forEach(opt => opt.classList.remove('selected'));
         }
 
         function loginUser(user) {
@@ -2265,6 +3003,7 @@
             updateStats();
             renderPainHistory();
             renderEvolutionChart();
+            updateKneeDisplay();
         }
 
         function showLoginScreen() {
@@ -2292,28 +3031,50 @@
             }
         }
 
+        // ==================== KNEE MANAGEMENT ====================
+        function updateKneeDisplay() {
+            if (!currentUser) return;
+
+            const kneeLabel = t('kneeLabels')[currentUser.knee] || '🦵 ?';
+            document.getElementById('header-knee-indicator').textContent = kneeLabel;
+            document.getElementById('welcome-knee-info').textContent = kneeLabel;
+
+            // Update profile knee selection
+            document.querySelectorAll('#profile-knee-options .knee-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            if (currentUser.knee) {
+                const profileKneeEl = document.getElementById('profile-knee-' + currentUser.knee);
+                if (profileKneeEl) profileKneeEl.classList.add('selected');
+            }
+        }
+
+        function updateKnee(knee) {
+            if (!currentUser) return;
+
+            currentUser.knee = knee;
+            saveUserData(currentUser);
+            updateKneeDisplay();
+        }
+
         // ==================== USER INTERFACE ====================
         function updateUserInterface() {
             if (!currentUser) return;
 
-            // Header
             document.getElementById('header-avatar').textContent = currentUser.avatar;
             document.getElementById('header-username').textContent = currentUser.nickname;
 
-            // Welcome card
             document.getElementById('welcome-avatar').textContent = currentUser.avatar;
             document.getElementById('welcome-name').textContent = currentUser.nickname;
             document.getElementById('home-workouts').textContent = currentUser.stats?.totalWorkouts || 0;
             document.getElementById('home-streak').textContent = currentUser.stats?.currentStreak || 0;
             document.getElementById('home-minutes').textContent = currentUser.stats?.totalMinutes || 0;
 
-            // Profile
             document.getElementById('profile-avatar-btn').textContent = currentUser.avatar;
             document.getElementById('profile-name-btn').textContent = currentUser.nickname;
 
             if (currentUser.profile) {
                 document.getElementById('user-age').value = currentUser.profile.age || '';
-                document.getElementById('injury-side').value = currentUser.profile.injurySide || '';
             }
         }
 
@@ -2324,6 +3085,7 @@
                 btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
             });
             applyTranslations();
+            updateKneeDisplay();
         }
 
         function applyTranslations() {
@@ -2367,12 +3129,10 @@
             });
             document.getElementById('pain-description').textContent = t('painLevels')[level];
 
-            // Save pain to history
             if (currentUser) {
                 const today = new Date().toISOString().split('T')[0];
                 if (!currentUser.painHistory) currentUser.painHistory = [];
 
-                // Check if already recorded today
                 const todayEntry = currentUser.painHistory.find(p => p.date === today);
                 if (todayEntry) {
                     todayEntry.level = level;
@@ -2380,7 +3140,6 @@
                     currentUser.painHistory.push({ date: today, level: level });
                 }
 
-                // Keep only last 30 days
                 currentUser.painHistory = currentUser.painHistory.slice(-30);
                 saveUserData(currentUser);
                 renderPainHistory();
@@ -2397,7 +3156,6 @@
             const container = document.getElementById('pain-history');
             const emojis = ['😊', '🙂', '😐', '😟', '😣'];
 
-            // Show last 7 entries
             const recent = currentUser.painHistory.slice(-7);
 
             container.innerHTML = recent.map(entry => {
@@ -2448,7 +3206,8 @@
             document.getElementById('exercise-reps').textContent = exercise.sets;
             document.getElementById('exercise-equipment').textContent = exercise.equipment;
 
-            loadExerciseMedia(exercise.mediaKey);
+            // Load animation
+            loadExerciseAnimation(exercise.animKey);
 
             const instructionsList = document.getElementById('instructions-list');
             instructionsList.innerHTML = exercise.instructions.map(i => `<li>${i}</li>`).join('');
@@ -2462,46 +3221,18 @@
             nextBtn.textContent = currentExerciseIndex === total - 1 ? t('finish') : t('next');
         }
 
-        function loadExerciseMedia(mediaKey) {
-            const mediaContainer = document.getElementById('media-container');
-            const mediaElement = document.getElementById('exercise-media');
-            const loadingElement = document.getElementById('media-loading');
+        function loadExerciseAnimation(animKey) {
+            const container = document.getElementById('animation-container');
+            const mappedKey = exerciseToAnimation[animKey] || animKey;
+            const anim = exerciseAnimations[mappedKey] || defaultAnimation;
 
-            loadingElement.style.display = 'block';
-            mediaElement.style.display = 'none';
-
-            const mediaUrl = exerciseMedia[mediaKey];
-
-            if (mediaUrl) {
-                mediaElement.onload = function() {
-                    loadingElement.style.display = 'none';
-                    mediaElement.style.display = 'block';
-                };
-
-                mediaElement.onerror = function() {
-                    loadingElement.style.display = 'none';
-                    mediaContainer.innerHTML = `
-                        <div class="exercise-media-placeholder">
-                            <div class="icon">🏃</div>
-                            <div class="text">Demonstração do exercício</div>
-                        </div>
-                        <div class="media-loading" id="media-loading" style="display:none;"></div>
-                        <img id="exercise-media" class="exercise-media" src="" style="display:none;">
-                    `;
-                };
-
-                mediaElement.src = mediaUrl;
-            } else {
-                loadingElement.style.display = 'none';
-                mediaContainer.innerHTML = `
-                    <div class="exercise-media-placeholder">
-                        <div class="icon">🏃</div>
-                        <div class="text">Demonstração do exercício</div>
-                    </div>
-                    <div class="media-loading" id="media-loading" style="display:none;"></div>
-                    <img id="exercise-media" class="exercise-media" src="" style="display:none;">
-                `;
-            }
+            container.className = 'exercise-animation-container';
+            container.innerHTML = `
+                <div class="exercise-animation ${anim.class}">
+                    ${anim.html}
+                    <div class="animation-label">${anim.label}</div>
+                </div>
+            `;
         }
 
         function prevExercise() {
@@ -2720,11 +3451,10 @@
         function renderEvolutionChart() {
             const container = document.getElementById('evolution-chart');
             if (!currentUser || !currentUser.completedDates) {
-                container.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Complete treinos para ver sua evolução</p>';
+                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); width: 100%;">Complete treinos para ver sua evolução</p>';
                 return;
             }
 
-            // Get last 7 days
             const days = [];
             for (let i = 6; i >= 0; i--) {
                 const date = new Date();
@@ -2735,12 +3465,11 @@
                 });
             }
 
-            // Count workouts per day (simplified - just 0 or 1)
-            const maxHeight = 100;
+            const maxHeight = 80;
 
             container.innerHTML = days.map(day => {
                 const completed = currentUser.completedDates.includes(day.date);
-                const height = completed ? maxHeight : 10;
+                const height = completed ? maxHeight : 8;
                 return `
                     <div class="chart-bar-container">
                         <div class="chart-bar" style="height: ${height}px;"></div>
@@ -2755,8 +3484,7 @@
             if (!currentUser) return;
 
             currentUser.profile = {
-                age: document.getElementById('user-age').value,
-                injurySide: document.getElementById('injury-side').value
+                age: document.getElementById('user-age').value
             };
 
             saveUserData(currentUser);
