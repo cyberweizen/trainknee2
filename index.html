@@ -180,6 +180,7 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
+            transition: all 0.3s;
         }
 
         .login-btn-primary {
@@ -356,6 +357,7 @@
             color: var(--text-muted);
             font-size: 0.85rem;
             border-bottom: 3px solid transparent;
+            transition: all 0.3s;
         }
 
         .nav-tab.active {
@@ -495,27 +497,27 @@
         .program-description { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; }
         .program-meta { display: flex; gap: 15px; font-size: 0.85rem; color: var(--text-muted); }
 
-        /* ==================== VIDEO PLAYER ==================== */
-        .video-container {
+        /* ==================== GIF PLAYER ==================== */
+        .gif-container {
             position: relative;
             width: 100%;
-            max-width: 320px;
+            max-width: 300px;
             margin: 15px auto;
             border-radius: 20px;
             overflow: hidden;
-            background: #000;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
-        .video-container video {
+        .gif-container img {
             width: 100%;
             height: auto;
             display: block;
-            max-height: 400px;
+            min-height: 200px;
             object-fit: cover;
         }
 
-        .video-overlay {
+        .gif-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -525,52 +527,39 @@
             color: white;
         }
 
-        .video-overlay-title {
+        .gif-overlay-title {
             font-weight: 700;
             font-size: 1rem;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
-        .video-overlay-subtitle {
+        .gif-overlay-subtitle {
             font-size: 0.8rem;
             opacity: 0.9;
         }
 
-        .video-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .video-control-btn {
-            background: rgba(255,255,255,0.2);
-            border: none;
+        .gif-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary);
             color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
-        .video-control-btn:hover {
-            background: rgba(255,255,255,0.4);
-            transform: scale(1.1);
-        }
-
-        .video-loading {
+        .gif-loading {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 0.9rem;
             text-align: center;
         }
 
-        .video-loading-spinner {
+        .gif-spinner {
             width: 40px;
             height: 40px;
             border: 3px solid rgba(255,255,255,0.3);
@@ -583,28 +572,6 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
-        .video-error {
-            padding: 40px 20px;
-            text-align: center;
-            color: var(--text-muted);
-            background: var(--bg-light);
-            border-radius: 20px;
-        }
-
-        .video-error-icon { font-size: 3rem; margin-bottom: 10px; }
-
-        .video-fallback {
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            margin: 15px auto;
-            max-width: 320px;
-        }
-
-        .video-fallback-icon { font-size: 4rem; margin-bottom: 15px; }
-        .video-fallback-text { color: var(--text-muted); font-size: 0.9rem; }
 
         /* ==================== EXERCISE ==================== */
         .exercise-container { text-align: center; }
@@ -676,6 +643,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         .timer-btn.start { background: var(--secondary); color: white; }
@@ -713,6 +681,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         .nav-btn.prev { background: var(--border); color: var(--text-dark); }
@@ -800,6 +769,7 @@
             cursor: pointer;
             margin-bottom: 15px;
             width: 100%;
+            transition: all 0.3s;
         }
 
         .switch-user-btn:hover {
@@ -875,13 +845,10 @@
                 </div>
 
                 <div class="login-form active" id="existing-form">
-                    <div class="existing-users">
-                        <div class="existing-users-title">Selecione seu perfil:</div>
-                        <div class="user-list" id="user-list"></div>
-                    </div>
+                    <div class="user-list" id="user-list"></div>
                     <div id="no-users-message" style="text-align: center; padding: 30px; color: var(--text-muted); display: none;">
                         <div style="font-size: 3rem; margin-bottom: 10px;">👋</div>
-                        <p>Nenhum perfil cadastrado ainda.</p>
+                        <p>Nenhum perfil cadastrado.</p>
                         <p>Crie seu primeiro perfil!</p>
                     </div>
                 </div>
@@ -1081,30 +1048,18 @@
                 </div>
 
                 <div class="card exercise-container">
-                    <!-- VIDEO PLAYER -->
-                    <div class="video-container" id="video-container">
-                        <video id="exercise-video" loop muted playsinline>
-                            <source src="" type="video/mp4">
-                        </video>
-                        <div class="video-loading" id="video-loading">
-                            <div class="video-loading-spinner"></div>
-                            <div>Carregando vídeo...</div>
+                    <!-- GIF PLAYER -->
+                    <div class="gif-container" id="gif-container">
+                        <img id="exercise-gif" src="" alt="Exercício" onload="hideGifLoading()" onerror="showGifError()">
+                        <div class="gif-loading" id="gif-loading">
+                            <div class="gif-spinner"></div>
+                            <div>Carregando...</div>
                         </div>
-                        <div class="video-overlay">
-                            <div class="video-overlay-title" id="video-title">Exercício</div>
-                            <div class="video-overlay-subtitle" id="video-subtitle">Músculo alvo</div>
-                            <div class="video-controls">
-                                <button class="video-control-btn" onclick="toggleVideoPlay()">▶️</button>
-                                <button class="video-control-btn" onclick="toggleVideoMute()">🔇</button>
-                                <button class="video-control-btn" onclick="restartVideo()">🔄</button>
-                            </div>
+                        <div class="gif-badge">🔄 LOOP</div>
+                        <div class="gif-overlay">
+                            <div class="gif-overlay-title" id="gif-title">Exercício</div>
+                            <div class="gif-overlay-subtitle" id="gif-subtitle">Músculo alvo</div>
                         </div>
-                    </div>
-
-                    <!-- Fallback quando vídeo não carrega -->
-                    <div class="video-fallback" id="video-fallback" style="display: none;">
-                        <div class="video-fallback-icon" id="fallback-icon">🏋️</div>
-                        <div class="video-fallback-text" id="fallback-text">Vídeo não disponível</div>
                     </div>
 
                     <h2 class="exercise-name" id="exercise-name">Agachamento</h2>
@@ -1128,8 +1083,8 @@
                     <div class="timer-display" id="timer-display">00:30</div>
 
                     <div class="timer-controls">
-                        <button class="timer-btn start" id="timer-btn" onclick="toggleTimer()">Iniciar</button>
-                        <button class="timer-btn reset" onclick="resetTimer()">Resetar</button>
+                        <button class="timer-btn start" id="timer-btn" onclick="toggleTimer()">▶️ Iniciar</button>
+                        <button class="timer-btn reset" onclick="resetTimer()">🔄 Resetar</button>
                     </div>
 
                     <div class="exercise-instructions">
@@ -1141,8 +1096,8 @@
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="nav-btn prev" onclick="prevExercise()" id="prev-btn" disabled>Anterior</button>
-                    <button class="nav-btn next" onclick="nextExercise()" id="next-btn">Próximo</button>
+                    <button class="nav-btn prev" onclick="prevExercise()" id="prev-btn" disabled>⬅️ Anterior</button>
+                    <button class="nav-btn next" onclick="nextExercise()" id="next-btn">Próximo ➡️</button>
                 </div>
             </div>
 
@@ -1255,56 +1210,49 @@
         // ==================== AVATARS ====================
         const avatars = ['🏃', '🚴', '🏋️', '🧘', '⚽', '🏀', '🎾', '🏊', '🥋', '💪', '🦵', '❤️'];
 
-        // ==================== EXERCISE VIDEOS ====================
-        // Vídeos gratuitos do Pexels (licença livre para uso)
-        const exerciseVideos = {
-            // Agachamentos e pernas
-            squat: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4',
-            squat_band: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4',
-            wall_sit: 'https://videos.pexels.com/video-files/4761563/4761563-uhd_1440_2560_25fps.mp4',
-            lunge: 'https://videos.pexels.com/video-files/4761449/4761449-uhd_1440_2560_25fps.mp4',
+        // ==================== EXERCISE GIFS ====================
+        // GIFs de exercícios de bancos gratuitos (Tenor, Giphy, etc.)
+        const exerciseGifs = {
+            // Agachamentos
+            squat: 'https://media.tenor.com/gI-8qCqEEqYAAAAM/squat-exercise.gif',
+            squat_band: 'https://media.tenor.com/gI-8qCqEEqYAAAAM/squat-exercise.gif',
+            wall_sit: 'https://media.tenor.com/xnGCvSVZwWoAAAAM/wall-sit.gif',
 
-            // Ponte e glúteos
-            bridge: 'https://videos.pexels.com/video-files/4761612/4761612-uhd_1440_2560_25fps.mp4',
+            // Lunges
+            lunge: 'https://media.tenor.com/E-iLquGpm5QAAAAM/lunges-exercise.gif',
+
+            // Ponte
+            bridge: 'https://media.tenor.com/nH_s9M9xVVIAAAAM/glute-bridge.gif',
 
             // Equilíbrio
-            balance: 'https://videos.pexels.com/video-files/4761792/4761792-uhd_1440_2560_25fps.mp4',
+            balance: 'https://media.tenor.com/LZsrfqGJmEgAAAAM/balance-yoga.gif',
 
             // Panturrilha
-            calf_raise: 'https://videos.pexels.com/video-files/4761563/4761563-uhd_1440_2560_25fps.mp4',
+            calf_raise: 'https://media.tenor.com/kF0zzWfN6XYAAAAM/calf-raises.gif',
 
             // Step
-            step_up: 'https://videos.pexels.com/video-files/4761449/4761449-uhd_1440_2560_25fps.mp4',
+            step_up: 'https://media.tenor.com/7KxYRCGJxDgAAAAM/step-up-exercise.gif',
 
             // Deadlift/Stiff
-            deadlift: 'https://videos.pexels.com/video-files/4761612/4761612-uhd_1440_2560_25fps.mp4',
+            deadlift: 'https://media.tenor.com/tFqJhGDwYnMAAAAM/deadlift.gif',
 
             // Lateral
-            lateral: 'https://videos.pexels.com/video-files/4761792/4761792-uhd_1440_2560_25fps.mp4',
+            lateral: 'https://media.tenor.com/8YKUJmLQhJEAAAAM/side-lunge.gif',
 
             // Prancha
-            plank: 'https://videos.pexels.com/video-files/4761612/4761612-uhd_1440_2560_25fps.mp4',
+            plank: 'https://media.tenor.com/kDhAE3lLOBkAAAAM/plank-exercise.gif',
 
             // Salto
-            jump: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4',
+            jump: 'https://media.tenor.com/5Nh-3sXuSjIAAAAM/jump-squat.gif',
 
-            // Genérico fitness
-            generic: 'https://videos.pexels.com/video-files/4761434/4761434-uhd_1440_2560_25fps.mp4'
-        };
+            // Clamshell
+            clamshell: 'https://media.tenor.com/WmzqLqJGbYoAAAAM/clamshell-exercise.gif',
 
-        // Fallback icons para quando vídeo não carregar
-        const exerciseIcons = {
-            squat: '🏋️',
-            bridge: '🌉',
-            balance: '🧘',
-            calf_raise: '🦶',
-            lunge: '🚶',
-            step_up: '📶',
-            deadlift: '💪',
-            lateral: '↔️',
-            plank: '🧱',
-            jump: '⬆️',
-            generic: '🏃'
+            // Kickback
+            kickback: 'https://media.tenor.com/8YKUJmLQhJEAAAAM/side-lunge.gif',
+
+            // Genérico
+            generic: 'https://media.tenor.com/gI-8qCqEEqYAAAAM/squat-exercise.gif'
         };
 
         // ==================== PROGRAMS ====================
@@ -1312,49 +1260,49 @@
             {
                 name: "Propriocepção Básica",
                 exercises: [
-                    { name: "Apoio Unipodal", videoKey: "balance", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna do chão", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo à frente", "Troque de lado"] },
-                    { name: "Agachamento com Mini Band", videoKey: "squat_band", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Coloque a mini band acima dos joelhos", "Pés na largura dos ombros", "Desça até 60° de flexão do joelho", "Mantenha os joelhos empurrando para fora", "Suba contraindo os glúteos"] },
-                    { name: "Ponte de Glúteos", videoKey: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de costas com joelhos flexionados", "Pés apoiados no chão", "Eleve o quadril contraindo os glúteos", "Mantenha 2 segundos no topo", "Desça controladamente"] },
-                    { name: "Equilíbrio Instável", videoKey: "balance", muscleTarget: "Proprioceptores", duration: 30, sets: "3 séries cada lado", equipment: "Almofada", instructions: ["Coloque uma almofada no chão", "Fique em apoio unipodal sobre ela", "Mantenha 30 segundos", "Feche os olhos para aumentar dificuldade", "Troque de lado"] },
-                    { name: "Abdução com Mini Band", videoKey: "lateral", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Coloque a mini band nos tornozelos", "Mantenha uma perna fixa no chão", "Afaste a outra perna lateralmente", "Controle a volta à posição inicial", "Mantenha o tronco estável"] },
-                    { name: "Elevação de Panturrilha", videoKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Degrau", instructions: ["Apoie-se na parede para equilíbrio", "Eleve-se na ponta dos pés", "Mantenha 2 segundos no topo", "Desça controladamente", "Use um degrau para maior amplitude"] }
+                    { name: "Apoio Unipodal", gifKey: "balance", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna do chão", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo à frente", "Troque de lado"] },
+                    { name: "Agachamento com Mini Band", gifKey: "squat_band", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Coloque a mini band acima dos joelhos", "Pés na largura dos ombros", "Desça até 60° de flexão do joelho", "Mantenha os joelhos empurrando para fora", "Suba contraindo os glúteos"] },
+                    { name: "Ponte de Glúteos", gifKey: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de costas com joelhos flexionados", "Pés apoiados no chão", "Eleve o quadril contraindo os glúteos", "Mantenha 2 segundos no topo", "Desça controladamente"] },
+                    { name: "Equilíbrio Instável", gifKey: "balance", muscleTarget: "Proprioceptores", duration: 30, sets: "3 séries cada lado", equipment: "Almofada", instructions: ["Coloque uma almofada no chão", "Fique em apoio unipodal sobre ela", "Mantenha 30 segundos", "Feche os olhos para aumentar dificuldade", "Troque de lado"] },
+                    { name: "Abdução com Mini Band", gifKey: "lateral", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Coloque a mini band nos tornozelos", "Mantenha uma perna fixa no chão", "Afaste a outra perna lateralmente", "Controle a volta à posição inicial", "Mantenha o tronco estável"] },
+                    { name: "Elevação de Panturrilha", gifKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Degrau", instructions: ["Apoie-se na parede para equilíbrio", "Eleve-se na ponta dos pés", "Mantenha 2 segundos no topo", "Desça controladamente", "Use um degrau para maior amplitude"] }
                 ]
             },
             {
                 name: "Fortalecimento Quadríceps",
                 exercises: [
-                    { name: "Agachamento na Parede", videoKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até os joelhos ficarem a 90°", "Mantenha a posição isométrica", "Pés afastados na largura dos ombros", "Joelhos não passam da ponta dos pés"] },
-                    { name: "Extensão de Joelho Sentado", videoKey: "generic", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Sente em uma cadeira alta", "Prenda a band no tornozelo e em ponto fixo", "Estenda o joelho contra a resistência", "Mantenha 2 segundos na extensão", "Retorne controladamente"] },
-                    { name: "Step Up Lateral", videoKey: "step_up", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Posicione-se ao lado do degrau", "Suba lateralmente com uma perna", "Estenda completamente o joelho no topo", "Desça controladamente", "Mantenha o tronco ereto"] },
-                    { name: "Afundo Estático", videoKey: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Dê um passo à frente", "Desça o joelho de trás em direção ao chão", "Mantenha o joelho da frente alinhado", "Suba e repita"] },
-                    { name: "Leg Press na Parede", videoKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 15 rep", equipment: "Bola", instructions: ["Coloque a bola entre as costas e a parede", "Pés à frente do corpo", "Desça flexionando os joelhos", "Suba empurrando a bola", "Movimento controlado"] },
-                    { name: "Agachamento Sumô", videoKey: "squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pés bem afastados", "Pontas dos pés para fora", "Desça mantendo joelhos para fora", "Tronco ereto", "Contraia glúteos ao subir"] },
-                    { name: "Terminal Knee Extension", videoKey: "generic", muscleTarget: "VMO", duration: 35, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band em ponto fixo baixo", "Passe atrás do joelho", "Flexione levemente o joelho", "Estenda contra a resistência", "Foque na contração do quadríceps"] }
+                    { name: "Agachamento na Parede", gifKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até os joelhos ficarem a 90°", "Mantenha a posição isométrica", "Pés afastados na largura dos ombros", "Joelhos não passam da ponta dos pés"] },
+                    { name: "Extensão de Joelho Sentado", gifKey: "generic", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Sente em uma cadeira alta", "Prenda a band no tornozelo e em ponto fixo", "Estenda o joelho contra a resistência", "Mantenha 2 segundos na extensão", "Retorne controladamente"] },
+                    { name: "Step Up Lateral", gifKey: "step_up", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Posicione-se ao lado do degrau", "Suba lateralmente com uma perna", "Estenda completamente o joelho no topo", "Desça controladamente", "Mantenha o tronco ereto"] },
+                    { name: "Afundo Estático", gifKey: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Dê um passo à frente", "Desça o joelho de trás em direção ao chão", "Mantenha o joelho da frente alinhado", "Suba e repita"] },
+                    { name: "Leg Press na Parede", gifKey: "wall_sit", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 15 rep", equipment: "Bola", instructions: ["Coloque a bola entre as costas e a parede", "Pés à frente do corpo", "Desça flexionando os joelhos", "Suba empurrando a bola", "Movimento controlado"] },
+                    { name: "Agachamento Sumô", gifKey: "squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pés bem afastados", "Pontas dos pés para fora", "Desça mantendo joelhos para fora", "Tronco ereto", "Contraia glúteos ao subir"] },
+                    { name: "Terminal Knee Extension", gifKey: "generic", muscleTarget: "VMO", duration: 35, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band em ponto fixo baixo", "Passe atrás do joelho", "Flexione levemente o joelho", "Estenda contra a resistência", "Foque na contração do quadríceps"] }
                 ]
             },
             {
                 name: "Cadeia Posterior",
                 exercises: [
-                    { name: "Stiff com Mini Band", videoKey: "deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band com os dois pés", "Segure a band com as mãos", "Incline o tronco para frente", "Mantenha as pernas semi-estendidas", "Suba contraindo glúteos e isquios"] },
-                    { name: "Ponte Unilateral", videoKey: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril com a perna de apoio", "Mantenha 2 segundos no topo", "Troque de lado"] },
-                    { name: "Flexão de Joelho em Pé", videoKey: "generic", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band no tornozelo", "Fique de pé com apoio", "Flexione o joelho contra a resistência", "Leve o calcanhar em direção ao glúteo", "Retorne controladamente"] },
-                    { name: "Good Morning", videoKey: "deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Passe atrás do pescoço", "Incline o tronco para frente", "Mantenha as costas retas", "Contraia ao subir"] },
-                    { name: "Clamshell", videoKey: "lateral", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de lado com band acima dos joelhos", "Joelhos flexionados a 45°", "Abra os joelhos como uma concha", "Mantenha os pés unidos", "Controle a descida"] },
-                    { name: "Kickback de Glúteo", videoKey: "plank", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Posição de quatro apoios", "Band nos tornozelos", "Estenda uma perna para trás", "Contraia o glúteo no topo", "Não deixe o pé tocar o chão"] },
-                    { name: "Panturrilha Excêntrica", videoKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Fique na ponta de um degrau", "Eleve-se na ponta dos pés", "Desça lentamente (5 segundos)", "Deixe o calcanhar ir bem abaixo", "Suba e repita"] }
+                    { name: "Stiff com Mini Band", gifKey: "deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band com os dois pés", "Segure a band com as mãos", "Incline o tronco para frente", "Mantenha as pernas semi-estendidas", "Suba contraindo glúteos e isquios"] },
+                    { name: "Ponte Unilateral", gifKey: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril com a perna de apoio", "Mantenha 2 segundos no topo", "Troque de lado"] },
+                    { name: "Flexão de Joelho em Pé", gifKey: "generic", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Prenda a band no tornozelo", "Fique de pé com apoio", "Flexione o joelho contra a resistência", "Leve o calcanhar em direção ao glúteo", "Retorne controladamente"] },
+                    { name: "Good Morning", gifKey: "deadlift", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Pise na band", "Passe atrás do pescoço", "Incline o tronco para frente", "Mantenha as costas retas", "Contraia ao subir"] },
+                    { name: "Clamshell", gifKey: "clamshell", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Mini Band", instructions: ["Deite de lado com band acima dos joelhos", "Joelhos flexionados a 45°", "Abra os joelhos como uma concha", "Mantenha os pés unidos", "Controle a descida"] },
+                    { name: "Kickback de Glúteo", gifKey: "kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Mini Band", instructions: ["Posição de quatro apoios", "Band nos tornozelos", "Estenda uma perna para trás", "Contraia o glúteo no topo", "Não deixe o pé tocar o chão"] },
+                    { name: "Panturrilha Excêntrica", gifKey: "calf_raise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Fique na ponta de um degrau", "Eleve-se na ponta dos pés", "Desça lentamente (5 segundos)", "Deixe o calcanhar ir bem abaixo", "Suba e repita"] }
                 ]
             },
             {
                 name: "Estabilização Avançada",
                 exercises: [
-                    { name: "Agachamento Búlgaro", videoKey: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Apoie o pé de trás em um banco", "Desça flexionando o joelho da frente", "Mantenha o tronco ereto", "Joelho não passa da ponta do pé", "Suba empurrando com o calcanhar"] },
-                    { name: "Monster Walk", videoKey: "lateral", muscleTarget: "Glúteo médio", duration: 45, sets: "3 séries x 20 passos", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Caminhe lateralmente", "Mantenha tensão constante na band", "Volte para o outro lado"] },
-                    { name: "Salto com Aterrissagem", videoKey: "jump", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Pés afastados na largura dos ombros", "Salte verticalmente", "Aterrisse suavemente", "Absorva o impacto flexionando joelhos", "Mantenha joelhos alinhados"] },
-                    { name: "Prancha com Elevação", videoKey: "plank", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Posição de prancha", "Band nos tornozelos", "Eleve uma perna", "Mantenha 2 segundos", "Alterne as pernas"] },
-                    { name: "Pistol Squat Assistido", videoKey: "squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure em um apoio fixo", "Estenda uma perna à frente", "Desça em agachamento unilateral", "Use o apoio para ajudar a subir", "Mantenha o joelho alinhado"] },
-                    { name: "Lateral Shuffle", videoKey: "lateral", muscleTarget: "Abdutores, Agilidade", duration: 40, sets: "3 séries x 30 seg", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Desloque-se lateralmente", "Passos rápidos e curtos", "Mude de direção"] },
-                    { name: "Step Down Controlado", videoKey: "step_up", muscleTarget: "Quadríceps, Controle", duration: 45, sets: "3 séries x 10 rep", equipment: "Degrau", instructions: ["Fique em cima do degrau", "Desça uma perna lentamente", "Toque o calcanhar no chão", "Suba controladamente", "Mantenha o joelho alinhado"] },
-                    { name: "Equilíbrio Dinâmico", videoKey: "balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 8 rep", equipment: "Nenhum", instructions: ["Fique em apoio unipodal", "Alcance para frente com as mãos", "Depois para o lado", "Depois para trás", "Mantenha o equilíbrio"] }
+                    { name: "Agachamento Búlgaro", gifKey: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Apoie o pé de trás em um banco", "Desça flexionando o joelho da frente", "Mantenha o tronco ereto", "Joelho não passa da ponta do pé", "Suba empurrando com o calcanhar"] },
+                    { name: "Monster Walk", gifKey: "lateral", muscleTarget: "Glúteo médio", duration: 45, sets: "3 séries x 20 passos", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Caminhe lateralmente", "Mantenha tensão constante na band", "Volte para o outro lado"] },
+                    { name: "Salto com Aterrissagem", gifKey: "jump", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Pés afastados na largura dos ombros", "Salte verticalmente", "Aterrisse suavemente", "Absorva o impacto flexionando joelhos", "Mantenha joelhos alinhados"] },
+                    { name: "Prancha com Elevação", gifKey: "plank", muscleTarget: "Core, Glúteos", duration: 45, sets: "3 séries x 10 rep", equipment: "Mini Band", instructions: ["Posição de prancha", "Band nos tornozelos", "Eleve uma perna", "Mantenha 2 segundos", "Alterne as pernas"] },
+                    { name: "Pistol Squat Assistido", gifKey: "squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure em um apoio fixo", "Estenda uma perna à frente", "Desça em agachamento unilateral", "Use o apoio para ajudar a subir", "Mantenha o joelho alinhado"] },
+                    { name: "Lateral Shuffle", gifKey: "lateral", muscleTarget: "Abdutores, Agilidade", duration: 40, sets: "3 séries x 30 seg", equipment: "Mini Band", instructions: ["Band acima dos joelhos", "Posição de semi-agachamento", "Desloque-se lateralmente", "Passos rápidos e curtos", "Mude de direção"] },
+                    { name: "Step Down Controlado", gifKey: "step_up", muscleTarget: "Quadríceps, Controle", duration: 45, sets: "3 séries x 10 rep", equipment: "Degrau", instructions: ["Fique em cima do degrau", "Desça uma perna lentamente", "Toque o calcanhar no chão", "Suba controladamente", "Mantenha o joelho alinhado"] },
+                    { name: "Equilíbrio Dinâmico", gifKey: "balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 8 rep", equipment: "Nenhum", instructions: ["Fique em apoio unipodal", "Alcance para frente com as mãos", "Depois para o lado", "Depois para trás", "Mantenha o equilíbrio"] }
                 ]
             }
         ];
@@ -1513,7 +1461,6 @@
             saveUserData(newUser);
             loginUser(newUser);
 
-            // Reset form
             document.getElementById('new-nickname').value = '';
             for (let i = 1; i <= 4; i++) document.getElementById('new-pin-' + i).value = '';
             selectedAvatar = null;
@@ -1632,63 +1579,35 @@
                 card.classList.toggle('selected', i === index));
         }
 
-        // ==================== VIDEO ====================
-        function loadExerciseVideo(videoKey) {
-            const video = document.getElementById('exercise-video');
-            const container = document.getElementById('video-container');
-            const loading = document.getElementById('video-loading');
-            const fallback = document.getElementById('video-fallback');
+        // ==================== GIF ====================
+        function loadExerciseGif(gifKey) {
+            const gifImg = document.getElementById('exercise-gif');
+            const loading = document.getElementById('gif-loading');
 
-            const videoUrl = exerciseVideos[videoKey] || exerciseVideos.generic;
-
-            // Show loading
-            container.style.display = 'block';
             loading.style.display = 'block';
-            fallback.style.display = 'none';
+            gifImg.style.opacity = '0';
 
-            // Set video source
-            video.src = videoUrl;
-
-            // Handle video load
-            video.onloadeddata = () => {
-                loading.style.display = 'none';
-                video.play().catch(() => {});
-            };
-
-            // Handle video error - show fallback
-            video.onerror = () => {
-                container.style.display = 'none';
-                fallback.style.display = 'block';
-                document.getElementById('fallback-icon').textContent = exerciseIcons[videoKey] || '🏃';
-                document.getElementById('fallback-text').textContent = 'Vídeo não disponível - siga as instruções abaixo';
-            };
-
-            // Timeout fallback
-            setTimeout(() => {
-                if (loading.style.display !== 'none') {
-                    container.style.display = 'none';
-                    fallback.style.display = 'block';
-                    document.getElementById('fallback-icon').textContent = exerciseIcons[videoKey] || '🏃';
-                    document.getElementById('fallback-text').textContent = 'Conexão lenta - siga as instruções';
-                }
-            }, 8000);
+            const gifUrl = exerciseGifs[gifKey] || exerciseGifs.generic;
+            gifImg.src = gifUrl;
         }
 
-        function toggleVideoPlay() {
-            const video = document.getElementById('exercise-video');
-            if (video.paused) video.play();
-            else video.pause();
+        function hideGifLoading() {
+            document.getElementById('gif-loading').style.display = 'none';
+            document.getElementById('exercise-gif').style.opacity = '1';
         }
 
-        function toggleVideoMute() {
-            const video = document.getElementById('exercise-video');
-            video.muted = !video.muted;
-        }
-
-        function restartVideo() {
-            const video = document.getElementById('exercise-video');
-            video.currentTime = 0;
-            video.play();
+        function showGifError() {
+            const gifImg = document.getElementById('exercise-gif');
+            document.getElementById('gif-loading').style.display = 'none';
+            // Fallback to a simple placeholder
+            gifImg.src = 'data:image/svg+xml,' + encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+                    <rect fill="#1e293b" width="300" height="200"/>
+                    <text x="150" y="90" text-anchor="middle" fill="white" font-size="48">🏋️</text>
+                    <text x="150" y="130" text-anchor="middle" fill="#94a3b8" font-size="14">Siga as instruções abaixo</text>
+                </svg>
+            `);
+            gifImg.style.opacity = '1';
         }
 
         // ==================== TRAINING ====================
@@ -1711,10 +1630,10 @@
             document.getElementById('total-exercises').textContent = total;
             document.getElementById('progress-fill').style.width = ((currentExerciseIndex + 1) / total * 100) + '%';
 
-            // Load video
-            loadExerciseVideo(exercise.videoKey);
-            document.getElementById('video-title').textContent = exercise.name;
-            document.getElementById('video-subtitle').textContent = exercise.muscleTarget;
+            // Load GIF
+            loadExerciseGif(exercise.gifKey);
+            document.getElementById('gif-title').textContent = exercise.name;
+            document.getElementById('gif-subtitle').textContent = exercise.muscleTarget;
 
             document.getElementById('exercise-name').textContent = exercise.name;
             document.getElementById('muscle-target').textContent = '🎯 ' + exercise.muscleTarget;
@@ -1728,7 +1647,7 @@
             resetTimer();
 
             document.getElementById('prev-btn').disabled = currentExerciseIndex === 0;
-            document.getElementById('next-btn').textContent = currentExerciseIndex === total - 1 ? 'Finalizar' : 'Próximo';
+            document.getElementById('next-btn').textContent = currentExerciseIndex === total - 1 ? '✅ Finalizar' : 'Próximo ➡️';
         }
 
         function prevExercise() {
@@ -1755,7 +1674,7 @@
 
         function startTimer() {
             timerRunning = true;
-            document.getElementById('timer-btn').textContent = 'Pausar';
+            document.getElementById('timer-btn').textContent = '⏸️ Pausar';
             document.getElementById('timer-btn').classList.remove('start');
             document.getElementById('timer-btn').classList.add('pause');
             timerInterval = setInterval(() => {
@@ -1772,7 +1691,7 @@
         function pauseTimer() {
             timerRunning = false;
             clearInterval(timerInterval);
-            document.getElementById('timer-btn').textContent = 'Iniciar';
+            document.getElementById('timer-btn').textContent = '▶️ Iniciar';
             document.getElementById('timer-btn').classList.remove('pause');
             document.getElementById('timer-btn').classList.add('start');
         }
@@ -1905,7 +1824,6 @@
             document.getElementById('total-minutes').textContent = stats.totalMinutes;
             document.getElementById('best-streak').textContent = stats.bestStreak;
 
-            // Evolution chart
             const container = document.getElementById('evolution-chart');
             const days = [];
             const weekdaysShort = ["D", "S", "T", "Q", "Q", "S", "S"];
