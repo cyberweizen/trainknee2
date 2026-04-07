@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KneeRecovery Pro</title>
     <style>
         :root {
@@ -16,10 +16,6 @@
             --text-dark: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --skin: #fdbf6f;
-            --skin-dark: #e8a84c;
-            --clothes: #3b82f6;
-            --clothes-dark: #2563eb;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,11 +28,12 @@
         }
 
         .app-container {
-            max-width: 480px;
+            max-width: 500px;
             margin: 0 auto;
             background: var(--bg-light);
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
         }
 
         /* ==================== LOGIN ==================== */
@@ -58,15 +55,15 @@
             border-radius: 24px;
             padding: 25px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-height: 90vh;
+            max-height: 92vh;
             overflow-y: auto;
         }
 
         .login-header { text-align: center; margin-bottom: 20px; }
         .login-logo { font-size: 3.5rem; margin-bottom: 8px; }
-        .login-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+        .login-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
         .login-subtitle { color: var(--text-muted); font-size: 0.9rem; }
 
         .login-tabs {
@@ -154,27 +151,21 @@
             font-size: 1rem;
         }
 
-        .login-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+        .login-input:focus { outline: none; border-color: var(--primary); }
 
-        .pin-container { display: flex; gap: 8px; justify-content: center; }
+        .pin-container { display: flex; gap: 10px; justify-content: center; }
 
         .pin-input {
-            width: 50px;
-            height: 55px;
+            width: 52px;
+            height: 58px;
             text-align: center;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             border: 2px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
-        .pin-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+        .pin-input:focus { outline: none; border-color: var(--primary); }
 
         .login-btn {
             width: 100%;
@@ -184,7 +175,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 10px;
             transition: all 0.3s;
         }
 
@@ -198,16 +189,16 @@
             box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
         }
 
-        .user-list { max-height: 180px; overflow-y: auto; }
+        .user-list { max-height: 200px; overflow-y: auto; }
 
         .user-card {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px;
+            gap: 12px;
+            padding: 12px;
             background: var(--bg-light);
-            border-radius: 12px;
-            margin-bottom: 8px;
+            border-radius: 14px;
+            margin-bottom: 10px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.3s;
@@ -219,44 +210,41 @@
         }
 
         .user-avatar {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
 
         .user-info { flex: 1; }
-        .user-name { font-weight: 600; font-size: 0.95rem; }
-        .user-stats { font-size: 0.75rem; color: var(--text-muted); }
+        .user-name { font-weight: 600; font-size: 1rem; }
+        .user-stats { font-size: 0.8rem; color: var(--text-muted); }
 
         .user-knee-badge {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             background: #fef3c7;
             color: #92400e;
-            padding: 2px 6px;
-            border-radius: 8px;
-            margin-left: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
         }
 
         .user-delete {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border: none;
             background: #fee2e2;
             color: var(--danger);
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
-        .user-delete:hover {
-            background: var(--danger);
-            color: white;
-        }
+        .user-delete:hover { background: var(--danger); color: white; }
 
         /* PIN Modal */
         .pin-modal {
@@ -273,55 +261,57 @@
 
         .pin-modal-content {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: 24px;
+            padding: 30px;
             width: 90%;
-            max-width: 320px;
+            max-width: 340px;
             text-align: center;
         }
 
-        .pin-modal-avatar { font-size: 2.5rem; margin-bottom: 8px; }
-        .pin-modal-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; }
-        .pin-error { color: var(--danger); font-size: 0.85rem; margin-top: 8px; display: none; }
+        .pin-modal-avatar { font-size: 3rem; margin-bottom: 10px; }
+        .pin-modal-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 18px; }
+        .pin-error { color: var(--danger); font-size: 0.9rem; margin-top: 10px; display: none; }
         .pin-error.show { display: block; }
+
+        #no-users-message {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+        }
 
         /* ==================== HEADER ==================== */
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 12px 16px;
+            padding: 14px 18px;
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .header-content { display: flex; align-items: center; gap: 12px; }
 
         .header-avatar {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             background: rgba(255,255,255,0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
         }
 
-        .header-info h1 { font-size: 1rem; font-weight: 700; }
-        .header-info p { font-size: 0.7rem; opacity: 0.9; }
+        .header-info h1 { font-size: 1.1rem; font-weight: 700; }
+        .header-info p { font-size: 0.75rem; opacity: 0.9; }
 
         .header-knee-indicator {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             background: rgba(255,255,255,0.2);
-            padding: 2px 6px;
-            border-radius: 8px;
-            margin-left: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
         }
 
         /* ==================== NAV ==================== */
@@ -330,19 +320,19 @@
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
-            top: 62px;
+            top: 70px;
             z-index: 99;
         }
 
         .nav-tab {
             flex: 1;
-            padding: 12px 8px;
+            padding: 14px 8px;
             text-align: center;
             cursor: pointer;
             border: none;
             background: transparent;
             color: var(--text-muted);
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             border-bottom: 3px solid transparent;
             transition: all 0.3s;
         }
@@ -354,21 +344,21 @@
         }
 
         /* ==================== SCREENS ==================== */
-        .screen { display: none; padding: 15px; }
+        .screen { display: none; padding: 16px; padding-bottom: 30px; }
         .screen.active { display: block; }
 
         .card {
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 14px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .card-title {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -378,60 +368,60 @@
         .welcome-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            border-radius: 18px;
-            margin-bottom: 15px;
+            padding: 22px;
+            border-radius: 20px;
+            margin-bottom: 16px;
         }
 
-        .welcome-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .welcome-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
 
         .welcome-avatar {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             background: rgba(255,255,255,0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
-        .welcome-text h2 { font-size: 1.1rem; margin-bottom: 2px; }
-        .welcome-text p { opacity: 0.9; font-size: 0.8rem; }
+        .welcome-text h2 { font-size: 1.15rem; margin-bottom: 3px; }
+        .welcome-text p { opacity: 0.9; font-size: 0.85rem; }
 
         .welcome-knee-info {
             display: inline-block;
             background: rgba(255,255,255,0.2);
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 15px;
-            font-size: 0.7rem;
-            margin-top: 4px;
+            font-size: 0.75rem;
+            margin-top: 5px;
         }
 
-        .welcome-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+        .welcome-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
 
         .welcome-stat {
             background: rgba(255,255,255,0.15);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             text-align: center;
         }
 
-        .welcome-stat-value { font-size: 1.3rem; font-weight: 700; }
-        .welcome-stat-label { font-size: 0.65rem; opacity: 0.9; }
+        .welcome-stat-value { font-size: 1.4rem; font-weight: 700; }
+        .welcome-stat-label { font-size: 0.7rem; opacity: 0.9; }
 
         /* Pain Scale */
-        .pain-scale { display: flex; justify-content: space-between; margin: 15px 0; }
+        .pain-scale { display: flex; justify-content: space-between; margin: 16px 0; }
 
         .pain-level {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             border: 3px solid transparent;
             transition: all 0.3s;
         }
@@ -447,14 +437,14 @@
         .pain-level.level-3 { background: #fed7aa; }
         .pain-level.level-4 { background: #fecaca; }
 
-        .pain-description { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 8px; }
+        .pain-description { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; }
 
         /* Programs */
         .program-card {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 10px;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.3s;
@@ -470,203 +460,208 @@
             background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
         }
 
-        .program-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-        .program-title { font-size: 0.95rem; font-weight: 600; }
+        .program-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .program-title { font-size: 1rem; font-weight: 600; }
 
         .program-badge {
             background: var(--primary);
             color: white;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 15px;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
         }
 
-        .program-description { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 6px; }
-        .program-meta { display: flex; gap: 12px; font-size: 0.75rem; color: var(--text-muted); }
+        .program-description { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; }
+        .program-meta { display: flex; gap: 15px; font-size: 0.8rem; color: var(--text-muted); }
 
-        /* ==================== EXERCISE ANIMATIONS ==================== */
+        /* ==================== SVG ANIMATION STYLES ==================== */
         .animation-container {
-            background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
-            border-radius: 16px;
+            background: linear-gradient(180deg, #e8f4f8 0%, #d0e8f0 100%);
+            border-radius: 18px;
             padding: 15px;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            min-height: 220px;
+            align-items: center;
+            min-height: 280px;
+            margin-bottom: 16px;
             position: relative;
             overflow: hidden;
-            margin-bottom: 15px;
         }
 
-        .floor {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 15px;
-            background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+        .animation-container svg {
+            max-width: 100%;
+            height: auto;
         }
 
-        .loop-indicator {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        /* SVG Human Figure Styles */
+        .skin { fill: #e8beac; }
+        .skin-shadow { fill: #d4a596; }
+        .skin-highlight { fill: #f5d0c0; }
+        .shirt { fill: #4a90d9; }
+        .shirt-shadow { fill: #3a7bc8; }
+        .pants { fill: #2d3748; }
+        .pants-shadow { fill: #1a202c; }
+        .shoes { fill: #1a202c; }
+        .shoes-detail { fill: #2d3748; }
+        .hair { fill: #4a3728; }
+        .hair-highlight { fill: #5d4a3a; }
+        .chair { fill: #8b7355; }
+        .chair-shadow { fill: #6b5344; }
+        .chair-highlight { fill: #a08060; }
+        .floor-svg { fill: #c4b5a5; }
+        .floor-shadow { fill: #a89888; }
+        .mat { fill: #6b8e7b; }
+        .mat-shadow { fill: #5a7d6a; }
+        .step-box { fill: #d97706; }
+        .step-box-top { fill: #f59e0b; }
+        .step-box-side { fill: #b45309; }
+        .wall { fill: #9ca3af; }
+        .wall-shadow { fill: #6b7280; }
+
+        .quad-highlight {
+            fill: #ff6b6b;
+            opacity: 0.3;
         }
 
-        .loop-indicator::before { content: "🔄"; font-size: 0.7rem; }
+        .muscle-glow {
+            fill: #ff6b6b;
+            opacity: 0.4;
+        }
 
-        /* SQUAT */
-        .squat-figure { position: relative; width: 100px; height: 170px; z-index: 1; }
-        .squat-head { width: 32px; height: 32px; background: var(--skin); border-radius: 50%; position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: squat-head 2s ease-in-out infinite; }
-        .squat-body { width: 40px; height: 55px; background: var(--clothes); border-radius: 8px; position: absolute; top: 28px; left: 50%; transform: translateX(-50%); animation: squat-body 2s ease-in-out infinite; }
-        .squat-arm { width: 10px; height: 40px; background: var(--skin); border-radius: 5px; position: absolute; top: 32px; animation: squat-arms 2s ease-in-out infinite; }
-        .squat-arm.left { left: 18px; }
-        .squat-arm.right { right: 18px; }
-        .squat-leg { width: 14px; height: 50px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 18px; transform-origin: top center; animation: squat-legs 2s ease-in-out infinite; }
-        .squat-leg.left { left: 32px; }
-        .squat-leg.right { right: 32px; }
-        .squat-foot { width: 20px; height: 8px; background: #1e293b; border-radius: 4px; position: absolute; bottom: 8px; }
-        .squat-foot.left { left: 28px; }
-        .squat-foot.right { right: 28px; }
+        /* Animation Keyframes */
+        @keyframes leg-extension {
+            0%, 100% { transform: rotate(0deg); }
+            40%, 60% { transform: rotate(-70deg); }
+        }
 
-        @keyframes squat-head { 0%, 100% { top: 0; } 50% { top: 40px; } }
-        @keyframes squat-body { 0%, 100% { top: 28px; transform: translateX(-50%) rotate(0deg); } 50% { top: 68px; transform: translateX(-50%) rotate(-8deg); } }
-        @keyframes squat-arms { 0%, 100% { height: 40px; top: 32px; } 50% { height: 48px; top: 72px; transform: rotate(25deg); } }
-        @keyframes squat-legs { 0%, 100% { height: 50px; transform: rotate(0deg); } 50% { height: 35px; transform: rotate(40deg); } }
+        @keyframes foot-extension {
+            0%, 100% { transform: rotate(0deg); }
+            40%, 60% { transform: rotate(15deg); }
+        }
 
-        /* BRIDGE */
-        .bridge-figure { position: relative; width: 150px; height: 80px; z-index: 1; margin-bottom: 8px; }
-        .bridge-head { width: 28px; height: 28px; background: var(--skin); border-radius: 50%; position: absolute; left: 0; bottom: 8px; }
-        .bridge-body { width: 65px; height: 20px; background: var(--clothes); border-radius: 10px; position: absolute; left: 22px; bottom: 16px; transform-origin: left center; animation: bridge-body 2.5s ease-in-out infinite; }
-        .bridge-hip { width: 24px; height: 24px; background: var(--clothes-dark); border-radius: 50%; position: absolute; left: 80px; bottom: 12px; animation: bridge-hip 2.5s ease-in-out infinite; }
-        .bridge-thigh { width: 40px; height: 16px; background: var(--clothes-dark); border-radius: 8px; position: absolute; left: 95px; bottom: 20px; transform-origin: left center; animation: bridge-thigh 2.5s ease-in-out infinite; }
-        .bridge-shin { width: 35px; height: 14px; background: var(--skin); border-radius: 7px; position: absolute; right: 8px; bottom: 8px; transform: rotate(-75deg); transform-origin: right center; }
-        .bridge-foot { width: 20px; height: 10px; background: #1e293b; border-radius: 5px; position: absolute; right: 0; bottom: 0; }
+        @keyframes balance-leg {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-45deg); }
+        }
 
-        @keyframes bridge-body { 0%, 100% { transform: rotate(0deg); bottom: 16px; } 50% { transform: rotate(-12deg); bottom: 28px; } }
-        @keyframes bridge-hip { 0%, 100% { bottom: 12px; } 50% { bottom: 36px; } }
-        @keyframes bridge-thigh { 0%, 100% { transform: rotate(25deg); } 50% { transform: rotate(55deg); } }
+        @keyframes balance-arms {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(8deg); }
+            75% { transform: rotate(-8deg); }
+        }
 
-        /* LUNGE */
-        .lunge-figure { position: relative; width: 130px; height: 170px; z-index: 1; }
-        .lunge-head { width: 30px; height: 30px; background: var(--skin); border-radius: 50%; position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: lunge-head 3s ease-in-out infinite; }
-        .lunge-torso { width: 36px; height: 52px; background: var(--clothes); border-radius: 8px; position: absolute; top: 26px; left: 50%; transform: translateX(-50%); animation: lunge-torso 3s ease-in-out infinite; }
-        .lunge-arm { width: 10px; height: 36px; background: var(--skin); border-radius: 5px; position: absolute; top: 30px; }
-        .lunge-arm.left { left: 38px; }
-        .lunge-arm.right { right: 38px; }
-        .lunge-leg-front { width: 14px; height: 45px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 42px; left: 48px; transform-origin: top center; animation: lunge-front-leg 3s ease-in-out infinite; }
-        .lunge-leg-back { width: 14px; height: 45px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 25px; right: 48px; transform-origin: top center; animation: lunge-back-leg 3s ease-in-out infinite; }
+        @keyframes balance-body-sway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-2deg); }
+        }
 
-        @keyframes lunge-head { 0%, 100% { top: 0; } 50% { top: 32px; } }
-        @keyframes lunge-torso { 0%, 100% { top: 26px; } 50% { top: 58px; } }
-        @keyframes lunge-front-leg { 0%, 100% { transform: rotate(0deg); height: 45px; } 50% { transform: rotate(38deg); height: 38px; } }
-        @keyframes lunge-back-leg { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-25deg); } }
+        @keyframes wall-sit-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(0.5px); }
+            75% { transform: translateX(-0.5px); }
+        }
 
-        /* CALF RAISE */
-        .calf-figure { position: relative; width: 65px; height: 170px; z-index: 1; }
-        .calf-head { width: 30px; height: 30px; background: var(--skin); border-radius: 50%; position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: calf-head 1.5s ease-in-out infinite; }
-        .calf-body { width: 34px; height: 50px; background: var(--clothes); border-radius: 7px; position: absolute; top: 26px; left: 50%; transform: translateX(-50%); animation: calf-body 1.5s ease-in-out infinite; }
-        .calf-legs { width: 28px; height: 55px; background: var(--clothes-dark); border-radius: 7px; position: absolute; top: 72px; left: 50%; transform: translateX(-50%); animation: calf-legs 1.5s ease-in-out infinite; }
-        .calf-calves { width: 24px; height: 28px; background: var(--skin); border-radius: 7px; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); animation: calf-calves 1.5s ease-in-out infinite; }
-        .calf-feet { width: 32px; height: 10px; background: #1e293b; border-radius: 5px; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); animation: calf-feet 1.5s ease-in-out infinite; }
+        @keyframes quad-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
 
-        @keyframes calf-head { 0%, 100% { top: 0; } 50% { top: -16px; } }
-        @keyframes calf-body { 0%, 100% { top: 26px; } 50% { top: 10px; } }
-        @keyframes calf-legs { 0%, 100% { top: 72px; } 50% { top: 56px; } }
-        @keyframes calf-calves { 0%, 100% { bottom: 20px; height: 28px; } 50% { bottom: 28px; height: 36px; } }
-        @keyframes calf-feet { 0%, 100% { transform: translateX(-50%) rotate(0deg); } 50% { transform: translateX(-50%) rotate(-18deg); } }
+        @keyframes bridge-lift {
+            0%, 100% { transform: rotate(0deg); }
+            40%, 60% { transform: rotate(-25deg); }
+        }
 
-        /* BALANCE */
-        .balance-figure { position: relative; width: 100px; height: 170px; z-index: 1; }
-        .balance-head { width: 30px; height: 30px; background: var(--skin); border-radius: 50%; position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: balance-sway 3s ease-in-out infinite; }
-        .balance-body { width: 34px; height: 50px; background: var(--clothes); border-radius: 7px; position: absolute; top: 26px; left: 50%; transform: translateX(-50%); animation: balance-sway 3s ease-in-out infinite; }
-        .balance-arms { position: absolute; top: 38px; left: 50%; transform: translateX(-50%); animation: balance-arms 3s ease-in-out infinite; }
-        .balance-arm { width: 36px; height: 10px; background: var(--skin); border-radius: 5px; position: absolute; }
-        .balance-arm.left { left: -40px; transform: rotate(-12deg); }
-        .balance-arm.right { right: -40px; transform: rotate(12deg); }
-        .balance-standing-leg { width: 13px; height: 75px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); }
-        .balance-raised-leg { width: 13px; height: 55px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 50px; left: 58px; transform: rotate(75deg); transform-origin: top left; animation: balance-leg 3s ease-in-out infinite; }
-        .balance-foot { width: 24px; height: 8px; background: #1e293b; border-radius: 4px; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); }
+        @keyframes squat-down {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(50px); }
+        }
 
-        @keyframes balance-sway { 0%, 100% { transform: translateX(-50%) rotate(-3deg); } 50% { transform: translateX(-50%) rotate(3deg); } }
-        @keyframes balance-arms { 0%, 100% { transform: translateX(-50%) rotate(-6deg); } 50% { transform: translateX(-50%) rotate(6deg); } }
-        @keyframes balance-leg { 0%, 100% { transform: rotate(70deg); } 50% { transform: rotate(80deg); } }
+        @keyframes calf-raise-up {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
 
-        /* WALL SIT */
-        .wallsit-container { position: relative; }
-        .wall { position: absolute; left: 15px; bottom: 15px; width: 12px; height: 150px; background: linear-gradient(90deg, #64748b 0%, #94a3b8 100%); border-radius: 3px; }
-        .wallsit-figure { position: relative; width: 85px; height: 135px; z-index: 1; margin-left: 25px; }
-        .wallsit-head { width: 28px; height: 28px; background: var(--skin); border-radius: 50%; position: absolute; top: 0; left: 8px; }
-        .wallsit-body { width: 32px; height: 45px; background: var(--clothes); border-radius: 7px; position: absolute; top: 25px; left: 6px; }
-        .wallsit-thigh { width: 40px; height: 14px; background: var(--clothes-dark); border-radius: 7px; position: absolute; top: 68px; left: 20px; }
-        .wallsit-shin { width: 14px; height: 40px; background: var(--skin); border-radius: 7px; position: absolute; bottom: 16px; left: 50px; }
-        .wallsit-foot { width: 22px; height: 8px; background: #1e293b; border-radius: 4px; position: absolute; bottom: 8px; left: 45px; }
-        .wallsit-timer { position: absolute; top: 8px; right: 15px; font-size: 1.2rem; font-weight: 700; color: var(--primary); animation: timer-pulse 1s ease-in-out infinite; }
+        @keyframes heel-raise {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-30deg); }
+        }
 
-        @keyframes timer-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes lunge-down {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(40px); }
+        }
 
-        /* STEP UP */
-        .stepup-container { position: relative; }
-        .step-box { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); width: 65px; height: 32px; background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%); border-radius: 4px; }
-        .stepup-figure { position: relative; width: 65px; height: 150px; z-index: 1; animation: stepup-move 2s ease-in-out infinite; }
-        .stepup-head { width: 28px; height: 28px; background: var(--skin); border-radius: 50%; position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
-        .stepup-body { width: 32px; height: 45px; background: var(--clothes); border-radius: 7px; position: absolute; top: 24px; left: 50%; transform: translateX(-50%); }
-        .stepup-leg-up { width: 13px; height: 38px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 50px; left: 20px; animation: stepup-leg-up 2s ease-in-out infinite; }
-        .stepup-leg-down { width: 13px; height: 50px; background: var(--clothes-dark); border-radius: 7px; position: absolute; bottom: 16px; right: 20px; animation: stepup-leg-down 2s ease-in-out infinite; }
+        @keyframes lunge-front-leg {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(25deg); }
+        }
 
-        @keyframes stepup-move { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-32px); } }
-        @keyframes stepup-leg-up { 0%, 100% { height: 38px; bottom: 50px; transform: rotate(-25deg); } 50% { height: 45px; bottom: 65px; transform: rotate(0deg); } }
-        @keyframes stepup-leg-down { 0%, 100% { height: 50px; } 50% { height: 38px; transform: rotate(18deg); } }
+        @keyframes lunge-back-knee {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(40deg); }
+        }
 
-        /* CLAMSHELL */
-        .clamshell-figure { position: relative; width: 150px; height: 80px; z-index: 1; margin-bottom: 15px; }
-        .clamshell-head { width: 26px; height: 26px; background: var(--skin); border-radius: 50%; position: absolute; left: 0; top: 0; }
-        .clamshell-body { width: 55px; height: 24px; background: var(--clothes); border-radius: 12px; position: absolute; left: 20px; top: 16px; }
-        .clamshell-hip { width: 28px; height: 28px; background: var(--clothes-dark); border-radius: 50%; position: absolute; left: 68px; top: 14px; }
-        .clamshell-leg-bottom { width: 48px; height: 16px; background: var(--clothes-dark); border-radius: 8px; position: absolute; left: 88px; top: 36px; transform: rotate(25deg); }
-        .clamshell-leg-top { width: 48px; height: 16px; background: var(--skin); border-radius: 8px; position: absolute; left: 88px; top: 20px; transform-origin: left center; animation: clamshell-open 2s ease-in-out infinite; }
-        .clamshell-feet { width: 16px; height: 24px; background: #1e293b; border-radius: 8px; position: absolute; right: 0; top: 40px; }
+        @keyframes step-up-motion {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
 
-        @keyframes clamshell-open { 0%, 100% { transform: rotate(25deg); } 50% { transform: rotate(-18deg); } }
+        @keyframes step-leg-lift {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-60deg); }
+            50%, 75% { transform: rotate(-20deg); }
+        }
 
-        /* PLANK */
-        .plank-figure { position: relative; width: 165px; height: 65px; z-index: 1; margin-bottom: 15px; }
-        .plank-head { width: 24px; height: 24px; background: var(--skin); border-radius: 50%; position: absolute; left: 0; top: 0; }
-        .plank-body { width: 95px; height: 20px; background: var(--clothes); border-radius: 10px; position: absolute; left: 20px; top: 12px; animation: plank-shake 0.5s ease-in-out infinite; }
-        .plank-arm { width: 10px; height: 32px; background: var(--skin); border-radius: 5px; position: absolute; left: 24px; top: 20px; transform: rotate(8deg); }
-        .plank-hip { width: 24px; height: 24px; background: var(--clothes-dark); border-radius: 50%; position: absolute; left: 108px; top: 8px; }
-        .plank-legs { width: 40px; height: 14px; background: var(--clothes-dark); border-radius: 7px; position: absolute; left: 125px; top: 16px; transform: rotate(-8deg); }
-        .plank-feet { width: 12px; height: 20px; background: #1e293b; border-radius: 6px; position: absolute; right: 0; top: 24px; }
+        @keyframes clamshell-open {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-45deg); }
+        }
 
-        @keyframes plank-shake { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1px); } }
+        @keyframes slr-lift {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-50deg); }
+        }
 
-        /* KICKBACK */
-        .kickback-figure { position: relative; width: 150px; height: 95px; z-index: 1; margin-bottom: 8px; }
-        .kickback-head { width: 24px; height: 24px; background: var(--skin); border-radius: 50%; position: absolute; left: 8px; top: 16px; }
-        .kickback-body { width: 55px; height: 20px; background: var(--clothes); border-radius: 10px; position: absolute; left: 28px; top: 32px; }
-        .kickback-arm-left { width: 10px; height: 36px; background: var(--skin); border-radius: 5px; position: absolute; left: 32px; top: 40px; }
-        .kickback-arm-right { width: 10px; height: 36px; background: var(--skin); border-radius: 5px; position: absolute; left: 68px; top: 40px; }
-        .kickback-hip { width: 22px; height: 22px; background: var(--clothes-dark); border-radius: 50%; position: absolute; left: 76px; top: 28px; }
-        .kickback-leg-support { width: 12px; height: 36px; background: var(--clothes-dark); border-radius: 6px; position: absolute; left: 80px; top: 44px; }
-        .kickback-leg-kick { width: 40px; height: 13px; background: var(--skin); border-radius: 7px; position: absolute; left: 92px; top: 32px; transform-origin: left center; animation: kickback-kick 2s ease-in-out infinite; }
+        @keyframes kickback-motion {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-40deg); }
+        }
 
-        @keyframes kickback-kick { 0%, 100% { transform: rotate(18deg); } 50% { transform: rotate(-25deg); } }
+        @keyframes plank-hold {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(1px); }
+        }
+
+        /* Animation Classes */
+        .leg-extension-lower { transform-origin: 155px 195px; animation: leg-extension 3s ease-in-out infinite; }
+        .foot-extension { transform-origin: 155px 260px; animation: foot-extension 3s ease-in-out infinite; }
+        .balance-moving-leg { transform-origin: 170px 200px; animation: balance-leg 4s ease-in-out infinite; }
+        .balance-arms { transform-origin: 170px 120px; animation: balance-arms 4s ease-in-out infinite; }
+        .balance-body { transform-origin: 170px 280px; animation: balance-body-sway 4s ease-in-out infinite; }
+        .wall-sit-body { animation: wall-sit-shake 0.3s ease-in-out infinite; }
+        .quad-highlight-anim { animation: quad-pulse 1s ease-in-out infinite; }
+        .bridge-hips { transform-origin: 200px 220px; animation: bridge-lift 3s ease-in-out infinite; }
+        .squat-upper { transform-origin: 170px 280px; animation: squat-down 3s ease-in-out infinite; }
+        .calf-raise-body { animation: calf-raise-up 2s ease-in-out infinite; }
+        .calf-foot { transform-origin: 155px 320px; animation: heel-raise 2s ease-in-out infinite; }
+        .lunge-body { animation: lunge-down 3.5s ease-in-out infinite; }
+        .lunge-front-thigh { transform-origin: 140px 200px; animation: lunge-front-leg 3.5s ease-in-out infinite; }
+        .lunge-back-lower { transform-origin: 220px 220px; animation: lunge-back-knee 3.5s ease-in-out infinite; }
+        .step-up-body { animation: step-up-motion 2.5s ease-in-out infinite; }
+        .step-lifting-leg { transform-origin: 150px 200px; animation: step-leg-lift 2.5s ease-in-out infinite; }
+        .clamshell-top-leg { transform-origin: 180px 180px; animation: clamshell-open 2.5s ease-in-out infinite; }
+        .slr-leg { transform-origin: 175px 185px; animation: slr-lift 3s ease-in-out infinite; }
+        .kickback-leg { transform-origin: 180px 140px; animation: kickback-motion 2.5s ease-in-out infinite; }
+        .plank-body { animation: plank-hold 0.5s ease-in-out infinite; }
 
         /* ==================== EXERCISE INFO ==================== */
         .exercise-container { text-align: center; }
 
         .exercise-name {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: var(--text-dark);
         }
 
@@ -674,25 +669,26 @@
             display: inline-block;
             background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
             color: white;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            margin-bottom: 12px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 14px;
         }
 
         .exercise-details {
             background: var(--bg-light);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 14px;
+            text-align: left;
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
+            padding: 8px 0;
             border-bottom: 1px solid var(--border);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .detail-row:last-child { border-bottom: none; }
@@ -702,33 +698,33 @@
         .exercise-instructions {
             text-align: left;
             background: #fef3c7;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 14px;
             border-left: 4px solid var(--warning);
         }
 
-        .exercise-instructions h4 { margin-bottom: 8px; color: #92400e; font-size: 0.85rem; }
-        .exercise-instructions ol { padding-left: 18px; color: #78350f; font-size: 0.8rem; }
-        .exercise-instructions li { margin-bottom: 4px; }
+        .exercise-instructions h4 { margin-bottom: 10px; color: #92400e; font-size: 0.9rem; }
+        .exercise-instructions ol { padding-left: 20px; color: #78350f; font-size: 0.85rem; line-height: 1.6; }
+        .exercise-instructions li { margin-bottom: 5px; }
 
         /* Timer */
         .timer-display {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             color: var(--primary);
             text-align: center;
-            margin: 15px 0;
+            margin: 18px 0;
             font-family: 'Courier New', monospace;
         }
 
-        .timer-controls { display: flex; justify-content: center; gap: 12px; margin: 15px 0; }
+        .timer-controls { display: flex; justify-content: center; gap: 14px; margin: 18px 0; }
 
         .timer-btn {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            border-radius: 30px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -742,31 +738,31 @@
         /* Progress */
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: var(--border);
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
-            border-radius: 4px;
+            border-radius: 5px;
             transition: width 0.5s ease;
         }
 
-        .progress-text { text-align: center; color: var(--text-muted); font-size: 0.8rem; }
+        .progress-text { text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
         /* Nav Buttons */
-        .nav-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .nav-buttons { display: flex; gap: 12px; margin-top: 18px; }
 
         .nav-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -778,28 +774,28 @@
         .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
         /* Calendar */
-        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 
         .calendar-nav {
             background: var(--primary);
             color: white;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
-        .calendar-month { font-size: 1.05rem; font-weight: 600; }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .calendar-month { font-size: 1.1rem; font-weight: 600; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 
         .calendar-day-header {
             text-align: center;
             font-weight: 600;
             color: var(--text-muted);
-            font-size: 0.7rem;
-            padding: 8px 0;
+            font-size: 0.75rem;
+            padding: 10px 0;
         }
 
         .calendar-day {
@@ -808,7 +804,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
         }
 
@@ -818,44 +814,44 @@
         .calendar-day.other-month { color: var(--border); }
 
         /* Stats */
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
         .stat-card {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            border-radius: 14px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 18px;
             text-align: center;
         }
 
-        .stat-value { font-size: 1.6rem; font-weight: 700; }
-        .stat-label { font-size: 0.75rem; opacity: 0.9; margin-top: 3px; }
+        .stat-value { font-size: 1.8rem; font-weight: 700; }
+        .stat-label { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
 
         /* Evolution Chart */
-        .evolution-chart { height: 100px; display: flex; align-items: flex-end; gap: 6px; padding: 8px 0; }
+        .evolution-chart { height: 110px; display: flex; align-items: flex-end; gap: 8px; padding: 10px 0; }
 
-        .chart-bar-container { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .chart-bar-container { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 
         .chart-bar {
             width: 100%;
             background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 3px 3px 0 0;
-            min-height: 4px;
+            border-radius: 4px 4px 0 0;
+            min-height: 5px;
         }
 
-        .chart-label { font-size: 0.6rem; color: var(--text-muted); }
+        .chart-label { font-size: 0.65rem; color: var(--text-muted); }
 
         /* Profile */
         .switch-user-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 12px;
+            gap: 10px;
+            padding: 12px 14px;
             background: var(--bg-light);
             border: 2px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             width: 100%;
             transition: all 0.3s;
         }
@@ -867,17 +863,14 @@
 
         .user-input {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 14px;
             border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
 
-        .user-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+        .user-input:focus { outline: none; border-color: var(--primary); }
 
         /* Modal */
         .modal-overlay {
@@ -894,31 +887,39 @@
 
         .modal {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            max-width: 320px;
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 340px;
             text-align: center;
+            margin: 20px;
         }
 
-        .modal-icon { font-size: 3.5rem; margin-bottom: 12px; }
-        .modal-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-        .modal-text { color: var(--text-muted); margin-bottom: 15px; font-size: 0.9rem; }
+        .modal-icon { font-size: 4rem; margin-bottom: 14px; }
+        .modal-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+        .modal-text { color: var(--text-muted); margin-bottom: 18px; font-size: 1rem; }
 
         .modal-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 35px;
-            border-radius: 25px;
-            font-size: 0.95rem;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
         }
 
-        #no-users-message {
-            text-align: center;
-            padding: 25px;
-            color: var(--text-muted);
+        /* Loop indicator */
+        .loop-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.65rem;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -941,7 +942,7 @@
                 <div class="login-form active" id="existing-form">
                     <div class="user-list" id="user-list"></div>
                     <div id="no-users-message" style="display: none;">
-                        <div style="font-size: 2.5rem; margin-bottom: 8px;">👋</div>
+                        <div style="font-size: 3rem; margin-bottom: 10px;">👋</div>
                         <p>Nenhum perfil cadastrado.</p>
                         <p>Crie seu primeiro perfil!</p>
                     </div>
@@ -996,15 +997,15 @@
             <div class="pin-modal-content">
                 <div class="pin-modal-avatar" id="pin-modal-avatar">🏃</div>
                 <div class="pin-modal-name" id="pin-modal-name">Nome</div>
-                <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem;">Digite seu PIN:</p>
+                <p style="color: var(--text-muted); margin-bottom: 14px; font-size: 0.95rem;">Digite seu PIN:</p>
                 <div class="pin-container">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-1" oninput="handlePinInput(this, 'verify-pin-2')">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-2" oninput="handlePinInput(this, 'verify-pin-3')">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-3" oninput="handlePinInput(this, 'verify-pin-4')">
                     <input type="tel" class="pin-input" maxlength="1" id="verify-pin-4" oninput="verifyPin()">
                 </div>
-                <p class="pin-error" id="pin-error">PIN incorreto.</p>
-                <button class="login-btn" style="background: var(--bg-light); color: var(--text-dark); margin-top: 12px;" onclick="closePinModal()">Cancelar</button>
+                <p class="pin-error" id="pin-error">PIN incorreto. Tente novamente.</p>
+                <button class="login-btn" style="background: var(--bg-light); color: var(--text-dark); margin-top: 14px;" onclick="closePinModal()">Cancelar</button>
             </div>
         </div>
 
@@ -1029,7 +1030,7 @@
                 <button class="nav-tab" onclick="showScreen('profile')">👤 Perfil</button>
             </nav>
 
-            <!-- HOME -->
+            <!-- HOME SCREEN -->
             <div id="home-screen" class="screen active">
                 <div class="welcome-card">
                     <div class="welcome-header">
@@ -1123,7 +1124,7 @@
                 <button class="nav-btn next" style="width: 100%;" onclick="startTraining()">🚀 Iniciar Treino</button>
             </div>
 
-            <!-- TRAINING -->
+            <!-- TRAINING SCREEN -->
             <div id="training-screen" class="screen">
                 <div class="card">
                     <div class="progress-text">
@@ -1135,15 +1136,13 @@
                 </div>
 
                 <div class="card exercise-container">
-                    <!-- ANIMATION CONTAINER - Dynamic -->
                     <div class="animation-container" id="exercise-animation">
-                        <div class="loop-indicator">LOOP</div>
-                        <!-- Animation will be inserted here -->
-                        <div class="floor"></div>
+                        <div class="loop-indicator">🔄 LOOP</div>
+                        <!-- SVG Animation will be inserted here -->
                     </div>
 
-                    <h2 class="exercise-name" id="exercise-name">Agachamento</h2>
-                    <div class="muscle-target" id="muscle-target">🎯 Quadríceps, Glúteos</div>
+                    <h2 class="exercise-name" id="exercise-name">Exercício</h2>
+                    <div class="muscle-target" id="muscle-target">🎯 Músculos</div>
 
                     <div class="exercise-details">
                         <div class="detail-row">
@@ -1170,7 +1169,7 @@
                     <div class="exercise-instructions">
                         <h4>📝 Como executar:</h4>
                         <ol id="instructions-list">
-                            <li>Instrução 1</li>
+                            <li>Instrução</li>
                         </ol>
                     </div>
                 </div>
@@ -1181,7 +1180,7 @@
                 </div>
             </div>
 
-            <!-- CALENDAR -->
+            <!-- CALENDAR SCREEN -->
             <div id="calendar-screen" class="screen">
                 <div class="card">
                     <div class="card-title">📅 Calendário de Treinos</div>
@@ -1221,13 +1220,13 @@
                 </div>
             </div>
 
-            <!-- PROFILE -->
+            <!-- PROFILE SCREEN -->
             <div id="profile-screen" class="screen">
                 <button class="switch-user-btn" onclick="showLoginScreen()">
-                    <span style="font-size: 1.4rem;" id="profile-avatar-btn">🏃</span>
+                    <span style="font-size: 1.6rem;" id="profile-avatar-btn">🏃</span>
                     <div style="flex: 1; text-align: left;">
                         <div style="font-weight: 600;" id="profile-name-btn">Nome</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Toque para trocar de usuário</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Toque para trocar de usuário</div>
                     </div>
                     <span>→</span>
                 </button>
@@ -1253,15 +1252,15 @@
                 <div class="card">
                     <div class="card-title">👤 Seu Perfil</div>
                     <input type="number" class="user-input" id="user-age" placeholder="Idade">
-                    <button class="nav-btn next" style="width: 100%; margin-top: 8px;" onclick="saveProfile()">💾 Salvar</button>
+                    <button class="nav-btn next" style="width: 100%; margin-top: 10px;" onclick="saveProfile()">💾 Salvar</button>
                 </div>
 
                 <div class="card">
                     <div class="card-title">ℹ️ Sobre o App</div>
-                    <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.85rem;">
+                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.9rem;">
                         Este aplicativo foi desenvolvido com base em protocolos de fisioterapia para fortalecimento muscular ao redor do joelho.
                     </p>
-                    <p style="color: var(--danger); margin-top: 8px; font-size: 0.8rem;">
+                    <p style="color: var(--danger); margin-top: 10px; font-size: 0.85rem;">
                         ⚠️ Consulte sempre um profissional de saúde antes de iniciar qualquer programa de exercícios.
                     </p>
                 </div>
@@ -1279,7 +1278,7 @@
                 <div class="modal">
                     <div class="modal-icon">🎉</div>
                     <h2 class="modal-title">Parabéns!</h2>
-                    <p class="modal-text">Você completou o treino de hoje!</p>
+                    <p class="modal-text">Você completou o treino de hoje! Continue assim!</p>
                     <button class="modal-btn" onclick="closeModal()">Fechar</button>
                 </div>
             </div>
@@ -1290,149 +1289,461 @@
         // ==================== AVATARS ====================
         const avatars = ['🏃', '🚴', '🏋️', '🧘', '⚽', '🏀', '🎾', '🏊', '🥋', '💪', '🦵', '❤️'];
 
-        // ==================== ANIMATION HTML TEMPLATES ====================
-        const animations = {
-            squat: `
-                <div class="squat-figure">
-                    <div class="squat-head"></div>
-                    <div class="squat-body"></div>
-                    <div class="squat-arm left"></div>
-                    <div class="squat-arm right"></div>
-                    <div class="squat-leg left"></div>
-                    <div class="squat-leg right"></div>
-                    <div class="squat-foot left"></div>
-                    <div class="squat-foot right"></div>
-                </div>`,
-            bridge: `
-                <div class="bridge-figure">
-                    <div class="bridge-head"></div>
-                    <div class="bridge-body"></div>
-                    <div class="bridge-hip"></div>
-                    <div class="bridge-thigh"></div>
-                    <div class="bridge-shin"></div>
-                    <div class="bridge-foot"></div>
-                </div>`,
-            lunge: `
-                <div class="lunge-figure">
-                    <div class="lunge-head"></div>
-                    <div class="lunge-torso"></div>
-                    <div class="lunge-arm left"></div>
-                    <div class="lunge-arm right"></div>
-                    <div class="lunge-leg-front"></div>
-                    <div class="lunge-leg-back"></div>
-                </div>`,
-            calf: `
-                <div class="calf-figure">
-                    <div class="calf-head"></div>
-                    <div class="calf-body"></div>
-                    <div class="calf-legs"></div>
-                    <div class="calf-calves"></div>
-                    <div class="calf-feet"></div>
-                </div>`,
+        // ==================== SVG ANIMATIONS ====================
+        const svgAnimations = {
+            // 1. SEATED LEG EXTENSION
+            legExtension: `
+                <svg viewBox="0 0 300 320" width="100%" height="260">
+                    <rect x="0" y="280" width="300" height="40" class="floor-svg"/>
+                    <rect x="0" y="280" width="300" height="5" class="floor-shadow"/>
+                    <rect x="60" y="130" width="120" height="15" rx="3" class="chair-highlight"/>
+                    <rect x="60" y="145" width="120" height="70" rx="5" class="chair"/>
+                    <rect x="55" y="120" width="15" height="160" rx="3" class="chair"/>
+                    <rect x="55" y="120" width="130" height="15" rx="3" class="chair-shadow"/>
+                    <rect x="65" y="215" width="12" height="65" rx="2" class="chair-shadow"/>
+                    <rect x="160" y="215" width="12" height="65" rx="2" class="chair-shadow"/>
+                    <g>
+                        <path d="M85 135 Q90 95 100 75 L130 75 Q140 95 145 135 Z" class="shirt"/>
+                        <ellipse cx="115" cy="50" rx="26" ry="30" class="skin"/>
+                        <path d="M89 42 Q92 18 115 15 Q138 18 141 42 Q137 30 115 28 Q93 30 89 42" class="hair"/>
+                        <ellipse cx="105" cy="46" rx="3" ry="4" fill="#2d3748"/>
+                        <ellipse cx="125" cy="46" rx="3" ry="4" fill="#2d3748"/>
+                        <path d="M108 58 Q115 64 122 58" fill="none" stroke="#c4a090" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="105" y="75" width="20" height="12" class="skin"/>
+                        <path d="M90 95 Q70 120 85 155" stroke="#e8beac" stroke-width="16" fill="none" stroke-linecap="round"/>
+                        <path d="M140 95 Q160 120 150 155" stroke="#e8beac" stroke-width="16" fill="none" stroke-linecap="round"/>
+                        <ellipse cx="105" cy="165" rx="24" ry="16" class="pants"/>
+                        <ellipse cx="145" cy="165" rx="24" ry="16" class="pants"/>
+                        <g>
+                            <path d="M105 178 L100 245" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                            <ellipse cx="100" cy="250" rx="16" ry="10" class="skin"/>
+                            <path d="M84 253 L86 280 L116 280 L114 253" class="shoes"/>
+                        </g>
+                        <g class="leg-extension-lower">
+                            <path d="M155 185 L160 245" stroke="#e8beac" stroke-width="18" stroke-linecap="round"/>
+                            <ellipse cx="162" cy="220" rx="10" ry="22" class="skin-shadow" opacity="0.4"/>
+                            <g class="foot-extension">
+                                <ellipse cx="162" cy="250" rx="9" ry="7" class="skin"/>
+                                <path d="M150 252 L148 275 L178 275 L176 252" class="shoes"/>
+                            </g>
+                        </g>
+                        <circle cx="155" cy="185" r="7" fill="#ffd700" opacity="0.6"/>
+                    </g>
+                    <g transform="translate(195, 200)">
+                        <path d="M0 0 Q18 -28 0 -55" fill="none" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="4,3">
+                            <animate attributeName="stroke-dashoffset" from="0" to="14" dur="1s" repeatCount="indefinite"/>
+                        </path>
+                        <polygon points="-4,-50 4,-50 0,-60" fill="#e74c3c"/>
+                    </g>
+                </svg>`,
+
+            // 2. SINGLE LEG BALANCE
             balance: `
-                <div class="balance-figure">
-                    <div class="balance-head"></div>
-                    <div class="balance-body"></div>
-                    <div class="balance-arms">
-                        <div class="balance-arm left"></div>
-                        <div class="balance-arm right"></div>
-                    </div>
-                    <div class="balance-standing-leg"></div>
-                    <div class="balance-raised-leg"></div>
-                    <div class="balance-foot"></div>
-                </div>`,
-            wallsit: `
-                <div class="wall"></div>
-                <div class="wallsit-figure">
-                    <div class="wallsit-head"></div>
-                    <div class="wallsit-body"></div>
-                    <div class="wallsit-thigh"></div>
-                    <div class="wallsit-shin"></div>
-                    <div class="wallsit-foot"></div>
-                </div>
-                <div class="wallsit-timer">⏱️</div>`,
-            stepup: `
-                <div class="step-box"></div>
-                <div class="stepup-figure">
-                    <div class="stepup-head"></div>
-                    <div class="stepup-body"></div>
-                    <div class="stepup-leg-up"></div>
-                    <div class="stepup-leg-down"></div>
-                </div>`,
+                <svg viewBox="0 0 300 320" width="100%" height="260">
+                    <rect x="0" y="285" width="300" height="35" class="floor-svg"/>
+                    <ellipse cx="150" cy="290" rx="35" ry="7" class="floor-shadow"/>
+                    <g class="balance-body">
+                        <g>
+                            <path d="M145 185 L142 240" stroke="#2d3748" stroke-width="24" stroke-linecap="round"/>
+                            <path d="M142 240 L140 285" stroke="#e8beac" stroke-width="18" stroke-linecap="round"/>
+                            <ellipse cx="145" cy="265" rx="11" ry="18" class="skin-shadow" opacity="0.3"/>
+                            <path d="M125 282 L123 300 L162 300 L160 282" class="shoes"/>
+                        </g>
+                        <g class="balance-moving-leg" style="transform-origin: 155px 185px;">
+                            <path d="M155 185 L178 230" stroke="#2d3748" stroke-width="22" stroke-linecap="round"/>
+                            <path d="M178 230 L195 275" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                            <ellipse cx="200" cy="280" rx="18" ry="8" class="shoes"/>
+                        </g>
+                        <path d="M125 110 Q130 88 150 82 Q170 88 175 110 L175 185 Q150 195 125 185 Z" class="shirt"/>
+                        <g class="balance-arms" style="transform-origin: 150px 110px;">
+                            <path d="M125 115 Q85 120 65 100" stroke="#e8beac" stroke-width="14" fill="none" stroke-linecap="round"/>
+                            <circle cx="63" cy="98" r="8" class="skin"/>
+                            <path d="M175 115 Q215 120 235 100" stroke="#e8beac" stroke-width="14" fill="none" stroke-linecap="round"/>
+                            <circle cx="237" cy="98" r="8" class="skin"/>
+                        </g>
+                        <rect x="140" y="68" width="20" height="16" class="skin"/>
+                        <ellipse cx="150" cy="45" rx="27" ry="32" class="skin"/>
+                        <path d="M123 38 Q128 10 150 7 Q172 10 177 38 Q170 24 150 22 Q130 24 123 38" class="hair"/>
+                        <ellipse cx="140" cy="42" rx="3.5" ry="4.5" fill="#2d3748"/>
+                        <ellipse cx="160" cy="42" rx="3.5" ry="4.5" fill="#2d3748"/>
+                        <path d="M143 56 Q150 62 157 56" fill="none" stroke="#c4a090" stroke-width="2"/>
+                    </g>
+                    <circle cx="142" cy="290" r="22" fill="none" stroke="#3498db" stroke-width="2" opacity="0.4">
+                        <animate attributeName="r" values="22;32;22" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>`,
+
+            // 3. WALL SIT
+            wallSit: `
+                <svg viewBox="0 0 280 320" width="100%" height="260">
+                    <rect x="25" y="0" width="22" height="290" class="wall"/>
+                    <rect x="25" y="0" width="7" height="290" class="wall-shadow"/>
+                    <rect x="0" y="280" width="280" height="40" class="floor-svg"/>
+                    <g class="wall-sit-body">
+                        <path d="M47 95 L47 180 Q70 190 82 180 L82 95 Q67 85 47 95" class="shirt"/>
+                        <ellipse cx="64" cy="62" rx="25" ry="30" class="skin"/>
+                        <path d="M39 52 Q43 25 64 22 Q85 25 89 52 Q84 40 64 38 Q44 40 39 52" class="hair"/>
+                        <ellipse cx="55" cy="56" rx="3" ry="4" fill="#2d3748"/>
+                        <ellipse cx="73" cy="56" rx="3" ry="4" fill="#2d3748"/>
+                        <path d="M58 70 Q64 67 70 70" fill="none" stroke="#c4a090" stroke-width="2"/>
+                        <path d="M52 48 L59 50" fill="none" stroke="#8b7355" stroke-width="1.5"/>
+                        <path d="M76 48 L69 50" fill="none" stroke="#8b7355" stroke-width="1.5"/>
+                        <rect x="54" y="88" width="20" height="10" class="skin"/>
+                        <path d="M47 108 L38 155" stroke="#e8beac" stroke-width="14" stroke-linecap="round"/>
+                        <path d="M82 108 L92 155" stroke="#e8beac" stroke-width="14" stroke-linecap="round"/>
+                        <path d="M62 180 L135 175" stroke="#2d3748" stroke-width="26" stroke-linecap="round"/>
+                        <ellipse cx="100" cy="175" rx="32" ry="10" class="quad-highlight quad-highlight-anim"/>
+                        <path d="M135 175 L138 255" stroke="#e8beac" stroke-width="18" stroke-linecap="round"/>
+                        <ellipse cx="140" cy="220" rx="11" ry="22" class="skin-shadow" opacity="0.3"/>
+                        <path d="M123 253 L120 280 L158 280 L155 253" class="shoes"/>
+                    </g>
+                    <g transform="translate(180, 60)">
+                        <rect x="0" y="0" width="60" height="35" rx="6" fill="white" opacity="0.9"/>
+                        <text x="30" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#e74c3c">0:30</text>
+                    </g>
+                    <circle cx="85" cy="65" r="2.5" fill="#87CEEB">
+                        <animate attributeName="cy" values="65;85;65" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>`,
+
+            // 4. GLUTE BRIDGE
+            bridge: `
+                <svg viewBox="0 0 320 220" width="100%" height="200">
+                    <rect x="10" y="180" width="300" height="40" class="mat"/>
+                    <rect x="10" y="180" width="300" height="6" class="mat-shadow"/>
+                    <g class="bridge-hips" style="transform-origin: 180px 165px;">
+                        <ellipse cx="155" cy="155" rx="35" ry="22" class="pants"/>
+                        <path d="M120 155 Q155 140 190 155 L190 170 Q155 180 120 170 Z" class="shirt"/>
+                        <ellipse cx="155" cy="160" rx="28" ry="16" class="muscle-glow">
+                            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="1.5s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                    <g>
+                        <path d="M45 165 L120 165 L120 180 L45 180 Z" class="shirt"/>
+                        <ellipse cx="32" cy="165" rx="22" ry="26" class="skin"/>
+                        <path d="M12 152 Q15 135 32 132 Q49 135 52 152 L52 168 Q49 160 32 158 Q15 160 12 168 Z" class="hair"/>
+                        <ellipse cx="25" cy="158" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <ellipse cx="39" cy="158" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <path d="M27 170 Q32 174 37 170" fill="none" stroke="#c4a090" stroke-width="1.5"/>
+                        <path d="M65 165 L65 140 L48 140" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <path d="M100 165 L100 140 L117 140" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                    </g>
+                    <g>
+                        <path d="M140 160 L128 118" stroke="#2d3748" stroke-width="22" stroke-linecap="round"/>
+                        <path d="M128 118 L125 180" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                        <ellipse cx="125" cy="185" rx="17" ry="8" class="shoes"/>
+                        <path d="M170 160 L182 118" stroke="#2d3748" stroke-width="22" stroke-linecap="round"/>
+                        <path d="M182 118 L185 180" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                        <ellipse cx="185" cy="185" rx="17" ry="8" class="shoes"/>
+                    </g>
+                    <g transform="translate(230, 120)">
+                        <path d="M0 25 L0 0" stroke="#e74c3c" stroke-width="2.5"/>
+                        <polygon points="-5,5 5,5 0,-5" fill="#e74c3c"/>
+                    </g>
+                </svg>`,
+
+            // 5. SQUAT
+            squat: `
+                <svg viewBox="0 0 280 320" width="100%" height="260">
+                    <rect x="0" y="285" width="280" height="35" class="floor-svg"/>
+                    <ellipse cx="140" cy="290" rx="50" ry="8" class="floor-shadow"/>
+                    <g>
+                        <path d="M100 280 L98 300 L135 300 L133 280" class="shoes"/>
+                        <path d="M145 280 L143 300 L180 300 L178 280" class="shoes"/>
+                    </g>
+                    <g>
+                        <path d="M118 282 L120 235" stroke="#e8beac" stroke-width="17" stroke-linecap="round"/>
+                        <path d="M160 282 L158 235" stroke="#e8beac" stroke-width="17" stroke-linecap="round"/>
+                    </g>
+                    <g class="squat-upper" style="transform-origin: 140px 260px;">
+                        <path d="M122 235 L130 185" stroke="#2d3748" stroke-width="24" stroke-linecap="round"/>
+                        <path d="M156 235 L148 185" stroke="#2d3748" stroke-width="24" stroke-linecap="round"/>
+                        <ellipse cx="140" cy="180" rx="30" ry="18" class="pants"/>
+                        <path d="M115 180 Q120 135 140 118 Q160 135 165 180 Z" class="shirt"/>
+                        <path d="M118 140 Q95 145 80 135" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="78" cy="133" r="7" class="skin"/>
+                        <path d="M162 140 Q185 145 200 135" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="202" cy="133" r="7" class="skin"/>
+                        <rect x="130" y="102" width="20" height="16" class="skin"/>
+                        <ellipse cx="140" cy="75" rx="25" ry="30" class="skin"/>
+                        <path d="M115 68 Q120 42 140 38 Q160 42 165 68 Q158 55 140 53 Q122 55 115 68" class="hair"/>
+                        <ellipse cx="130" cy="70" rx="3" ry="4" fill="#2d3748"/>
+                        <ellipse cx="150" cy="70" rx="3" ry="4" fill="#2d3748"/>
+                        <path d="M133 84 Q140 90 147 84" fill="none" stroke="#c4a090" stroke-width="2"/>
+                    </g>
+                    <line x1="55" y1="235" x2="80" y2="235" stroke="#3498db" stroke-width="1.5" stroke-dasharray="3,2"/>
+                    <text x="45" y="240" font-size="9" fill="#3498db">90°</text>
+                </svg>`,
+
+            // 6. CALF RAISE
+            calfRaise: `
+                <svg viewBox="0 0 280 320" width="100%" height="260">
+                    <rect x="50" y="40" width="12" height="250" class="wall"/>
+                    <rect x="50" y="40" width="4" height="250" class="wall-shadow"/>
+                    <rect x="0" y="285" width="280" height="35" class="floor-svg"/>
+                    <g class="calf-raise-body">
+                        <path d="M115 95 Q120 75 138 70 Q156 75 161 95 L161 165 Q138 175 115 165 Z" class="shirt"/>
+                        <ellipse cx="138" cy="48" rx="24" ry="28" class="skin"/>
+                        <path d="M114 42 Q118 18 138 15 Q158 18 162 42 Q156 30 138 28 Q120 30 114 42" class="hair"/>
+                        <ellipse cx="128" cy="44" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <path d="M125 56 Q130 60 135 56" fill="none" stroke="#c4a090" stroke-width="1.5"/>
+                        <rect x="128" y="72" width="20" height="10" class="skin"/>
+                        <path d="M115 105 Q88 98 68 88" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="66" cy="86" r="7" class="skin"/>
+                        <path d="M115 122 Q88 118 68 108" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="66" cy="106" r="7" class="skin"/>
+                        <ellipse cx="138" cy="170" rx="26" ry="15" class="pants"/>
+                        <path d="M125 175 L123 225" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                        <path d="M151 175 L153 225" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                        <path d="M123 225 L120 275" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                        <path d="M153 225 L156 275" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                        <ellipse cx="125" cy="255" rx="11" ry="20" class="muscle-glow">
+                            <animate attributeName="ry" values="20;25;20" dur="2s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="151" cy="255" rx="11" ry="20" class="muscle-glow">
+                            <animate attributeName="ry" values="20;25;20" dur="2s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <g class="calf-foot" style="transform-origin: 138px 290px;">
+                            <path d="M105 273 L103 295 L172 295 L170 273" class="shoes"/>
+                        </g>
+                    </g>
+                    <g transform="translate(195, 180)">
+                        <path d="M0 0 L0 -35" stroke="#e74c3c" stroke-width="2.5"/>
+                        <polygon points="-5,-30 5,-30 0,-42" fill="#e74c3c"/>
+                        <path d="M0 8 L0 43" stroke="#3498db" stroke-width="2.5"/>
+                        <polygon points="-5,38 5,38 0,50" fill="#3498db"/>
+                    </g>
+                </svg>`,
+
+            // 7. LUNGE
+            lunge: `
+                <svg viewBox="0 0 300 320" width="100%" height="260">
+                    <rect x="0" y="285" width="300" height="35" class="floor-svg"/>
+                    <g class="lunge-body">
+                        <ellipse cx="230" cy="290" rx="18" ry="8" class="shoes"/>
+                        <g class="lunge-back-lower" style="transform-origin: 205px 205px;">
+                            <path d="M225 285 L205 240" stroke="#e8beac" stroke-width="15" stroke-linecap="round"/>
+                        </g>
+                        <path d="M205 240 L165 185" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                        <path d="M70 280 L68 298 L108 298 L106 280" class="shoes"/>
+                        <path d="M90 282 L93 235" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                        <g class="lunge-front-thigh" style="transform-origin: 130px 185px;">
+                            <path d="M95 235 L135 185" stroke="#2d3748" stroke-width="22" stroke-linecap="round"/>
+                        </g>
+                        <ellipse cx="150" cy="180" rx="30" ry="18" class="pants"/>
+                        <path d="M125 180 Q130 135 150 118 Q170 135 175 180 Z" class="shirt"/>
+                        <path d="M130 130 L118 175" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="116" cy="177" r="7" class="skin"/>
+                        <path d="M170 130 L182 175" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="184" cy="177" r="7" class="skin"/>
+                        <rect x="140" y="102" width="20" height="16" class="skin"/>
+                        <ellipse cx="150" cy="75" rx="24" ry="28" class="skin"/>
+                        <path d="M126 68 Q130 45 150 42 Q170 45 174 68 Q168 56 150 54 Q132 56 126 68" class="hair"/>
+                        <ellipse cx="140" cy="70" rx="3" ry="4" fill="#2d3748"/>
+                        <ellipse cx="160" cy="70" rx="3" ry="4" fill="#2d3748"/>
+                        <path d="M143 82 Q150 88 157 82" fill="none" stroke="#c4a090" stroke-width="2"/>
+                    </g>
+                    <path d="M95 235 Q108 222 95 208" fill="none" stroke="#3498db" stroke-width="1.5"/>
+                    <text x="108" y="225" font-size="9" fill="#3498db">90°</text>
+                </svg>`,
+
+            // 8. STEP UP
+            stepUp: `
+                <svg viewBox="0 0 280 320" width="100%" height="260">
+                    <rect x="0" y="285" width="280" height="35" class="floor-svg"/>
+                    <rect x="75" y="245" width="85" height="40" rx="3" class="step-box"/>
+                    <rect x="75" y="245" width="85" height="7" class="step-box-top"/>
+                    <rect x="75" y="245" width="7" height="40" class="step-box-side"/>
+                    <g class="step-up-body">
+                        <path d="M185 280 L183 298 L218 298 L216 280" class="shoes"/>
+                        <path d="M200 282 L192 235" stroke="#e8beac" stroke-width="15" stroke-linecap="round"/>
+                        <path d="M192 235 L165 185" stroke="#2d3748" stroke-width="18" stroke-linecap="round"/>
+                        <g class="step-lifting-leg" style="transform-origin: 135px 185px;">
+                            <path d="M130 185 L122 225" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                            <path d="M122 225 L118 245" stroke="#e8beac" stroke-width="16" stroke-linecap="round"/>
+                            <ellipse cx="120" cy="248" rx="18" ry="8" class="shoes"/>
+                        </g>
+                        <ellipse cx="148" cy="180" rx="28" ry="16" class="pants"/>
+                        <path d="M122 180 Q127 135 148 118 Q169 135 174 180 Z" class="shirt"/>
+                        <path d="M125 135 L105 160" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="103" cy="162" r="7" class="skin"/>
+                        <path d="M171 135 L191 115" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="193" cy="113" r="7" class="skin"/>
+                        <rect x="138" y="102" width="20" height="16" class="skin"/>
+                        <ellipse cx="148" cy="75" rx="24" ry="28" class="skin"/>
+                        <path d="M124" y="68" Q128 45 148 42 Q168 45 172 68 Q166 56 148 54 Q130 56 124 68" class="hair"/>
+                        <ellipse cx="138" cy="70" rx="3" ry="4" fill="#2d3748"/>
+                        <ellipse cx="158" cy="70" rx="3" ry="4" fill="#2d3748"/>
+                        <path d="M141 82 Q148 88 155 82" fill="none" stroke="#c4a090" stroke-width="2"/>
+                    </g>
+                    <g transform="translate(55, 165)">
+                        <path d="M0 40 L0 0" stroke="#e74c3c" stroke-width="2.5"/>
+                        <polygon points="-5,6 5,6 0,-6" fill="#e74c3c"/>
+                    </g>
+                </svg>`,
+
+            // 9. CLAMSHELL
             clamshell: `
-                <div class="clamshell-figure">
-                    <div class="clamshell-head"></div>
-                    <div class="clamshell-body"></div>
-                    <div class="clamshell-hip"></div>
-                    <div class="clamshell-leg-bottom"></div>
-                    <div class="clamshell-leg-top"></div>
-                    <div class="clamshell-feet"></div>
-                </div>`,
-            plank: `
-                <div class="plank-figure">
-                    <div class="plank-head"></div>
-                    <div class="plank-body"></div>
-                    <div class="plank-arm"></div>
-                    <div class="plank-hip"></div>
-                    <div class="plank-legs"></div>
-                    <div class="plank-feet"></div>
-                </div>`,
+                <svg viewBox="0 0 320 200" width="100%" height="180">
+                    <rect x="10" y="165" width="300" height="35" class="mat"/>
+                    <rect x="10" y="165" width="300" height="5" class="mat-shadow"/>
+                    <g>
+                        <ellipse cx="45" cy="105" rx="26" ry="30" class="skin"/>
+                        <path d="M20" y="92" Q26 68 45 65 Q64 68 70 92 Q63 80 45 78 Q27 80 20 92" class="hair"/>
+                        <ellipse cx="36" cy="100" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <path d="M32 114 Q37 118 42 114" fill="none" stroke="#c4a090" stroke-width="1.5"/>
+                        <path d="M45 130 L45 105" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <ellipse cx="105" cy="135" rx="42" ry="28" class="shirt"/>
+                        <path d="M125 122 L142 105" stroke="#e8beac" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        <circle cx="144" cy="103" r="6" class="skin"/>
+                        <ellipse cx="158" cy="145" rx="26" ry="20" class="pants"/>
+                        <path d="M162" y="158" L232 162" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                        <path d="M232 162 L268 165" stroke="#e8beac" stroke-width="14" stroke-linecap="round"/>
+                        <ellipse cx="273" cy="168" rx="15" ry="7" class="shoes"/>
+                        <g class="clamshell-top-leg" style="transform-origin: 162px 150px;">
+                            <path d="M162 150 L228 142" stroke="#2d3748" stroke-width="18" stroke-linecap="round"/>
+                            <path d="M228 142 L262 145" stroke="#e8beac" stroke-width="13" stroke-linecap="round"/>
+                            <ellipse cx="267" cy="148" rx="14" ry="6" class="shoes"/>
+                            <ellipse cx="168" cy="142" rx="16" ry="12" class="muscle-glow">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.5s" repeatCount="indefinite"/>
+                            </ellipse>
+                        </g>
+                    </g>
+                    <path d="M180 120 Q205 90 225 110" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,3">
+                        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                </svg>`,
+
+            // 10. STRAIGHT LEG RAISE
+            slr: `
+                <svg viewBox="0 0 320 200" width="100%" height="180">
+                    <rect x="10" y="165" width="300" height="35" class="mat"/>
+                    <rect x="10" y="165" width="300" height="5" class="mat-shadow"/>
+                    <g>
+                        <ellipse cx="42" cy="142" rx="24" ry="28" class="skin"/>
+                        <path d="M20 130 Q24 112 42 108 Q60 112 64 130 L64 148 Q60 140 42 138 Q24 140 20 148 Z" class="hair"/>
+                        <ellipse cx="34" cy="136" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <ellipse cx="50" cy="136" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <path d="M37 150 Q42 154 47 150" fill="none" stroke="#c4a090" stroke-width="1.5"/>
+                        <rect x="60" y="138" width="70" height="28" rx="4" class="shirt"/>
+                        <path d="M70 148 L58 168" stroke="#e8beac" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        <path d="M120 148 L132 168" stroke="#e8beac" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        <ellipse cx="145" cy="158" rx="22" ry="14" class="pants"/>
+                        <path d="M140 162 L155 135" stroke="#2d3748" stroke-width="18" stroke-linecap="round"/>
+                        <path d="M155 135 L160 168" stroke="#e8beac" stroke-width="14" stroke-linecap="round"/>
+                        <ellipse cx="163" cy="172" rx="15" ry="6" class="shoes"/>
+                        <g class="slr-leg" style="transform-origin: 158px 158px;">
+                            <path d="M158 158 L248 162" stroke="#2d3748" stroke-width="20" stroke-linecap="round"/>
+                            <path d="M248 162 L285 164" stroke="#e8beac" stroke-width="15" stroke-linecap="round"/>
+                            <ellipse cx="290" cy="166" rx="15" ry="7" class="shoes"/>
+                            <ellipse cx="200" cy="160" rx="26" ry="8" class="muscle-glow">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+                            </ellipse>
+                        </g>
+                    </g>
+                    <path d="M158 158 Q180 125 165 100" fill="none" stroke="#3498db" stroke-width="1.5" stroke-dasharray="3,2"/>
+                </svg>`,
+
+            // 11. KICKBACK
             kickback: `
-                <div class="kickback-figure">
-                    <div class="kickback-head"></div>
-                    <div class="kickback-body"></div>
-                    <div class="kickback-arm-left"></div>
-                    <div class="kickback-arm-right"></div>
-                    <div class="kickback-hip"></div>
-                    <div class="kickback-leg-support"></div>
-                    <div class="kickback-leg-kick"></div>
-                </div>`
+                <svg viewBox="0 0 320 200" width="100%" height="180">
+                    <rect x="10" y="165" width="300" height="35" class="mat"/>
+                    <rect x="10" y="165" width="300" height="5" class="mat-shadow"/>
+                    <g>
+                        <ellipse cx="55" cy="95" rx="20" ry="22" class="skin"/>
+                        <path d="M37 88 Q40 72 55 70 Q70 72 73 88 Q68 80 55 78 Q42 80 37 88" class="hair"/>
+                        <ellipse cx="48" cy="92" rx="2" ry="3" fill="#2d3748"/>
+                        <path d="M45 102 Q50 105 55 102" fill="none" stroke="#c4a090" stroke-width="1.5"/>
+                        <path d="M70 110 L130 125" stroke="#e8beac" stroke-width="16" fill="none" stroke-linecap="round"/>
+                        <path d="M75 125 L75 165" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="75" cy="168" r="6" class="skin"/>
+                        <path d="M125 125 L125 165" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="125" cy="168" r="6" class="skin"/>
+                        <ellipse cx="155" cy="130" rx="22" ry="18" class="pants"/>
+                        <path d="M158 145 L155 165" stroke="#2d3748" stroke-width="16" stroke-linecap="round"/>
+                        <ellipse cx="155" cy="170" rx="14" ry="6" class="shoes"/>
+                        <g class="kickback-leg" style="transform-origin: 162px 130px;">
+                            <path d="M162 130 L220 125" stroke="#2d3748" stroke-width="15" stroke-linecap="round"/>
+                            <path d="M220 125 L255 128" stroke="#e8beac" stroke-width="12" stroke-linecap="round"/>
+                            <ellipse cx="260" cy="130" rx="12" ry="5" class="shoes"/>
+                            <ellipse cx="165" cy="125" rx="14" ry="10" class="muscle-glow">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.5s" repeatCount="indefinite"/>
+                            </ellipse>
+                        </g>
+                    </g>
+                    <path d="M185 110 Q210 85 195 65" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,3">
+                        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                </svg>`,
+
+            // 12. PLANK
+            plank: `
+                <svg viewBox="0 0 320 180" width="100%" height="160">
+                    <rect x="10" y="145" width="300" height="35" class="mat"/>
+                    <rect x="10" y="145" width="300" height="5" class="mat-shadow"/>
+                    <g class="plank-body">
+                        <ellipse cx="48" cy="85" rx="20" ry="24" class="skin"/>
+                        <path d="M30 78 Q33 60 48 57 Q63 60 66 78 Q60 68 48 66 Q36 68 30 78" class="hair"/>
+                        <ellipse cx="40" cy="82" rx="2.5" ry="3.5" fill="#2d3748"/>
+                        <path d="M38 94 Q43 98 48 94" fill="none" stroke="#c4a090" stroke-width="1.5"/>
+                        <path d="M65 100 L170 108" stroke="#4a90d9" stroke-width="22" fill="none" stroke-linecap="round"/>
+                        <path d="M70 108 L72 145" stroke="#e8beac" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <circle cx="72" cy="148" r="5" class="skin"/>
+                        <ellipse cx="185" cy="112" rx="20" ry="18" class="pants"/>
+                        <path d="M195 118 L255 122" stroke="#2d3748" stroke-width="16" stroke-linecap="round"/>
+                        <path d="M255 122 L280 125" stroke="#e8beac" stroke-width="12" stroke-linecap="round"/>
+                        <ellipse cx="285" cy="128" rx="12" ry="18" class="shoes" transform="rotate(80 285 128)"/>
+                    </g>
+                    <text x="160" y="75" text-anchor="middle" font-size="10" fill="#e74c3c" font-weight="bold">HOLD</text>
+                </svg>`
         };
 
-        // ==================== PROGRAMS ====================
+        // ==================== PROGRAMS DATA ====================
         const programs = [
             {
                 name: "Propriocepção Básica",
                 exercises: [
-                    { name: "Apoio Unipodal", animation: "balance", muscleTarget: "Estabilizadores", duration: 30, sets: "3 séries cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna do chão", "Mantenha o equilíbrio por 30 segundos", "Olhe para um ponto fixo à frente", "Troque de lado"] },
-                    { name: "Agachamento Básico", animation: "squat", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Nenhum", instructions: ["Pés na largura dos ombros", "Desça flexionando os joelhos", "Mantenha os joelhos alinhados", "Não deixe os joelhos passarem dos pés", "Suba contraindo os glúteos"] },
-                    { name: "Ponte de Glúteos", animation: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Nenhum", instructions: ["Deite de costas com joelhos flexionados", "Pés apoiados no chão", "Eleve o quadril contraindo os glúteos", "Mantenha 2 segundos no topo", "Desça controladamente"] },
-                    { name: "Elevação de Panturrilha", animation: "calf", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3 séries x 20 rep", equipment: "Parede", instructions: ["Apoie-se na parede para equilíbrio", "Eleve-se na ponta dos pés", "Mantenha 2 segundos no topo", "Desça controladamente", "Repita o movimento"] },
-                    { name: "Abdução Lateral", animation: "balance", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Nenhum", instructions: ["Fique em pé com apoio", "Afaste uma perna lateralmente", "Mantenha a perna reta", "Controle a volta", "Troque de lado"] },
-                    { name: "Agachamento na Parede", animation: "wallsit", muscleTarget: "Quadríceps", duration: 30, sets: "3 séries x 30 seg", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até os joelhos ficarem a 90°", "Mantenha a posição", "Respire normalmente", "Suba quando terminar o tempo"] }
+                    { name: "Equilíbrio Unipodal", animation: "balance", muscleTarget: "Estabilizadores, Tornozelo", duration: 30, sets: "3x30s cada lado", equipment: "Nenhum", instructions: ["Fique em pé com os pés juntos", "Levante uma perna do chão lentamente", "Mantenha o equilíbrio por 30 segundos", "Braços abertos ajudam no equilíbrio", "Troque de lado e repita"] },
+                    { name: "Agachamento Básico", animation: "squat", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3x12 repetições", equipment: "Nenhum", instructions: ["Pés na largura dos ombros", "Desça flexionando joelhos e quadril", "Mantenha os joelhos alinhados com os pés", "Desça até as coxas ficarem paralelas ao chão", "Suba contraindo glúteos"] },
+                    { name: "Ponte de Glúteos", animation: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3x15 repetições", equipment: "Nenhum", instructions: ["Deite de costas com joelhos flexionados", "Pés apoiados no chão, braços ao lado", "Eleve o quadril contraindo os glúteos", "Mantenha 2 segundos no topo", "Desça controladamente"] },
+                    { name: "Elevação de Panturrilha", animation: "calfRaise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 35, sets: "3x20 repetições", equipment: "Parede", instructions: ["Apoie as mãos na parede", "Fique na ponta dos pés", "Eleve-se o máximo possível", "Mantenha 2 segundos no topo", "Desça lentamente"] },
+                    { name: "Extensão de Joelho", animation: "legExtension", muscleTarget: "Quadríceps", duration: 40, sets: "3x15 cada perna", equipment: "Cadeira", instructions: ["Sente-se em uma cadeira firme", "Estenda uma perna lentamente", "Mantenha 2 segundos na extensão total", "Desça controladamente", "Alterne as pernas"] },
+                    { name: "Agachamento na Parede", animation: "wallSit", muscleTarget: "Quadríceps", duration: 30, sets: "3x30 segundos", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até joelhos ficarem a 90°", "Mantenha a posição isométrica", "Respire normalmente", "Suba quando terminar o tempo"] }
                 ]
             },
             {
                 name: "Fortalecimento Quadríceps",
                 exercises: [
-                    { name: "Agachamento na Parede", animation: "wallsit", muscleTarget: "Quadríceps", duration: 45, sets: "3 séries x 45 seg", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até os joelhos ficarem a 90°", "Mantenha a posição isométrica", "Pés afastados na largura dos ombros", "Joelhos não passam da ponta dos pés"] },
-                    { name: "Extensão de Joelho", animation: "squat", muscleTarget: "Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Cadeira", instructions: ["Sente em uma cadeira", "Estenda o joelho lentamente", "Mantenha 2 segundos na extensão", "Retorne controladamente", "Foque na contração do quadríceps"] },
-                    { name: "Step Up", animation: "stepup", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 12 rep", equipment: "Degrau", instructions: ["Posicione-se em frente ao degrau", "Suba com uma perna", "Estenda completamente o joelho no topo", "Desça controladamente", "Alterne as pernas"] },
-                    { name: "Afundo Estático", animation: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Dê um passo à frente", "Desça o joelho de trás em direção ao chão", "Mantenha o joelho da frente alinhado", "Suba empurrando com o calcanhar", "Alterne as pernas"] },
-                    { name: "Agachamento Sumô", animation: "squat", muscleTarget: "Adutores, Quadríceps", duration: 45, sets: "3 séries x 12 rep", equipment: "Nenhum", instructions: ["Pés bem afastados", "Pontas dos pés para fora", "Desça mantendo joelhos para fora", "Tronco ereto", "Contraia glúteos ao subir"] },
-                    { name: "Ponte de Glúteos", animation: "bridge", muscleTarget: "Glúteos, Quadríceps", duration: 40, sets: "3 séries x 15 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Joelhos flexionados", "Eleve o quadril", "Mantenha 2 segundos", "Desça controladamente"] }
+                    { name: "Agachamento na Parede", animation: "wallSit", muscleTarget: "Quadríceps", duration: 45, sets: "3x45 segundos", equipment: "Parede", instructions: ["Encoste as costas na parede", "Deslize até joelhos ficarem a 90°", "Coxas paralelas ao chão", "Mantenha a posição", "Respire profundamente"] },
+                    { name: "Extensão de Joelho", animation: "legExtension", muscleTarget: "Quadríceps", duration: 40, sets: "3x15 cada perna", equipment: "Cadeira", instructions: ["Sente em cadeira firme", "Estenda o joelho completamente", "Contraia o quadríceps no topo", "Mantenha 2 segundos", "Desça controladamente"] },
+                    { name: "Step Up", animation: "stepUp", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3x12 cada perna", equipment: "Degrau/Banco", instructions: ["Posicione-se em frente ao degrau", "Suba com uma perna", "Estenda completamente no topo", "Desça controladamente", "Alterne as pernas"] },
+                    { name: "Afundo Estático", animation: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3x10 cada perna", equipment: "Nenhum", instructions: ["Dê um passo largo à frente", "Desça o joelho de trás em direção ao chão", "Joelho da frente a 90°", "Suba empurrando com o calcanhar", "Alterne as pernas"] },
+                    { name: "Agachamento Livre", animation: "squat", muscleTarget: "Quadríceps, Glúteos", duration: 45, sets: "3x15 repetições", equipment: "Nenhum", instructions: ["Pés afastados na largura dos ombros", "Braços à frente para equilíbrio", "Desça até 90° nos joelhos", "Mantenha o peso nos calcanhares", "Suba contraindo os glúteos"] },
+                    { name: "Elevação Perna Reta", animation: "slr", muscleTarget: "Quadríceps, Flexores", duration: 40, sets: "3x12 cada perna", equipment: "Nenhum", instructions: ["Deite de costas", "Uma perna flexionada, outra estendida", "Eleve a perna reta até 45°", "Mantenha 2 segundos", "Desça controladamente"] }
                 ]
             },
             {
                 name: "Cadeia Posterior",
                 exercises: [
-                    { name: "Stiff (Levantamento Terra)", animation: "lunge", muscleTarget: "Isquiotibiais, Glúteos", duration: 45, sets: "3 séries x 12 rep", equipment: "Nenhum", instructions: ["Pés na largura dos ombros", "Incline o tronco para frente", "Mantenha as pernas semi-estendidas", "Sinta o alongamento nos isquiotibiais", "Suba contraindo glúteos"] },
-                    { name: "Ponte Unilateral", animation: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 40, sets: "3 séries x 10 rep", equipment: "Nenhum", instructions: ["Deite de costas", "Estenda uma perna", "Eleve o quadril com a perna de apoio", "Mantenha 2 segundos no topo", "Troque de lado"] },
-                    { name: "Flexão de Joelho", animation: "kickback", muscleTarget: "Isquiotibiais", duration: 40, sets: "3 séries x 15 rep", equipment: "Nenhum", instructions: ["Fique em pé com apoio", "Flexione o joelho", "Leve o calcanhar em direção ao glúteo", "Retorne controladamente", "Alterne as pernas"] },
-                    { name: "Clamshell", animation: "clamshell", muscleTarget: "Glúteo médio", duration: 40, sets: "3 séries x 15 rep", equipment: "Nenhum", instructions: ["Deite de lado", "Joelhos flexionados a 45°", "Abra os joelhos como uma concha", "Mantenha os pés unidos", "Controle a descida"] },
-                    { name: "Kickback de Glúteo", animation: "kickback", muscleTarget: "Glúteo máximo", duration: 40, sets: "3 séries x 12 rep", equipment: "Nenhum", instructions: ["Posição de quatro apoios", "Estenda uma perna para trás", "Contraia o glúteo no topo", "Retorne sem tocar o chão", "Alterne as pernas"] },
-                    { name: "Panturrilha Excêntrica", animation: "calf", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3 séries x 15 rep", equipment: "Degrau", instructions: ["Fique na ponta de um degrau", "Eleve-se na ponta dos pés", "Desça lentamente (5 segundos)", "Deixe o calcanhar ir bem abaixo", "Suba e repita"] }
+                    { name: "Ponte de Glúteos", animation: "bridge", muscleTarget: "Glúteos, Isquiotibiais", duration: 45, sets: "3x15 repetições", equipment: "Nenhum", instructions: ["Deite de costas", "Joelhos flexionados, pés no chão", "Eleve o quadril alto", "Aperte os glúteos no topo", "Desça lentamente"] },
+                    { name: "Kickback de Glúteo", animation: "kickback", muscleTarget: "Glúteo Máximo", duration: 40, sets: "3x12 cada perna", equipment: "Nenhum", instructions: ["Posição de quatro apoios", "Estenda uma perna para trás", "Contraia o glúteo no topo", "Mantenha 2 segundos", "Alterne as pernas"] },
+                    { name: "Clamshell", animation: "clamshell", muscleTarget: "Glúteo Médio", duration: 40, sets: "3x15 cada lado", equipment: "Nenhum", instructions: ["Deite de lado", "Joelhos flexionados a 45°", "Abra os joelhos mantendo pés unidos", "Controle a descida", "Troque de lado"] },
+                    { name: "Afundo", animation: "lunge", muscleTarget: "Glúteos, Isquiotibiais", duration: 45, sets: "3x10 cada perna", equipment: "Nenhum", instructions: ["Passo largo à frente", "Desça controladamente", "Joelho de trás quase toca o chão", "Empurre com o calcanhar para subir", "Alterne as pernas"] },
+                    { name: "Elevação de Panturrilha", animation: "calfRaise", muscleTarget: "Gastrocnêmio, Sóleo", duration: 50, sets: "3x20 repetições", equipment: "Degrau", instructions: ["Fique na borda de um degrau", "Eleve-se na ponta dos pés", "Desça lentamente (5 segundos)", "Deixe o calcanhar ir abaixo do degrau", "Suba e repita"] },
+                    { name: "Prancha", animation: "plank", muscleTarget: "Core, Glúteos", duration: 30, sets: "3x30 segundos", equipment: "Nenhum", instructions: ["Apoie-se nos antebraços", "Corpo reto da cabeça aos pés", "Contraia abdômen e glúteos", "Não deixe o quadril cair", "Respire normalmente"] }
                 ]
             },
             {
                 name: "Estabilização Avançada",
                 exercises: [
-                    { name: "Agachamento Búlgaro", animation: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Cadeira", instructions: ["Apoie o pé de trás em uma cadeira", "Desça flexionando o joelho da frente", "Mantenha o tronco ereto", "Joelho não passa da ponta do pé", "Suba empurrando com o calcanhar"] },
-                    { name: "Prancha Frontal", animation: "plank", muscleTarget: "Core, Estabilizadores", duration: 45, sets: "3 séries x 30 seg", equipment: "Nenhum", instructions: ["Apoie-se nos antebraços e pontas dos pés", "Mantenha o corpo reto", "Contraia o abdômen", "Não deixe o quadril subir ou descer", "Respire normalmente"] },
-                    { name: "Step Up Alto", animation: "stepup", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3 séries x 10 rep", equipment: "Banco", instructions: ["Use um banco mais alto", "Suba com controle", "Estenda completamente no topo", "Desça lentamente", "Alterne as pernas"] },
-                    { name: "Agachamento Unilateral", animation: "squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3 séries x 8 rep", equipment: "Apoio", instructions: ["Segure em um apoio fixo", "Estenda uma perna à frente", "Desça em agachamento unilateral", "Use o apoio para ajudar a subir", "Mantenha o joelho alinhado"] },
-                    { name: "Ponte com Elevação", animation: "bridge", muscleTarget: "Glúteos, Core", duration: 45, sets: "3 séries x 12 rep", equipment: "Nenhum", instructions: ["Posição de ponte", "Eleve uma perna", "Mantenha o quadril estável", "Alterne as pernas", "Controle o movimento"] },
-                    { name: "Equilíbrio Dinâmico", animation: "balance", muscleTarget: "Propriocepção, Core", duration: 45, sets: "3 séries x 30 seg", equipment: "Nenhum", instructions: ["Fique em apoio unipodal", "Mova os braços lentamente", "Mantenha o equilíbrio", "Feche os olhos para aumentar dificuldade", "Troque de lado"] }
+                    { name: "Equilíbrio Unipodal", animation: "balance", muscleTarget: "Propriocepção", duration: 45, sets: "3x45s cada lado", equipment: "Nenhum", instructions: ["Fique em uma perna só", "Feche os olhos para aumentar dificuldade", "Braços ajudam no equilíbrio", "Mantenha o core ativado", "Troque de lado"] },
+                    { name: "Step Up Alto", animation: "stepUp", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3x10 cada perna", equipment: "Banco alto", instructions: ["Use um banco mais alto", "Suba com controle total", "Não use impulso", "Desça lentamente", "Foque no equilíbrio"] },
+                    { name: "Afundo com Pausa", animation: "lunge", muscleTarget: "Quadríceps, Glúteos", duration: 50, sets: "3x8 cada perna", equipment: "Nenhum", instructions: ["Afundo profundo", "Pause 3 segundos embaixo", "Mantenha o tronco ereto", "Suba com força", "Alterne as pernas"] },
+                    { name: "Ponte Unilateral", animation: "bridge", muscleTarget: "Glúteos, Core", duration: 45, sets: "3x10 cada perna", equipment: "Nenhum", instructions: ["Posição de ponte", "Estenda uma perna", "Eleve o quadril com uma perna só", "Mantenha o quadril nivelado", "Troque de lado"] },
+                    { name: "Prancha com Elevação", animation: "plank", muscleTarget: "Core, Estabilizadores", duration: 40, sets: "3x30 segundos", equipment: "Nenhum", instructions: ["Posição de prancha", "Eleve um braço ou perna", "Mantenha o corpo estável", "Alterne os membros", "Não deixe o quadril rodar"] },
+                    { name: "Agachamento Unilateral", animation: "squat", muscleTarget: "Quadríceps, Equilíbrio", duration: 50, sets: "3x8 cada perna", equipment: "Apoio", instructions: ["Segure em um apoio", "Uma perna à frente", "Desça em agachamento unilateral", "Use o apoio minimamente", "Suba com controle"] }
                 ]
             }
         ];
@@ -1518,13 +1829,13 @@
             } else {
                 userList.style.display = 'block';
                 noUsersMsg.style.display = 'none';
-                const kneeLabels = { left: 'E', right: 'D', both: 'A' };
+                const kneeLabels = { left: 'E', right: 'D', both: 'Ambos' };
                 userList.innerHTML = users.map(user => `
                     <div class="user-card" onclick="selectUserForLogin('${user.nickname}')">
                         <div class="user-avatar">${user.avatar}</div>
                         <div class="user-info">
                             <div class="user-name">${user.nickname}<span class="user-knee-badge">🦵${kneeLabels[user.knee] || '?'}</span></div>
-                            <div class="user-stats">${user.stats?.totalWorkouts || 0} treinos</div>
+                            <div class="user-stats">${user.stats?.totalWorkouts || 0} treinos • ${user.stats?.totalMinutes || 0} min</div>
                         </div>
                         <button class="user-delete" onclick="event.stopPropagation(); confirmDeleteUser('${user.nickname}')">×</button>
                     </div>
@@ -1588,6 +1899,7 @@
             saveUserData(newUser);
             loginUser(newUser);
 
+            // Reset form
             document.getElementById('new-nickname').value = '';
             for (let i = 1; i <= 4; i++) document.getElementById('new-pin-' + i).value = '';
             selectedAvatar = null;
@@ -1615,7 +1927,7 @@
         }
 
         function confirmDeleteUser(nickname) {
-            if (confirm('Excluir este perfil?')) {
+            if (confirm(`Excluir o perfil "${nickname}"?`)) {
                 deleteUser(nickname);
                 loadUserList();
                 if (currentUser && currentUser.nickname === nickname) showLoginScreen();
@@ -1623,7 +1935,7 @@
         }
 
         function deleteCurrentUser() {
-            if (confirm('Excluir seu perfil?')) {
+            if (confirm('Tem certeza que deseja excluir seu perfil? Esta ação não pode ser desfeita.')) {
                 deleteUser(currentUser.nickname);
                 showLoginScreen();
             }
@@ -1633,7 +1945,7 @@
         function updateKneeDisplay() {
             if (!currentUser) return;
             const labels = { left: '🦵 E', right: '🦵 D', both: '🦵 Ambos' };
-            const fullLabels = { left: '🦵 Esquerdo', right: '🦵 Direito', both: '🦵 Ambos' };
+            const fullLabels = { left: '🦵 Joelho Esquerdo', right: '🦵 Joelho Direito', both: '🦵 Ambos os Joelhos' };
             document.getElementById('header-knee-indicator').textContent = labels[currentUser.knee] || '🦵 ?';
             document.getElementById('welcome-knee-info').textContent = fullLabels[currentUser.knee] || '🦵 ?';
             document.querySelectorAll('#profile-knee-options .knee-option').forEach(opt => opt.classList.remove('selected'));
@@ -1676,7 +1988,7 @@
         // ==================== PAIN ====================
         function selectPain(level) {
             currentPain = level;
-            const labels = ["Sem dor", "Dor leve", "Dor moderada", "Dor considerável", "Dor intensa"];
+            const labels = ["Sem dor - Ótimo!", "Dor leve - Bom", "Dor moderada - Atenção", "Dor considerável - Cuidado", "Dor intensa - Descanse"];
             document.querySelectorAll('.pain-level').forEach(el => 
                 el.classList.toggle('selected', parseInt(el.dataset.pain) === level));
             document.getElementById('pain-description').textContent = labels[level];
@@ -1699,28 +2011,6 @@
                 card.classList.toggle('selected', i === index));
         }
 
-        // ==================== ANIMATION LOADER ====================
-        function loadAnimation(animationKey) {
-            const container = document.getElementById('exercise-animation');
-            const animationHTML = animations[animationKey] || animations.squat;
-            const isHold = animationKey === 'wallsit' || animationKey === 'plank';
-
-            container.innerHTML = `
-                <div class="loop-indicator">${isHold ? 'HOLD' : 'LOOP'}</div>
-                ${animationHTML}
-                <div class="floor"></div>
-            `;
-
-            // Add special class for wallsit container
-            if (animationKey === 'wallsit') {
-                container.classList.add('wallsit-container');
-            } else if (animationKey === 'stepup') {
-                container.classList.add('stepup-container');
-            } else {
-                container.classList.remove('wallsit-container', 'stepup-container');
-            }
-        }
-
         // ==================== TRAINING ====================
         function startTraining() {
             if (selectedProgram === null) {
@@ -1741,8 +2031,10 @@
             document.getElementById('total-exercises').textContent = total;
             document.getElementById('progress-fill').style.width = ((currentExerciseIndex + 1) / total * 100) + '%';
 
-            // Load animation
-            loadAnimation(exercise.animation);
+            // Load SVG animation
+            const animContainer = document.getElementById('exercise-animation');
+            const svgKey = exercise.animation;
+            animContainer.innerHTML = `<div class="loop-indicator">🔄 LOOP</div>${svgAnimations[svgKey] || svgAnimations.squat}`;
 
             document.getElementById('exercise-name').textContent = exercise.name;
             document.getElementById('muscle-target').textContent = '🎯 ' + exercise.muscleTarget;
@@ -1863,7 +2155,7 @@
 
         function closeModal() {
             document.getElementById('completion-modal').classList.remove('active');
-            showScreen('calendar');
+            showScreen('home');
         }
 
         // ==================== CALENDAR ====================
@@ -1943,7 +2235,7 @@
             }
             container.innerHTML = days.map(day => {
                 const completed = currentUser.completedDates?.includes(day.date);
-                return `<div class="chart-bar-container"><div class="chart-bar" style="height: ${completed ? 70 : 6}px;"></div><div class="chart-label">${day.dayName}</div></div>`;
+                return `<div class="chart-bar-container"><div class="chart-bar" style="height: ${completed ? 80 : 6}px;"></div><div class="chart-label">${day.dayName}</div></div>`;
             }).join('');
         }
 
@@ -1952,7 +2244,7 @@
             if (!currentUser) return;
             currentUser.profile = { age: document.getElementById('user-age').value };
             saveUserData(currentUser);
-            alert('Perfil salvo!');
+            alert('Perfil salvo com sucesso!');
         }
     </script>
 </body>
